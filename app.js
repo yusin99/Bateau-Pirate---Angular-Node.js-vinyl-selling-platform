@@ -8,12 +8,12 @@ var app = express();
 
 // Input routes
 var productRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+var usersRouter = require("./routes/orders");
 
 // Use routes
 
 app.use("/api/products", productRouter);
-app.use("/api/users", usersRouter);
+app.use("/api/orders", usersRouter);
 app.use(
   cors({
     origin: "*",
