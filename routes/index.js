@@ -45,5 +45,33 @@ router.get("/", function (req, res, next) {
     })
     .catch((err) => console.log(err));
 });
+router.get("/:vinylId", function (req, res, next) {
+  let vinylId = req.params.vinylId;
+  console.log(vinylId);
 
+  database
+    .table("vinyl as v")
+    .join([
+      {
+        table: "categories_musique as c",
+        on: "c.idCategorie = v.idCategorie",
+      },
+    ])
+    .slice(startValue, endValue)
+    .sort({ idVinyl: 0.1 })
+    .getAll()
+    .then((prods) => {
+      if (prods.length > 0) {
+        res.status(200).json({
+          count: prods.length,
+          products: prods,
+        });
+      } else {
+        res.json({
+          message: "No products found",
+        });
+      }
+    })
+    .catch((err) => console.log(err));
+});
 module.exports = router;
