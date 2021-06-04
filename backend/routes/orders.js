@@ -23,9 +23,7 @@ router.get("/", function (req, res) {
         on: "ac.idVinyl = v.idVinyl",
       },
     ])
-    .withFields([
-      "com.montant_HT,com.date_commande,com.status_commande,c.prenom,c.nom,v.nom",
-    ])
+    .withFields(["com.date_commande,com.status_commande,c.prenom,c.nom,v.nom"])
     .getAll()
     .then((orders) => {
       if (orders.length > 0) {
