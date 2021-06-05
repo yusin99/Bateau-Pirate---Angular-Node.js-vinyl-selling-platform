@@ -26,63 +26,78 @@
       <div class="container">
         <div class="row">
           <div
-            class="col-sm-6 col-md-4"
+            class="col-12 col-sm-6 col-md-4"
             *ngFor="let product of products; index as i"
           >
-            <div class="col-md-12">
-              <div class="row">
-                <div class="products-tabs">
-                  <!-- tab -->
-                  <div id="tab1" class="tab-pane active">
-                    <div class="products-slick" data-nav="#slick-nav-1">
-                      <!-- product -->
-                      <div class="product">
-                        <div class="product-img">
-                          <img src="assets/img/{{ product['photo'] }}" alt="" />
+            <div class="col-12">
+              <div class="products-tabs">
+                <!-- tab -->
+                <div id="tab1" class="tab-pane active">
+                  <div class="products-slick" data-nav="#slick-nav-1">
+                    <!-- product -->
+                    <div class="product">
+                      <div class="product-img">
+                        <img
+                          src="assets/img/{{ product['photo'] }}"
+                          alt=""
+                          (click)="selectProduct(product['idVinyl'])"
+                        />
+                      </div>
+                      <div class="product-body">
+                        <p
+                          class="product-category"
+                          (click)="selectProduct(product['idVinyl'])"
+                        >
+                          {{ product["nom"] }}
+                        </p>
+                        <h3 class="product-name">
+                          <a href="#">{{ vinyl[i] }}</a>
+                        </h3>
+                        <h4 class="product-price">
+                          {{ prices[i] | currency: "EUR" }}
+                        </h4>
+                        <div class="product-rating">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
                         </div>
-                        <div class="product-body">
-                          <p class="product-category">
-                            {{ product["nom"] }}
-                          </p>
-                          <h3 class="product-name">
-                            <a href="#">{{ product["nom"] }}</a>
-                          </h3>
-                          <h4 class="product-price">
-                            {{ product["nom"] }}
-                          </h4>
-                          <div class="product-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                          </div>
-                          <div class="product-btns">
-                            <button class="add-to-wishlist">
-                              <i class="fa fa-heart-o"></i
-                              ><span class="tooltipp">add to wishlist</span>
-                            </button>
-                            <button class="add-to-compare">
-                              <i class="fa fa-exchange"></i
-                              ><span class="tooltipp">add to compare</span>
-                            </button>
-                            <button class="quick-view">
-                              <i class="fa fa-eye"></i
-                              ><span class="tooltipp">quick view</span>
-                            </button>
-                          </div>
-                        </div>
-                        <div class="add-to-cart">
-                          <button class="add-to-cart-btn">
-                            <i class="fa fa-shopping-cart"></i> add to cart
+                        <div class="product-btns">
+                          <button class="add-to-wishlist">
+                            <i class="fa fa-heart-o"></i
+                            ><span class="tooltipp">add to wishlist</span>
                           </button>
+                          <!-- <button class="add-to-compare">
+                            <i class="fa fa-exchange"></i
+                            ><span class="tooltipp">add to compare</span>
+                          </button> -->
+                          <!-- <button class="quick-view">
+                            <i class="fa fa-eye"></i
+                            ><span
+                              class="tooltipp"
+                              (click)="selectProduct(product['idVinyl'])"
+                              >quick view</span
+                            >
+                          </button> -->
                         </div>
                       </div>
-                      <!-- /product -->
+                      <div class="add-to-cart">
+                        <button class="add-to-cart-btn">
+                          <i class="fa fa-shopping-cart"></i>
+                          {{
+                            product["quantite_dispo"] > 1
+                              ? "Add to cart"
+                              : "Out of Stock"
+                          }}
+                        </button>
+                      </div>
                     </div>
+                    <!-- /product -->
                   </div>
                 </div>
               </div>
+
               <!-- Products tab & slick -->
             </div>
           </div>

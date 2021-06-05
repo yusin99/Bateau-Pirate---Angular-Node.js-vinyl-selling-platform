@@ -1,11 +1,16 @@
 export interface ProductModel {
   anne_sortie: number;
   disponible: boolean;
-  idCategorie: Number;
-  idGroupe: Number;
-  idVinyl: Number;
+  idCategorie: number;
+  idGroupe: number;
+  idVinyl: number;
   nom: string;
   photo: string;
-  prix: Number;
-  quantite_dispo: Number;
+  prix: number;
+  quantite_dispo: number;
+}
+
+export interface ServerResponse {
+  count: Number;
+  products: ProductModel[];
 }

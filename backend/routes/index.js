@@ -26,7 +26,7 @@ router.get("/", function (req, res, next) {
     .join([
       {
         table: "categories_musique as c",
-        on: "c.idCategorie = v.idCategorie",
+        on: "v.idCategorie = c.idCategorie",
       },
     ])
     .slice(startValue, endValue)
