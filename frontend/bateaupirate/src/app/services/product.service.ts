@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ProductModelServer } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -8,11 +10,14 @@ import { Router } from '@angular/router';
 export class ProductService {
   constructor(private http: HttpClient, private router: Router) {}
   API_KEY = 'http://localhost:3000/api';
-  getAllProducts(numberOfResults: number = 10) {
-    return this.http.get(this.API_KEY + '/products', {
+  getAllProducts(numberOfResults: number = 6) {
+    return this.http.get(this.API_KEY + '/products/', {
       params: {
         limit: numberOfResults.toString(),
       },
     });
+  }
+  getSingleProduct(id: number): Observable<ProductModelServer> {
+    return this.http.get<ProductModelServer>(this.API_KEY + '/products/' + id);
   }
 }

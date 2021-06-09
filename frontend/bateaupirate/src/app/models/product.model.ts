@@ -1,4 +1,4 @@
-export interface ProductModel {
+export interface ProductModelServer {
   anne_sortie: number;
   disponible: boolean;
   idCategorie: number;
@@ -11,6 +11,6 @@ export interface ProductModel {
 }
 
 export interface ServerResponse {
-  count: Number;
-  products: ProductModel[];
+  count: number;
+  products: ProductModelServer[];
 }

@@ -81,9 +81,13 @@
                             >
                           </button> -->
                         </div>
+                        <!-- {{ arr.prodData[i].id }} -->
                       </div>
                       <div class="add-to-cart">
-                        <button class="add-to-cart-btn">
+                        <button
+                          class="add-to-cart-btn"
+                          (click)="addToCart(product['idVinyl'])"
+                        >
                           <i class="fa fa-shopping-cart"></i>
                           {{
                             product["quantite_dispo"] > 1
@@ -97,14 +101,12 @@
                   </div>
                 </div>
               </div>
-
               <!-- Products tab & slick -->
             </div>
           </div>
           <!-- Insert here if problem -->
         </div>
       </div>
-
       <!-- /row -->
     </div>
     <!-- /container -->
