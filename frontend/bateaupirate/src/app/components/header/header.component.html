@@ -85,28 +85,55 @@
               >
                 <i class="fa fa-shopping-cart"></i>
                 <span>Your Cart</span>
-                <div class="qty">0</div>
+                <div class="qty">
+                  {{
+                    cartData.data[0].numInCart !== 0 ? cartData.data.length : 0
+                  }}
+                </div>
               </a>
               <div class="cart-dropdown">
-                <div class="cart-list">
-                  <div class="product-widget">
+                <p *ngIf="cartData.data[0].numInCart === 0">
+                  Your cart is empty
+                </p>
+                <div class="cart-list" *ngIf="cartData.data[0].numInCart !== 0">
+                  <div
+                    class="product-widget"
+                    *ngFor="let c of cartData.data; let i = index"
+                  >
                     <div class="product-img">
-                      <img src="assets/img/product01.png" alt="" />
+                      <img
+                        src="assets/img/{{ c.product.photo }}"
+                        alt="{{ c.product.nomVinyl }}"
+                        width="20px"
+                      />
                     </div>
                     <div class="product-body">
                       <h3 class="product-name">
-                        <a href="#">product name goes here</a>
+                        <a href="#">{{ c.product.nomVinyl }}</a>
                       </h3>
                       <h4 class="product-price">
-                        <span class="qty">1x</span>0
+                        <span class="qty">{{ c.numInCart }}x</span
+                        >{{ c.product.prixHT | currency: "EUR" }}
                       </h4>
                     </div>
-                    <button class="delete"><i class="fa fa-close"></i></button>
+                    <button
+                      class="delete"
+                      (click)="cartService.DeleteProductFromCart(i)"
+                    >
+                      <i class="fa fa-close"></i>
+                    </button>
                   </div>
                 </div>
                 <div class="cart-summary">
-                  <small>3 Item(s) selected</small>
-                  <h5>SUBTOTAL:{{ 0 | currency: "EUR" }}</h5>
+                  <small
+                    >{{
+                      cartData.data[0].numInCart !== 0
+                        ? cartData.data.length
+                        : 0
+                    }}
+                    Item(s) selected</small
+                  >
+                  <h5>TOTAL:{{ cartTotal | currency: "EUR" }}</h5>
                 </div>
                 <div class="cart-btns">
                   <a routerLink="/cart">View Cart</a>
@@ -159,62 +186,3 @@
 </nav>
 <!-- /NAVIGATION -->
 
-<!-- SECTION -->
-<div class="section">
-  <!-- container -->
-  <div class="container">
-    <!-- row -->
-    <div class="row">
-      <!-- shop -->
-      <div class="col-md-4 col-xs-6">
-        <div class="shop">
-          <div class="shop-img">
-            <img src="/assets/img/shop01.png" alt="" />
-          </div>
-          <div class="shop-body">
-            <h3>Laptop<br />Collection</h3>
-            <a href="#" class="cta-btn"
-              >Shop now <i class="fa fa-arrow-circle-right"></i
-            ></a>
-          </div>
-        </div>
-      </div>
-      <!-- /shop -->
-
-      <!-- shop -->
-      <div class="col-md-4 col-xs-6">
-        <div class="shop">
-          <div class="shop-img">
-            <img src="/assets/img/shop03.png" alt="" />
-          </div>
-          <div class="shop-body">
-            <h3>Accessories<br />Collection</h3>
-            <a href="#" class="cta-btn"
-              >Shop now <i class="fa fa-arrow-circle-right"></i
-            ></a>
-          </div>
-        </div>
-      </div>
-      <!-- /shop -->
-
-      <!-- shop -->
-      <div class="col-md-4 col-xs-6">
-        <div class="shop">
-          <div class="shop-img">
-            <img src="/assets/img/shop02.png" alt="" />
-          </div>
-          <div class="shop-body">
-            <h3>Cameras<br />Collection</h3>
-            <a href="#" class="cta-btn"
-              >Shop now <i class="fa fa-arrow-circle-right"></i
-            ></a>
-          </div>
-        </div>
-      </div>
-      <!-- /shop -->
-    </div>
-    <!-- /row -->
-  </div>
-  <!-- /container -->
-</div>
-<!-- /SECTION -->

@@ -104,6 +104,7 @@ export class CartService {
       }
     }
   }
+
   AddProductToCart(id: number, quantity?: number) {
     this.productService.getSingleProduct(id).subscribe((prod) => {
       //  1. If the cart is empty
@@ -207,9 +208,9 @@ export class CartService {
     const data = this.cartDataServer.data[index];
 
     if (increase) {
-      data.numInCart < data.product.quantity
+      data.numInCart < data.product.quantite_dispo
         ? data.numInCart++
-        : data.product.quantity;
+        : data.product.quantite_dispo;
       this.cartDataClient.prodData[index].incart = data.numInCart;
       this.CalculateTotal();
       this.cartDataClient.total = this.cartDataServer.total;

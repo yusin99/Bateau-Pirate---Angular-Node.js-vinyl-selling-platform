@@ -59,7 +59,7 @@ router.get("/:idCommande", function (req, res) {
       },
     ])
     .withFields([
-      "com.montant_HT,com.date_commande,com.status_commande,c.prenom,c.nom,v.nomVinyl,ac.quantite",
+      "ac.montantHT,com.date_commande,com.status_commande,c.prenom,c.nom,v.nomVinyl,ac.quantite",
     ])
     .filter({ "ac.id": orderId })
     .getAll()
@@ -100,7 +100,7 @@ router.post("/new", function (req, res) {
             const prixTotal = data.prixHT * inCart;
             console.log(data.prixHT + " EUR");
             // console.log(inCart);
-            // console.log(data);
+            console.log(data);
 
             // Deduct the number of pieces ordered from the quantity column in database
             if (data.quantite_dispo > 0) {
@@ -120,13 +120,13 @@ router.post("/new", function (req, res) {
                 idCommande: newOrderId,
                 idVinyl: v.idVinyl,
                 quantite: inCart,
-                montant_HT: prixTotal,
+                montantHT: prixTotal,
               })
               .then((newId) => {
                 database
                   .table("vinyl")
                   .filter({ idVinyl: v.idVinyl })
-                  .update({ quantite_dispo: data.quantite })
+                  .update({ quantite_dispo: data.quantite_dispo })
                   .then((successNum) => {
                     // database
                     //   .table("commandes")
