@@ -174,9 +174,9 @@
       <!-- NAV -->
       <ul class="main-nav nav navbar-nav">
         <li class="active"><a [routerLink]="['/']">Accuiel</a></li>
-        <li><a href="#">Tous les vinyls</a></li>
-        <li><a href="#">Categories</a></li>
-        <li><a href="#">Contactez-nous</a></li>
+        <li><a (click)="navigateAllProducts()">Tous les vinyls</a></li>
+        <!-- <li><a href="#">Categories</a></li>
+        <li><a href="#">Contactez-nous</a></li> -->
       </ul>
       <!-- /NAV -->
     </div>
@@ -185,4 +185,3 @@
   <!-- /container -->
 </nav>
 <!-- /NAVIGATION -->
-

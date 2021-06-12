@@ -1,5 +1,5 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const { database } = require("../config/helpers");
 /* GET users listing. */
 // router.get("/", function (req, res, next) {
@@ -24,7 +24,11 @@ router.get("/", function (req, res) {
       },
     ])
     .withFields([
-      "com.date_commande,com.status_commande,c.prenom,c.nom,v.nomVinyl",
+      "com.date_commande",
+      "com.status_commande",
+      "c.prenom",
+      "c.nom",
+      "v.nomVinyl",
     ])
     .getAll()
     .then((orders) => {
@@ -40,110 +44,124 @@ router.get("/", function (req, res) {
 });
 
 // Get single order
-router.get("/:idCommande", function (req, res) {
-  const orderId = req.params.idCommande;
-  database
-    .table("commandes as com")
-    .join([
-      {
-        table: "clients as c",
-        on: "com.idClient = c.idClient",
-      },
-      {
-        table: "articles_commande as ac",
-        on: "com.idCommande = ac.idCommande",
-      },
-      {
-        table: "vinyl as v",
-        on: "ac.idVinyl = v.idVinyl",
-      },
-    ])
-    .withFields([
-      "ac.montantHT,com.date_commande,com.status_commande,c.prenom,c.nom,v.nomVinyl,ac.quantite",
-    ])
-    .filter({ "ac.id": orderId })
-    .getAll()
-
-    .then((orders) => {
-      if (orders.length > 0) {
-        res.status(200).json(orders);
-      } else {
-        res.json({ message: `No orders found with order id ${orderId}` });
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+router.get("/:idCommande", async (req, res) => {
+  try {
+    const orderId = req.params.idCommande;
+    database
+      .table("commandes as com")
+      .join([
+        {
+          table: "clients as c",
+          on: "com.idClient = c.idClient",
+        },
+        {
+          table: "articles_commande as ac",
+          on: "com.idCommande = ac.idCommande",
+        },
+        {
+          table: "vinyl as v",
+          on: "ac.idVinyl = v.idVinyl",
+        },
+      ])
+      .withFields([
+        "ac.idCommande",
+        "com.date_commande",
+        "com.status_commande",
+        "c.prenom",
+        "v.nomVinyl",
+        "v.photo",
+        "ac.quantite",
+      ])
+      .filter({ "ac.id": orderId })
+      .getAll()
+      .then((orders) => {
+        if (orders.length >= 0) {
+          res.status(200).json(orders);
+        } else {
+          res.json({ message: `No orders found with order id ${orderId}` });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
-//Post new order
-router.post("/new", function (req, res) {
-  let { idClient, vinyl, commandes } = req.body;
-  // console.log(idClient);
-  // console.log(vinyl);
-  console.log(idClient, vinyl);
-  if (idClient !== null && idClient > 0 && !isNaN(idClient)) {
+router.post("/new", async (req, res) => {
+  // let userId = req.body.userId;
+  // let data = JSON.parse(req.body);
+
+  let { userId, products } = req.body;
+  console.log(userId);
+  console.log(products);
+
+  if (userId !== null && userId > 0) {
     database
       .table("commandes")
       .insert({
-        idClient: idClient,
+        idClient: userId,
       })
       .then((newOrderId) => {
         if (newOrderId > 0) {
-          vinyl.forEach(async (v) => {
-            let data = await database
-              .table("vinyl")
-              .filter({ idVinyl: v.idVinyl })
-              .withFields(["quantite_dispo", "prixHT"])
-              .get();
-            let inCart = v.quantite;
-            const prixTotal = data.prixHT * inCart;
-            console.log(data.prixHT + " EUR");
-            // console.log(inCart);
-            console.log(data);
+          products.forEach(async (p) => {
+            try {
+              let data = await database
+                .table("vinyl")
+                .filter({ idVinyl: p.id })
+                .withFields(["quantite_dispo", "prixHT"])
+                .get();
 
-            // Deduct the number of pieces ordered from the quantity column in database
-            if (data.quantite_dispo > 0) {
-              data.quantite_dispo = data.quantite_dispo - inCart;
-              if (data.quantite_dispo < 0) {
+              let inCart = parseInt(p.incart);
+              let prixTotal = p.incart * data.prixHT;
+              console.log(p.id + " idididiididididiididi");
+              // Deduct the number of pieces ordered from the quantity in database
+
+              if (data.quantite_dispo > 0) {
+                data.quantite_dispo = data.quantite_dispo - inCart;
+
+                if (data.quantite_dispo < 0) {
+                  data.quantite_dispo = 0;
+                }
+              } else {
                 data.quantite_dispo = 0;
               }
-            } else {
-              data.quantite_dispo = 0;
-            }
-            console.log(prixTotal);
-            // Insert order details with respect to the newly generated order id
 
-            database
-              .table("articles_commande")
-              .insert({
-                idCommande: newOrderId,
-                idVinyl: v.idVinyl,
-                quantite: inCart,
-                montantHT: prixTotal,
-              })
-              .then((newId) => {
-                database
-                  .table("vinyl")
-                  .filter({ idVinyl: v.idVinyl })
-                  .update({ quantite_dispo: data.quantite_dispo })
-                  .then((successNum) => {
-                    // database
-                    //   .table("commandes")
-                    //   .filter({ idCommande: newOrderId })
-                    //   .insert({ montant_HT: prixTotal })
-                    //   .then(() => {})
-                    //   .catch((err) => {
-                    //     console.log(err);
-                    //   });
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                  });
-              })
-              .catch((err) => {
-                console.log(err);
-              });
+              // Insert order details w.r.t the newly created order Id
+              database
+                .table("articles_commande")
+                .insert({
+                  idCommande: newOrderId,
+                  idVinyl: p.id,
+                  quantite: inCart,
+                  montantHT: prixTotal,
+                })
+                .then((newId) => {
+                  database
+                    .table("vinyl")
+                    .filter({ idVinyl: p.id })
+                    .update({ quantite_dispo: data.quantite_dispo })
+                    .then((successNum) => {
+                      // database
+                      //   .table("commandes")
+                      //   .filter({ idCommande: newOrderId })
+                      //   .insert({ montant_HT: prixTotal })
+                      //   .then(() => {})
+                      //   .catch((err) => {
+                      //     console.log(err);
+                      //   });
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            } catch (error) {
+              console.log(error);
+            }
           });
         } else {
           res.json({
@@ -151,31 +169,24 @@ router.post("/new", function (req, res) {
             success: false,
           });
         }
-
         res.json({
-          message: `Order successfully places with order id ${newOrderId}`,
+          message: `Order successfully placed with order id ${newOrderId}`,
           success: true,
-          orderId: newOrderId,
-          vinyl: vinyl,
+          order_id: newOrderId,
+          products: products,
         });
       })
-      .catch((err) => console.log(err));
-    // database
-    //   .table("commandes")
-    //   .filter({ idCommande: newOrderId })
-    //   .insert({ montant_HT: prixTotal })
-    //   .then(() => {})
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+      .catch((err) => res.json(err));
   } else {
-    res.json({ message: `New order failled`, success: false });
+    res.json({ message: "New order failed", success: false });
   }
 });
+
 // Payment Gateway fake
 router.post("/payment", function (req, res) {
   setTimeout(() => {
     res.status(200).json({ success: true });
   }, 3000);
 });
+
 module.exports = router;

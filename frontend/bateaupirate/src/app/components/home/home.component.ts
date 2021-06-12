@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     // console.log(this.arr.prodData[0]);
-    this.productService.getAllProducts(3).subscribe((prods: any) => {
+    this.productService.getAllProducts(4).subscribe((prods: any) => {
       // console.log(prods);
       this.products = prods.products;
       for (let i = 0; i < prods.products.length; i++) {
@@ -38,7 +38,8 @@ export class HomeComponent implements OnInit {
     });
   }
   selectProduct(id: Number) {
-    this.router.navigate(['/products/', id]).then();
+    this.router.navigate(['/product/', id]).then();
+    console.log(id);
   }
   addToCart(idVinyl: number) {
     // console.log(idVinyl);

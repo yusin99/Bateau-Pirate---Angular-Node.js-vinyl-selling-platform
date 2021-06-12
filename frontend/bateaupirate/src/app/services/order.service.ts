@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+// import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -11,7 +12,7 @@ export class OrderService {
 
   constructor(private http: HttpClient) {}
 
-  getSingleOrder(orderId: Number) {
+  getSingleOrder(orderId: number) {
     return this.http
       .get<ProductResponseModel[]>(`${this.API_KEY}orders/${orderId}`)
       .toPromise();

@@ -2,7 +2,9 @@ const { json } = require("body-parser");
 var express = require("express");
 var router = express.Router();
 const { database } = require("../config/helpers");
+
 /* GET home page. */
+
 router.get("/", function (req, res, next) {
   let page =
     req.query.page !== undefined && req.query.page !== 0 ? req.query.page : 1; // set current page number
@@ -46,6 +48,7 @@ router.get("/", function (req, res, next) {
     })
     .catch((err) => console.log(err));
 });
+
 router.get("/:vinylId", function (req, res, next) {
   let vinylId = req.params.vinylId;
   console.log(vinylId);

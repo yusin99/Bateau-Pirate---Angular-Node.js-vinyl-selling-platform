@@ -67,6 +67,7 @@ export class CartService {
         // console.log(this.cartDataClient);
         //  Loop through each entry and put it in the cartDataServer object
         this.cartDataClient.prodData.forEach((p) => {
+
           this.productService
             .getSingleProduct(p.id)
             .subscribe((actualProductInfo: ProductModelServer) => {
@@ -260,20 +261,22 @@ export class CartService {
       return;
     }
   }
-
+  private dataInfo: any;
   CheckoutFromCart(userId: number) {
     this.http
-      .post(`${this.API_KEY}/orders/payment`, null)
+      .post(`${this.API_KEY}orders/payment`, null)
       .subscribe((res: any) => {
         if (res.success) {
           this.resetServerData();
           this.http
-            .post(`${this.API_KEY}/orders/new`, {
+            .post(`${this.API_KEY}orders/new`, {
               userId,
               products: this.cartDataClient.prodData,
             })
             .subscribe((data: any) => {
               this.orderService.getSingleOrder(data.order_id).then((prods) => {
+                console.log(data);
+                this.dataInfo = data;
                 if (data.success) {
                   const navigationExtras: NavigationExtras = {
                     state: {
@@ -283,6 +286,7 @@ export class CartService {
                       total: this.cartDataClient.total,
                     },
                   };
+                  console.log(prods);
 
                   this.spinner.hide().then();
                   this.router

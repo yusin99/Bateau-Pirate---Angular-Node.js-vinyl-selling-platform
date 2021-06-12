@@ -18,7 +18,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductModelServer } from './models/product.model';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
+import { AllproduComponent } from './components/allprodu/allprodu.component';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { FormsModule } from '@angular/forms';
+import {
+  GoogleLoginProvider,
+  AuthServiceConfig,
+  SocialLoginModule,
+} from 'angularx-social-login';
+// import { GoogleLoginProvider } from 'angularx-social-login';
+// import { AuthServiceConfig } from 'angularx-social-login';
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider(
+      '478516489460-mg7or4i99mten76f5a0dibfgbkbkrrk9.apps.googleusercontent.com'
+    ),
+  },
+]);
 
+export function provideConfig() {
+  return config;
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +51,9 @@ import { ToastrModule } from 'ngx-toastr';
     HomeComponent,
     SingleProductComponent,
     ThankYouComponent,
+    AllproduComponent,
+    LoginComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,8 +63,15 @@ import { ToastrModule } from 'ngx-toastr';
     NgxSpinnerModule,
     NoopAnimationsModule,
     ToastrModule.forRoot(),
+    FormsModule,
+    SocialLoginModule,
   ],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
