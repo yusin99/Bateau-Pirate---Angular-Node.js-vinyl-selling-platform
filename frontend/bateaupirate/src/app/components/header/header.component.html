@@ -20,11 +20,22 @@
         </li>
       </ul>
       <ul class="header-links pull-right">
-        <!-- <li>
-          <a href="#"><i class="fa fa-dollar"></i> USD</a>
-        </li> -->
         <li>
-          <a href="#"><i class="fa fa-user-o"></i> My Account</a>
+          <a routerLink="/profile"
+            ><i class="fa fa-user-o"></i>
+            {{ authState === false ? "LOGIN" : "My Account" }}</a
+          >
+        </li>
+        <li>
+          <a routerLink="/register"
+            ><i class="fa fa-user-o"></i>
+            {{ authState === false ? "Register" : "" }}</a
+          >
+        </li>
+        <li>
+          <a routerLink="/register">
+            {{ authState === true ? "Logout" : "" }}</a
+          >
         </li>
       </ul>
     </div>

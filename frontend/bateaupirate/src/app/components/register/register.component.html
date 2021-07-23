@@ -1,0 +1,89 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Sign In</h5>
+            <form class="form-signin" novalidate #myform="ngForm">
+              <div class="form-label-group">
+                <input
+                  type="email"
+                  id="inputEmail"
+                  class="form-control"
+                  placeholder="Email address"
+                  [(ngModel)]="email"
+                  name="email"
+                  required
+                  autofocus
+                />
+                <label for="inputEmail">Email address</label>
+              </div>
+
+              <div class="form-label-group">
+                <input
+                  type="password"
+                  id="inputPassword"
+                  class="form-control"
+                  placeholder="Password"
+                  [(ngModel)]="mdp"
+                  name="mdp"
+                  required
+                />
+                <label for="inputPassword">Password</label>
+              </div>
+
+              <div class="form-label-group">
+                <input
+                  type="text"
+                  id="pseudo"
+                  class="form-control"
+                  placeholder="pseudo"
+                  [(ngModel)]="pseudo"
+                  name="pseudo"
+                  required
+                />
+                <label for="pseudo">pseudo</label>
+              </div>
+
+              <div class="form-label-group">
+                <input
+                  type="text"
+                  id="nom"
+                  class="form-control"
+                  placeholder="nom"
+                  [(ngModel)]="nom"
+                  name="nom"
+                  required
+                />
+                <label for="nom">nom</label>
+              </div>
+
+              <div class="form-label-group">
+                <input
+                  type="text"
+                  id="prenom"
+                  class="form-control"
+                  placeholder="prenom"
+                  [(ngModel)]="prenom"
+                  name="prenom"
+                  required
+                />
+                <label for="prenom">prenom</label>
+              </div>
+
+              <button
+                class="btn btn-lg btn-primary btn-block text-uppercase"
+                type="submit"
+                (click)="register(myform)"
+              >
+                Sign in
+              </button>
+              <hr class="my-4" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

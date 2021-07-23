@@ -22,25 +22,35 @@ import { AllproduComponent } from './components/allprodu/allprodu.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule } from '@angular/forms';
+// import {
+//   GoogleLoginProvider,
+//   SocialAuthServiceConfig,
+// } from 'angularx-social-login';
 import {
-  GoogleLoginProvider,
-  AuthServiceConfig,
   SocialLoginModule,
+  SocialAuthServiceConfig,
+  GoogleLoginProvider,
 } from 'angularx-social-login';
+import { RegisterComponent } from './components/register/register.component';
+
+// import {
+//   SocialLoginModule,
+//   SocialAuthServiceConfig,
+// } from 'angularx-social-login';
 // import { GoogleLoginProvider } from 'angularx-social-login';
 // import { AuthServiceConfig } from 'angularx-social-login';
-const config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider(
-      '478516489460-mg7or4i99mten76f5a0dibfgbkbkrrk9.apps.googleusercontent.com'
-    ),
-  },
-]);
+// const config = new SocialAuthServiceConfig([
+//   {
+//     id: GoogleLoginProvider.PROVIDER_ID,
+//     provider: new GoogleLoginProvider(
+//       '478516489460-mg7or4i99mten76f5a0dibfgbkbkrrk9.apps.googleusercontent.com'
+//     ),
+//   },
+// ]);
 
-export function provideConfig() {
-  return config;
-}
+// export function provideConfig() {
+//   return config;
+// }
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +64,7 @@ export function provideConfig() {
     AllproduComponent,
     LoginComponent,
     ProfileComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,8 +79,18 @@ export function provideConfig() {
   ],
   providers: [
     {
-      provide: AuthServiceConfig,
-      useFactory: provideConfig,
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '478516489460-mg7or4i99mten76f5a0dibfgbkbkrrk9.apps.googleusercontent.com'
+            ),
+          },
+        ],
+      } as SocialAuthServiceConfig,
     },
   ],
   bootstrap: [AppComponent],

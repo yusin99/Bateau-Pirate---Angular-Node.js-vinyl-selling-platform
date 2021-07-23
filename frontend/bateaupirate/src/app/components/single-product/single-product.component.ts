@@ -35,18 +35,24 @@ export class SingleProductComponent implements AfterViewInit, OnInit {
       )
       .subscribe((prodId) => {
         this.id = prodId;
-        this.productService.getSingleProduct(this.id).subscribe((prod) => {
-          this.product = prod;
-          if (prod.photo !== null) {
-            this.thumbimages = prod.photo.split(';');
-          }
-          console.log(this.product);
-        });
+        this.getSingleProduct();
       });
   }
+
   navigateAllProducts() {
     this.router.navigate(['/allproducts']).then();
   }
+
+  getSingleProduct() {
+    this.productService.getSingleProduct(this.id).subscribe((prod) => {
+      this.product = prod;
+      if (prod.photo !== null) {
+        this.thumbimages = prod.photo.split(';');
+      }
+      console.log(this.product);
+    });
+  }
+
   ngAfterViewInit(): void {
     // Product Main img Slick
     $('#product-main-img').slick({
