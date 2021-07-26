@@ -6,6 +6,7 @@ import {
 } from 'angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,8 @@ export class UserService {
 
   constructor(
     private authService: SocialAuthService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private Router: Router
   ) {
     authService.authState.subscribe((user: SocialUser) => {
       if (user != null) {
@@ -53,8 +55,13 @@ export class UserService {
       .subscribe((data: any) => {
         console.log(data);
         this.auth = data.auth;
-        this.authState$.next(this.auth);
-        this.userData$.next(data);
+        if (data.message === 'Registration successful') {
+          this.Router.navigate(['/login']);
+        } else {
+          console.log('error');
+        }
+        // this.authState$.next(this.auth);
+        // this.userData$.next(data);
       });
   }
 

@@ -1,196 +1,96 @@
-<!-- SECTION -->
-<div class="section">
-  <!-- container -->
+<section class="section-name padding-y-sm">
   <div class="container">
-    <!-- row -->
-    <div class="row">
-      <!-- section title -->
-      <div class="col-md-12">
-        <div class="section-title">
-          <h3 class="title">New Products</h3>
-          <!-- <div class="section-nav">
-            <ul class="section-tab-nav tab-nav">
-              <li class="active">
-                <a data-toggle="tab" href="#tab1">Laptops</a>
-              </li>
-              <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
-              <li><a data-toggle="tab" href="#tab1">Cameras</a></li>
-              <li><a data-toggle="tab" href="#tab1">Accessories</a></li>
-            </ul>
-          </div> -->
-        </div>
-      </div>
-      <!-- /section title -->
-      <!-- {{ p[i]['photo'] }} -->
-      <!-- Products tab & slick -->
-      <div class="container">
-        <div class="row">
-          <div
-            class="col-12 col-sm-3 col-md-3"
-            *ngFor="let product of products; index as i"
-          >
-            <div class="col-12">
-              <div class="products-tabs">
-                <!-- tab -->
-                <div id="tab1" class="tab-pane active">
-                  <div class="products-slick" data-nav="#slick-nav-1">
-                    <!-- product -->
-                    <div class="product">
-                      <div class="product-img">
-                        <img
-                          src="assets/img/{{ product['photo'] }}"
-                          alt=""
-                          (click)="selectProduct(product['idVinyl'])"
-                        />
-                      </div>
-                      <div class="product-body">
-                        <p class="product-category">
-                          {{ product["nom"] }}
-                        </p>
-                        <h3 class="product-name">
-                          <a>{{ vinyl[i] }}</a>
-                        </h3>
-                        <h4 class="product-price">
-                          {{ prices[i] | currency: "EUR" }}
-                        </h4>
-                        <div class="product-rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product-btns">
-                          <button class="add-to-wishlist">
-                            <i class="fa fa-heart-o"></i
-                            ><span class="tooltipp">add to wishlist</span>
-                          </button>
-                          <!-- <button class="add-to-compare">
-                            <i class="fa fa-exchange"></i
-                            ><span class="tooltipp">add to compare</span>
-                          </button> -->
-                          <!-- <button class="quick-view">
-                            <i class="fa fa-eye"></i
-                            ><span
-                              class="tooltipp"
-                              (click)="selectProduct(product['idVinyl'])"
-                              >quick view</span
-                            >
-                          </button> -->
-                        </div>
-                        <!-- {{ arr.prodData[i].id }} -->
-                      </div>
-                      <div class="add-to-cart">
-                        <button
-                          class="add-to-cart-btn"
-                          [disabled]="product['quantite_dispo'] < 1"
-                          (click)="addToCart(product['idVinyl'])"
-                        >
-                          <i class="fa fa-shopping-cart"></i>
-                          {{
-                            product["quantite_dispo"] > 1
-                              ? "Add to cart"
-                              : "Out of Stock"
-                          }}
-                        </button>
-                      </div>
-                    </div>
-                    <!-- /product -->
-                  </div>
-                </div>
-              </div>
-              <!-- Products tab & slick -->
+    <header class="section-heading">
+      <!-- <a href="./store.html" class="btn btn-outline-primary float-right"
+        >See all</a
+      > -->
+      <h3 class="section-title">Nouveaux Vinyls</h3>
+    </header>
+    <!-- sect-heading -->
+    <div>
+      <div class="row">
+        <div
+          class="col-sm-6 col-md-6"
+          *ngFor="let product of products; index as i"
+        >
+          <div class="card card-product-grid">
+            <!-- <a href="./product-detail.html" class="img-wrap"> -->
+            <img
+              src="assets/img/{{ product['photo'] }}"
+              (click)="selectProduct(product['idVinyl'])"
+            />
+            <!-- </a> -->
+            <div
+              class="
+                col-md-12 col-lg-12
+                d-flex
+                align-items-center
+                justify-content-between
+              "
+            >
+              <figcaption class="p-4">
+                <a href="./product-detail.html" class="title">
+                  {{ product["nom"] }}</a
+                >
+                <a href="./product-detail.html" class="title">
+                  {{ vinyl[i] }}</a
+                >
+                <div class="price mt-1">{{ prices[i] | currency: "EUR" }}</div>
+                <!-- price-wrap.// -->
+              </figcaption>
+              <!-- <a routerLink="/cart" class="widget-header pl-3 ml-3"> -->
+              <button
+                class="btn btn-sm btn-outline-primary float-right"
+                [disabled]="product['quantite_dispo'] < 1"
+                (click)="addToCart(product['idVinyl'])"
+              >
+                {{
+                  product["quantite_dispo"] > 1
+                    ? "Add to cart"
+                    : "Out of Stock"
+                }}<i class="fa fa-shopping-cart"></i>
+              </button>
+              <!-- </a> -->
             </div>
           </div>
-          <!-- Insert here if problem -->
         </div>
-      </div>
-      <!-- /row -->
-    </div>
-    <!-- /container -->
-  </div>
-  <!-- /SECTION -->
-</div>
-
-<div id="hot-deal" class="section">
-  <!-- container -->
-  <div class="container">
-    <!-- row -->
-    <div class="row">
-      <div class="col-md-12">
-        <div class="hot-deal">
-          <ul class="hot-deal-countdown">
-            <li>
-              <div>
-                <h3>02</h3>
-                <span>Days</span>
-              </div>
-            </li>
-            <li>
-              <div>
-                <h3>10</h3>
-                <span>Hours</span>
-              </div>
-            </li>
-            <li>
-              <div>
-                <h3>34</h3>
-                <span>Mins</span>
-              </div>
-            </li>
-            <li>
-              <div>
-                <h3>60</h3>
-                <span>Secs</span>
-              </div>
-            </li>
-          </ul>
-          <h2 class="text-uppercase">hot deal this week</h2>
-          <p>New Collection Up to 50% OFF</p>
-          <a class="primary-btn cta-btn" href="#">Shop now</a>
-        </div>
+        <!-- col.// -->
       </div>
     </div>
-    <!-- /row -->
   </div>
-  <!-- /container -->
-</div>
-<!-- /HOT DEAL SECTION -->
-
-<!-- NEWSLETTER -->
-<div id="newsletter" class="section">
-  <!-- container -->
-  <div class="container">
-    <!-- row -->
-    <div class="row">
-      <div class="col-md-12">
-        <div class="newsletter">
-          <p>Sign Up for the <strong>NEWSLETTER</strong></p>
-          <form>
-            <input class="input" type="email" placeholder="Enter Your Email" />
-            <button class="newsletter-btn">
-              <i class="fa fa-envelope"></i> Subscribe
-            </button>
-          </form>
-          <ul class="newsletter-follow">
-            <li>
-              <a href="#"><i class="fa fa-facebook"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-instagram"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-pinterest"></i></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!-- /row -->
-  </div>
-  <!-- /container -->
-</div>
-<!-- /NEWSLETTER -->
+</section>
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->
+<!-- dsaaaaaaaaaaaaaaaaaaaa -->

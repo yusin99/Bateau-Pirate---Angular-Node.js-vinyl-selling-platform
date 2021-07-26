@@ -51,7 +51,6 @@ router.get("/", function (req, res, next) {
 
 router.get("/:vinylId", function (req, res, next) {
   let vinylId = req.params.vinylId;
-  console.log(vinylId);
 
   database
     .table("vinyl as v")
@@ -64,11 +63,41 @@ router.get("/:vinylId", function (req, res, next) {
     .filter({ "v.idVinyl": vinylId })
     .get()
     .then((prods) => {
+      console.log(prods);
       if (prods) {
         res.status(200).json(prods);
       } else {
         res.json({
           message: "No product found matching this",
+        });
+      }
+    })
+    .catch((err) => console.log(err));
+});
+// Get All songs
+router.get("/piste/:vinylId", function (req, res, next) {
+  let vinylId = req.params.vinylId;
+
+  database
+    .table("pistes as p")
+    .join([
+      {
+        table: "vinyl as v",
+        on: "v.idVinyl = p.idVinyl",
+      },
+    ])
+    .filter({ "p.idVinyl": vinylId })
+    .getAll()
+    .then((prods) => {
+      console.log(prods);
+      if (prods) {
+        res.status(200).json({
+          count: prods.length,
+          songs: prods,
+        });
+      } else {
+        res.json({
+          message: "No product found matching thiss",
         });
       }
     })

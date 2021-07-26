@@ -1,89 +1,244 @@
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center">Sign In</h5>
-            <form class="form-signin" novalidate #myform="ngForm">
-              <div class="form-label-group">
-                <input
-                  type="email"
-                  id="inputEmail"
-                  class="form-control"
-                  placeholder="Email address"
-                  [(ngModel)]="email"
-                  name="email"
-                  required
-                  autofocus
-                />
-                <label for="inputEmail">Email address</label>
-              </div>
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Sign In</h5>
+          <form class="form-signin" novalidate #myform="ngForm">
+            <div class="form-label-group">
+              <input
+                type="email"
+                id="inputEmail"
+                class="form-control"
+                placeholder="Email address"
+                [(ngModel)]="email"
+                name="email"
+                required
+                autofocus
+              />
+              <label for="inputEmail">Email address</label>
+            </div>
 
-              <div class="form-label-group">
-                <input
-                  type="password"
-                  id="inputPassword"
-                  class="form-control"
-                  placeholder="Password"
-                  [(ngModel)]="mdp"
-                  name="mdp"
-                  required
-                />
-                <label for="inputPassword">Password</label>
-              </div>
+            <div class="form-label-group">
+              <input
+                type="password"
+                id="inputPassword"
+                class="form-control"
+                placeholder="Password"
+                [(ngModel)]="mdp"
+                name="mdp"
+                required
+              />
+              <label for="inputPassword">Password</label>
+            </div>
 
-              <div class="form-label-group">
-                <input
-                  type="text"
-                  id="pseudo"
-                  class="form-control"
-                  placeholder="pseudo"
-                  [(ngModel)]="pseudo"
-                  name="pseudo"
-                  required
-                />
-                <label for="pseudo">pseudo</label>
-              </div>
+            <div class="form-label-group">
+              <input
+                type="text"
+                id="pseudo"
+                class="form-control"
+                placeholder="pseudo"
+                [(ngModel)]="pseudo"
+                name="pseudo"
+                required
+              />
+              <label for="pseudo">pseudo</label>
+            </div>
 
-              <div class="form-label-group">
-                <input
-                  type="text"
-                  id="nom"
-                  class="form-control"
-                  placeholder="nom"
-                  [(ngModel)]="nom"
-                  name="nom"
-                  required
-                />
-                <label for="nom">nom</label>
-              </div>
+            <div class="form-label-group">
+              <input
+                type="text"
+                id="nom"
+                class="form-control"
+                placeholder="nom"
+                [(ngModel)]="nom"
+                name="nom"
+                required
+              />
+              <label for="nom">nom</label>
+            </div>
 
-              <div class="form-label-group">
-                <input
-                  type="text"
-                  id="prenom"
-                  class="form-control"
-                  placeholder="prenom"
-                  [(ngModel)]="prenom"
-                  name="prenom"
-                  required
-                />
-                <label for="prenom">prenom</label>
-              </div>
+            <div class="form-label-group">
+              <input
+                type="text"
+                id="prenom"
+                class="form-control"
+                placeholder="prenom"
+                [(ngModel)]="prenom"
+                name="prenom"
+                required
+              />
+              <label for="prenom">prenom</label>
+            </div>
 
-              <button
-                class="btn btn-lg btn-primary btn-block text-uppercase"
-                type="submit"
-                (click)="register(myform)"
-              >
-                Sign in
-              </button>
-              <hr class="my-4" />
-            </form>
-          </div>
+            <button
+              class="btn btn-lg btn-primary btn-block text-uppercase"
+              type="submit"
+              (click)="register(myform)"
+            >
+              Sign in
+            </button>
+            <hr class="my-4" />
+          </form>
         </div>
       </div>
     </div>
   </div>
-</body>
+</div> -->
+
+<!--  -->
+<div class="container w-50">
+  <div class="card">
+    <article class="card-body">
+      <header class="mb-4">
+        <h4 class="card-title">Sign up</h4>
+      </header>
+      <form novalidate #myform="ngForm">
+        <div class="form-row">
+          <div class="col form-group">
+            <label for="prenom">Prénom</label>
+            <input
+              type="text"
+              id="prenom"
+              class="form-control"
+              placeholder="prenom"
+              [(ngModel)]="prenom"
+              name="prenom"
+              required
+            />
+          </div>
+          <!-- form-group end.// -->
+          <div class="col form-group">
+            <label for="nom">Nom</label>
+            <input
+              type="text"
+              id="nom"
+              class="form-control"
+              placeholder="nom"
+              [(ngModel)]="nom"
+              name="nom"
+              required
+            />
+          </div>
+          <!-- form-group end.// -->
+        </div>
+        <!-- form-row end.// -->
+        <div class="form-group">
+          <label for="inputEmail">Email address</label>
+          <input
+            type="email"
+            id="inputEmail"
+            class="form-control"
+            placeholder="Email address"
+            [(ngModel)]="email"
+            name="email"
+            required
+            autofocus
+          />
+          <small class="form-text text-muted"
+            >We'll never share your email with anyone else.</small
+          >
+        </div>
+        <!-- form-group end.// -->
+        <!-- <div class="form-group">
+          <label class="custom-control custom-radio custom-control-inline">
+            <input
+              class="custom-control-input"
+              checked=""
+              type="radio"
+              name="gender"
+              value="option1"
+            />
+            <span class="custom-control-label"> Male </span>
+          </label>
+          <label class="custom-control custom-radio custom-control-inline">
+            <input
+              class="custom-control-input"
+              type="radio"
+              name="gender"
+              value="option2"
+            />
+            <span class="custom-control-label"> Female </span>
+          </label>
+        </div> -->
+        <!-- form-group end.// -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="pseudo">Pseudo</label>
+            <input
+              type="text"
+              id="pseudo"
+              class="form-control"
+              placeholder="Pseudo"
+              [(ngModel)]="pseudo"
+              name="pseudo"
+              required
+            />
+          </div>
+          <!-- form-group end.// -->
+          <!-- <div class="form-group col-md-6">
+            <label>Country</label>
+            <select id="inputState" class="form-control">
+              <option>Choose...</option>
+              <option>Uzbekistan</option>
+              <option>Russia</option>
+              <option selected="">United States</option>
+              <option>India</option>
+              <option>Afganistan</option>
+            </select>
+          </div> -->
+          <!-- form-group end.// -->
+        </div>
+        <!-- form-row.// -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputPassword1">Créer mot de passe</label>
+            <input
+              type="password"
+              id="inputPassword1"
+              class="form-control"
+              placeholder="Password"
+              [(ngModel)]="mdp1"
+              name="mdp1"
+              required
+            />
+          </div>
+          <!-- form-group end.// -->
+          <div class="form-group col-md-6">
+            <label for="inputPassword2">Répétez le mot de passe</label>
+            <input
+              type="password"
+              id="inputPassword2"
+              class="form-control"
+              placeholder="Password"
+              [(ngModel)]="mdp2"
+              name="mdp2"
+              required
+            />
+          </div>
+          <div class="text-danger">{{ error }}</div>
+          <!-- form-group end.// -->
+        </div>
+        <div class="form-group mt-3">
+          <button
+            type="submit"
+            class="btn btn-primary btn-block"
+            (click)="register(myform)"
+          >
+            Register
+          </button>
+        </div>
+        <!-- form-group// -->
+        <p class="text-muted">
+          By clicking the 'Sign Up' button, you confirm that you accept our
+          Terms of use and Privacy Policy.
+        </p>
+      </form>
+      <hr />
+      <p class="text-center">
+        Have an account? <a routerLink="/login">Log In</a>
+      </p>
+    </article>
+    <!-- card-body end .// -->
+  </div>
+</div>

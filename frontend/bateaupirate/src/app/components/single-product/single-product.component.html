@@ -1,107 +1,174 @@
-<!-- BREADCRUMB -->
-<div id="breadcrumb" class="section">
-  <!-- container -->
-  <div class="container">
-    <!-- row -->
-    <div class="row">
-      <div class="col-md-12">
-        <ul class="breadcrumb-tree">
-          <li><a routerLink="/">Accueil</a></li>
-          <li><a (click)="navigateAllProducts()">Tous les vinyls</a></li>
-          <li class="active">{{ product.nomVinyl }}</li>
-        </ul>
-      </div>
-    </div>
-    <!-- /row -->
-  </div>
-  <!-- /container -->
-</div>
-<!-- /BREADCRUMB -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
 
-<!-- SECTION -->
-<div class="section">
-  <!-- container -->
-  <div class="container">
-    <!-- row -->
-    <div class="row">
-      <!-- Product main img -->
-      <div class="col-md-5 col-md-push-2">
-        <div id="product-main-img">
-          <ng-template [ngIf]="thumbimages.length === 0">
-            <div class="product-preview">
-              <img
-                src="assets/img/product.photo"
-                alt="{{ product.nomVinyl }}"
-              />
-            </div>
-          </ng-template>
-          <ng-template [ngIf]="thumbimages.length > 0">
-            <div class="product-preview" *ngFor="let t of thumbimages">
-              <img
-                src="assets/img/{{ product.photo }}"
-                alt="{{ product.nomVinyl }}"
-              />
-            </div>
-          </ng-template>
+<div class="card">
+  <div class="row no-gutters">
+    <aside class="col-sm-6 border-right">
+      <article class="gallery-wrap">
+        <div class="img-big-wrap">
+          <a href="#"><img src="assets/img/{{ product.photo }}" /></a>
         </div>
-      </div>
-      <!-- /Product main img -->
+        <!-- img-big-wrap.// -->
+        <div class="thumbs-wrap">
+          <a href="#" class="item-thumb">
+            <img src="assets/img/{{ product.photo }}"
+          /></a>
+          <a href="#" class="item-thumb">
+            <img src="assets/img/{{ product.photo }}"
+          /></a>
+          <a href="#" class="item-thumb">
+            <img src="assets/img/{{ product.photo }}"
+          /></a>
+        </div>
+        <!-- thumbs-wrap.// -->
+      </article>
+      <!-- gallery-wrap .end// -->
+    </aside>
+    <main class="col-sm-6">
+      <article class="content-body">
+        <h2 class="title">{{ product.nomVinyl }}</h2>
+        <h5>Description</h5>
+        <p>
+          {{ product.description }}
+        </p>
+        <h5>Chansons dans le vinyl:</h5>
+        <div class="d-flex flex-wrap">
+          <ul
+            class="
+              list-item
+              cols-two
+              text-primary
+              d-flex
+              flex-wrap
+              justify-content-between
+              p-1
+            "
+            *ngFor="let s of songs.songs; index as i"
+          >
+            <li>{{ s.nom }},</li>
+            <!-- <li>Branded tongue and cuff</li>
+          <li>Super fast and amazing</li>
+          <li>Lorem sed do eiusmod tempor</li>
+          <li>Easy fast and ver good</li>
+          <li>Lorem sed do eiusmod tempor</li> -->
+          </ul>
+        </div>
+        <p>
+          Remaining:
+          <span class="text-primary">{{ product.quantite_dispo }}</span>
+        </p>
 
-      <!-- Product thumb imgs -->
-      <div class="col-md-2 col-md-pull-5">
-        <ng-template [ngIf]="thumbimages.length > 0">
-          <div id="product-imgs">
-            <div class="product-preview" *ngFor="let t of thumbimages">
-              <img
-                src="assets/img/{{ product.photo }}"
-                alt="{{ product.nomVinyl }}"
+        <div class="h3 mb-4">
+          <var class="price h4">{{ product.prixHT | currency: "EUR" }}</var>
+        </div>
+        <!-- price-wrap.// -->
+
+        <div class="form-row">
+          <div class="col-2">
+            <select class="form-control">
+              <option *ngFor="let s of songs.songs; index as i">
+                {{ s.nom }}
+              </option>
+              <!-- <option>2</option>
+              <option>3</option> -->
+            </select>
+          </div>
+
+          <!-- col.// -->
+          <!-- <div class="col-2">
+            <select class="form-control">
+              <option>Size</option>
+              <option>XL</option>
+              <option>MD</option>
+              <option>XS</option>
+            </select>
+          </div> -->
+          <div class="col">
+            <div class="input-group input-spinner">
+              <div class="input-group-prepend">
+                <button
+                  class="btn btn-light"
+                  type="button"
+                  id="button-plus"
+                  (click)="Decrease()"
+                >
+                  <i class="fa fa-minus"></i>
+                </button>
+              </div>
+              <input
+                type="number"
+                [max]="
+                  product?.quantite_dispo >= 1 ? product?.quantite_dispo : 0
+                "
+                min="1"
+                readonly
+                #quantity
+                value="{{ product?.quantite_dispo >= 1 ? 1 : 0 }}"
+                style="text-align: center"
               />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-light"
+                  type="button"
+                  id="button-minus"
+                  (click)="Increase()"
+                >
+                  <i class="fa fa-plus"></i>
+                </button>
+              </div>
             </div>
+            <!-- input-group.// -->
           </div>
-        </ng-template>
-        <ng-template [ngIf]="thumbimages.length === 0">
-          <div id="product-imgs">
-            <div class="product-preview">
-              <img
-                src="assets/img/{{ product.photo }}"
-                alt="{{ product.nomVinyl }}"
-              />
-            </div>
-          </div>
-        </ng-template>
-      </div>
-      <!-- /Product thumb imgs -->
-
-      <!-- Product details -->
-      <div class="col-md-5">
-        <div class="product-details">
-          <h2 class="product-name">{{ product.nomVinyl }}</h2>
-          <div>
-            <div class="product-rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star-o"></i>
-            </div>
-            <a class="review-link" href="#">10 Review(s) | Add your review</a>
-          </div>
-          <div>
-            <h3 class="product-price">
-              {{ product.prixHT | currency: "EUR" }}
-            </h3>
-            <span class="product-available" *ngIf="product.quantite_dispo >= 1"
-              >Disponible {{ product.quantite_dispo }} vinyls</span
+          <!-- col.// -->
+          <div class="col-6">
+            <button
+              (click)="addToCart(product?.idVinyl)"
+              class="btn btn-primary w-100"
+              *ngIf="product.quantite_dispo >= 1"
             >
-            <span class="product-available" *ngIf="product.quantite_dispo === 0"
-              >Indisponible temporairement</span
+              Add to cart
+              <i class="fas fa-shopping-cart"></i>
+            </button>
+            <button
+              (click)="addToCart(product?.idVinyl)"
+              class="btn btn-primary w-100"
+              *ngIf="product.quantite_dispo == 0"
+              disabled
             >
+              Indisponible
+              <i class="fas fa-shopping-cart"></i>
+            </button>
           </div>
-          <p>
-            {{ product.description }}
-          </p>
-
-          <div class="add-to-cart">
+          <!-- col.// -->
+          <!-- <div class="col">
             <div class="qty-label">
               Qty
               <div class="input-number">
@@ -119,50 +186,18 @@
                 <span class="qty-down" (click)="Decrease()">-</span>
               </div>
             </div>
-            <button
-              class="add-to-cart-btn"
-              (click)="addToCart(product?.idVinyl)"
-              *ngIf="product.quantite_dispo >= 1"
-            >
-              <i class="fa fa-shopping-cart"></i> Add To Cart
-            </button>
-            <button
-              class="add-to-cart-btn"
-              (click)="addToCart(product?.idVinyl)"
-              *ngIf="product.quantite_dispo < 1"
-              [disabled]="product['quantite_dispo'] < 1"
-            >
-              <i class="fa fa-shopping-cart"></i> Indisponible
-            </button>
-          </div>
+          </div> -->
 
-          <ul class="product-btns">
-            <li>
-              <a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a>
-            </li>
-          </ul>
-
-          <ul class="product-links">
-            <li>Share:</li>
-            <li>
-              <a href="#"><i class="fa fa-facebook"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-google-plus"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-envelope"></i></a>
-            </li>
-          </ul>
+          <!-- <div class="col">
+            <a href="#" class="btn btn-light"> <i class="fas fa-heart"></i> </a>
+          </div>  -->
+          <!-- col.// -->
         </div>
-      </div>
-      <!-- /Product details -->
-    </div>
-    <!-- /row -->
+        <!-- row.// -->
+      </article>
+      <!-- product-info-aside .// -->
+    </main>
+    <!-- col.// -->
   </div>
-  <!-- /container -->
+  <!-- row.// -->
 </div>
-<!-- /SECTION -->

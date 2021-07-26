@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     // console.log(this.arr.prodData[0]);
-    this.productService.getAllProducts(4).subscribe((prods: any) => {
+    this.productService.getAllProducts(8).subscribe((prods: any) => {
       // console.log(prods);
       this.products = prods.products;
       for (let i = 0; i < prods.products.length; i++) {

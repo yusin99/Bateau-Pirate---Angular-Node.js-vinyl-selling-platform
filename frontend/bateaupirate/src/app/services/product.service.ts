@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProductModelServer } from '../models/product.model';
+import { SingleProductModelServer } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,5 +20,10 @@ export class ProductService {
   }
   getSingleProduct(id: number): Observable<ProductModelServer> {
     return this.http.get<ProductModelServer>(this.API_KEY + '/products/' + id);
+  }
+  getAllSongs(id: number): Observable<SingleProductModelServer> {
+    return this.http.get<SingleProductModelServer>(
+      this.API_KEY + '/products/piste/' + id
+    );
   }
 }

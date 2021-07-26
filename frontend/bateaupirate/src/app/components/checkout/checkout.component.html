@@ -7,7 +7,6 @@
   <p style="font-size: 20px; color: black">Booking Order...</p>
 </ngx-spinner>
 
-<!-- BREADCRUMB -->
 <div id="breadcrumb" class="section">
   <!-- container -->
   <div class="container">
@@ -27,278 +26,180 @@
 </div>
 <!-- /BREADCRUMB -->
 
-<div class="text-center my-5" *ngIf="cartData.data[0].numInCart === 0">
-  <h4>Your cart is Empty</h4>
-  <button class="btn btn-primary btn-lg mt-3" routerLink="/">GO TO SHOP</button>
-</div>
-<!-- SECTION -->
-<div class="section" *ngIf="cartData.data[0].numInCart !== 0">
-  <!-- container -->
-  <div class="container">
-    <!-- row -->
-    <div class="row">
-      <div class="col-md-7">
-        <!-- Billing Details -->
-        <div class="billing-details">
-          <div class="section-title">
-            <h3 class="title">Billing address</h3>
-          </div>
-          <div class="form-group">
-            <input
-              class="input"
-              type="text"
-              name="first-name"
-              placeholder="First Name"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="input"
-              type="text"
-              name="last-name"
-              placeholder="Last Name"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="input"
-              type="email"
-              name="email"
-              placeholder="Email"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="input"
-              type="text"
-              name="address"
-              placeholder="Address"
-            />
-          </div>
-          <div class="form-group">
-            <input class="input" type="text" name="city" placeholder="City" />
-          </div>
-          <div class="form-group">
-            <input
-              class="input"
-              type="text"
-              name="country"
-              placeholder="Country"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="input"
-              type="text"
-              name="zip-code"
-              placeholder="ZIP Code"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="input"
-              type="tel"
-              name="tel"
-              placeholder="Telephone"
-            />
-          </div>
-          <div class="form-group">
-            <div class="input-checkbox">
-              <input type="checkbox" id="create-account" />
-              <label for="create-account">
-                <span></span>
-                Create Account?
-              </label>
-              <div class="caption">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt.
-                </p>
-                <input
-                  class="input"
-                  type="password"
-                  name="password"
-                  placeholder="Enter Your Password"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /Billing Details -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<div class="container w-75">
+  <div class="row">
+    <aside class="col-lg-9">
+      <div class="card">
+        <table class="table table-borderless table-shopping-cart">
+          <thead class="text-muted">
+            <tr class="small text-uppercase">
+              <th scope="col">Product</th>
+              <!-- <th scope="col" width="120">Quantity</th> -->
+              <th scope="col" width="120">Price</th>
+              <th scope="col" class="text-right" width="200"></th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let c of cartData.data; let i = index">
+            <tr>
+              <td>
+                <figure class="itemside align-items-center">
+                  <div class="aside">
+                    <img
+                      src="assets/img/{{ c.product.photo }}"
+                      class="img-sm"
+                    />
+                  </div>
+                  <figcaption class="info">
+                    <a href="#" class="title text-dark">{{
+                      c.product.nomVinyl
+                    }}</a>
+                    <p class="text-muted small">
+                      {{ c.product.nomVinyl }}<br />
+                      Categorie ID : {{ c.product.idCategorie }}
+                    </p>
+                  </figcaption>
+                </figure>
+              </td>
 
-        <!-- Shiping Details -->
-        <div class="shiping-details">
-          <div class="section-title">
-            <h3 class="title">Shiping address</h3>
-          </div>
-          <div class="input-checkbox">
-            <input type="checkbox" id="shiping-address" />
-            <label for="shiping-address">
-              <span></span>
-              Ship to a diffrent address?
-            </label>
-            <div class="caption">
-              <div class="form-group">
-                <input
-                  class="input"
-                  type="text"
-                  name="first-name"
-                  placeholder="First Name"
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  class="input"
-                  type="text"
-                  name="last-name"
-                  placeholder="Last Name"
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  class="input"
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  class="input"
-                  type="text"
-                  name="address"
-                  placeholder="Address"
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  class="input"
-                  type="text"
-                  name="city"
-                  placeholder="City"
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  class="input"
-                  type="text"
-                  name="country"
-                  placeholder="Country"
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  class="input"
-                  type="text"
-                  name="zip-code"
-                  placeholder="ZIP Code"
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  class="input"
-                  type="tel"
-                  name="tel"
-                  placeholder="Telephone"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /Shiping Details -->
+              <td>
+                <div class="price-wrap">
+                  <var class="price">{{
+                    c.numInCart * c.product.prixHT | currency: "EUR"
+                  }}</var>
+                  <small class="text-muted"
+                    >{{ c.numInCart }} X
+                    {{ c.product.prixHT | currency: "EUR" }}
+                  </small>
+                </div>
+                <!-- price-wrap .// -->
+              </td>
+              <td class="text-right">
+                <!-- <a
+                  data-original-title="Save to Wishlist"
+                  title=""
+                  href=""
+                  class="btn btn-light"
+                  data-toggle="tooltip"
+                >
+                  <i class="fa fa-heart"></i
+                ></a> -->
+                <button
+                  href=""
+                  class="btn btn-light"
+                  (click)="cartService.DeleteProductFromCart(i)"
+                >
+                  Remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-        <!-- Order notes -->
-        <div class="order-notes">
-          <textarea class="input" placeholder="Order Notes"></textarea>
+        <div class="card-body border-top">
+          <p class="icontext">
+            <i class="icon text-success fa fa-truck"></i> Free Delivery within
+            1-2 weeks
+          </p>
         </div>
-        <!-- /Order notes -->
+        <!-- card-body.// -->
       </div>
-
-      <!-- Order Details -->
-      <div class="col-md-5 order-details">
-        <div class="section-title text-center">
-          <h3 class="title">Your Order</h3>
+      <!-- card.// -->
+    </aside>
+    <!-- col.// -->
+    <aside class="col-lg-3">
+      <div class="card mb-3">
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label>Have coupon?</label>
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  name=""
+                  placeholder="Coupon code"
+                />
+                <span class="input-group-append">
+                  <button class="btn btn-primary">Apply</button>
+                </span>
+              </div>
+            </div>
+          </form>
         </div>
-        <div class="order-summary">
-          <div class="order-col">
-            <div><strong>PRODUCT</strong></div>
-            <div><strong>TOTAL</strong></div>
-          </div>
-          <div class="order-products">
-            <div class="order-col" *ngFor="let c of cartData.data">
-              <div>{{ c.numInCart }} X {{ c.product.nomVinyl }}</div>
-              <div>{{ c.product.prixHT * c.numInCart | currency: "EUR" }}</div>
-            </div>
-          </div>
-          <div class="order-col">
-            <div>Shiping</div>
-            <div><strong>FREE</strong></div>
-          </div>
-          <div class="order-col">
-            <div><strong>TOTAL</strong></div>
-            <div>
-              <strong class="order-total">{{
-                cartTotal | currency: "EUR"
-              }}</strong>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="payment-method">
-          <div class="input-radio">
-            <input type="radio" name="payment" id="payment-1" />
-            <label for="payment-1">
-              <span></span>
-              Direct Bank Transfer
-            </label>
-            <div class="caption">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
-          </div>
-          <div class="input-radio">
-            <input type="radio" name="payment" id="payment-2" />
-            <label for="payment-2">
-              <span></span>
-              Cheque Payment
-            </label>
-            <div class="caption">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
-          </div>
-          <div class="input-radio">
-            <input type="radio" name="payment" id="payment-3" />
-            <label for="payment-3">
-              <span></span>
-              Paypal System
-            </label>
-            <div class="caption">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
-          </div>
-        </div> -->
-        <div class="input-checkbox">
-          <input type="checkbox" id="terms" />
-          <label for="terms">
-            <span></span>
-            I've read and accept the <a href="#">terms & conditions</a>
-          </label>
-        </div>
-        <button class="btn btn-danger order-submit" (click)="onCheckout()">
-          Place order
-        </button>
+        <!-- card-body.// -->
       </div>
-      <!-- /Order Details -->
-    </div>
-    <!-- /row -->
+      <!-- card.// -->
+
+      <div class="card">
+        <div class="card-body">
+          <dl class="dlist-align">
+            <dt>Total price:</dt>
+            <dd class="text-right">{{ cartTotal | currency: "EUR" }}</dd>
+          </dl>
+          <dl class="dlist-align">
+            <dt>Discount:</dt>
+            <dd class="text-right text-danger">- €0.00</dd>
+          </dl>
+          <dl class="dlist-align">
+            <dt>Total:</dt>
+            <dd class="text-right text-dark b">
+              <strong>{{ cartTotal | currency: "EUR" }}</strong>
+            </dd>
+          </dl>
+          <hr />
+          <p class="text-center mb-3">
+            <img
+              src="bootstrap-ecommerce-html/images/misc/payments.png"
+              height="26"
+            />
+          </p>
+          <button (click)="onCheckout()" class="btn btn-primary btn-block">
+            Make Purchase
+          </button>
+          <button routerLink="/" class="btn btn-light btn-block">
+            Continue Shopping
+          </button>
+        </div>
+        <!-- card-body.// -->
+      </div>
+      <!-- card.// -->
+    </aside>
+    <!-- col.// -->
   </div>
-  <!-- /container -->
 </div>
-<!-- /SECTION -->

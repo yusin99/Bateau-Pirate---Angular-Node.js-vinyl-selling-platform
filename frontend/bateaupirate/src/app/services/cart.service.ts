@@ -67,7 +67,6 @@ export class CartService {
         // console.log(this.cartDataClient);
         //  Loop through each entry and put it in the cartDataServer object
         this.cartDataClient.prodData.forEach((p) => {
-
           this.productService
             .getSingleProduct(p.id)
             .subscribe((actualProductInfo: ProductModelServer) => {
@@ -128,6 +127,7 @@ export class CartService {
             progressBar: true,
             progressAnimation: 'increasing',
             positionClass: 'toast-top-right',
+            closeButton: true,
           }
         );
       } else {

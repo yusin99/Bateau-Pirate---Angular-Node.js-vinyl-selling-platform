@@ -15,7 +15,7 @@ export class CheckoutComponent implements OnInit {
   cartData!: CartModelServer;
 
   constructor(
-    private cartService: CartService,
+    public cartService: CartService,
     private orderService: OrderService,
     private router: Router,
     private spinner: NgxSpinnerService

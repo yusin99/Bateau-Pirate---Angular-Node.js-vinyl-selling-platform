@@ -14,6 +14,7 @@ declare let $: any;
 export class SingleProductComponent implements AfterViewInit, OnInit {
   id!: number;
   product: any;
+  songs: any;
   thumbimages: any[] = [];
 
   @ViewChild('quantity') quantityInput: any;
@@ -36,6 +37,7 @@ export class SingleProductComponent implements AfterViewInit, OnInit {
       .subscribe((prodId) => {
         this.id = prodId;
         this.getSingleProduct();
+        this.getSingleProductSongs();
       });
   }
 
@@ -50,6 +52,15 @@ export class SingleProductComponent implements AfterViewInit, OnInit {
         this.thumbimages = prod.photo.split(';');
       }
       console.log(this.product);
+    });
+  }
+  getSingleProductSongs() {
+    this.productService.getAllSongs(this.id).subscribe((prod) => {
+      this.songs = prod;
+      // if (prod.photo !== null) {
+      //   this.thumbimages = prod.photo.split(';');
+      // }
+      console.log(this.songs);
     });
   }
 
