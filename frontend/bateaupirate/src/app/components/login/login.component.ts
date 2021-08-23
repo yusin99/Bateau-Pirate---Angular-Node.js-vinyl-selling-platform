@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.userService.authState$.subscribe(
       (authState) => {
+        console.log(authState);
         if (authState) {
           this.router.navigateByUrl(
             this.route.snapshot.queryParams['returnUrl'] || '/profile'
@@ -36,9 +37,15 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+  isEmpty(obj: any) {
+    return Object.keys(obj).length === 0;
+  }
 
   signInWithGoogle(): void {
     this.userService.googleLogin();
+  }
+  signInWithFacebook(): void {
+    this.userService.facebookLogin();
   }
   getError() {
     return this.error;

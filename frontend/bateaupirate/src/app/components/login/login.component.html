@@ -62,7 +62,11 @@
   <div class="card-body">
     <h4 class="card-title mb-4">Sign in</h4>
     <form novalidate #myform="ngForm">
-      <a href="#" class="btn btn-facebook btn-block mb-2">
+      <a
+        href="#"
+        class="btn btn-facebook btn-block mb-2"
+        (click)="signInWithFacebook()"
+      >
         <i class="fab fa-facebook-f"></i> &nbsp; Sign in with Facebook</a
       >
       <a class="btn btn-google btn-block mb-4" (click)="signInWithGoogle()">

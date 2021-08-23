@@ -23,7 +23,9 @@ export class ProfileGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.userService.auth) {
+    const authToken = JSON.parse(window.localStorage.getItem('user') || '');
+    // console.log(authToken.authToken);
+    if (typeof authToken == 'object') {
       return true;
     } else {
       this.router.navigate(['/login'], {
@@ -31,5 +33,8 @@ export class ProfileGuard implements CanActivate {
       });
       return false;
     }
+  }
+  isEmpty(obj: any) {
+    return Object.keys(obj).length === 0;
   }
 }

@@ -30,6 +30,7 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig,
   GoogleLoginProvider,
+  FacebookLoginProvider,
 } from 'angularx-social-login';
 import { RegisterComponent } from './components/register/register.component';
 
@@ -88,6 +89,10 @@ import { RegisterComponent } from './components/register/register.component';
             provider: new GoogleLoginProvider(
               '478516489460-mg7or4i99mten76f5a0dibfgbkbkrrk9.apps.googleusercontent.com'
             ),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('4328588887207992'),
           },
         ],
       } as SocialAuthServiceConfig,

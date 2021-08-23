@@ -3,6 +3,7 @@ import {
   SocialAuthService,
   GoogleLoginProvider,
   SocialUser,
+  FacebookLoginProvider,
 } from 'angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
@@ -38,6 +39,11 @@ export class UserService {
       .post(`${this.API_KEY}auth/login`, { email, mdp })
       .subscribe((data: any) => {
         console.log(data);
+        // var data1 = JSON.parse(window.localStorage.getItem('user') || '');
+        // if (typeof data1 === 'object') {
+        // } else {
+        //   window.localStorage.setItem('user', JSON.stringify(data));
+        // }
         this.auth = data.auth;
         this.authState$.next(this.auth);
         this.userData$.next(data);
@@ -69,11 +75,15 @@ export class UserService {
   googleLogin() {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
+  facebookLogin(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
 
   logout() {
     this.authService.signOut();
     this.auth = false;
     this.authState$.next(this.auth);
+    window.localStorage.removeItem('user');
   }
 }
 

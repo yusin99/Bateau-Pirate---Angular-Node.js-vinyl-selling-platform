@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SocialUser, SocialAuthService } from 'angularx-social-login';
 import { ResponseModel, UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, windowCount } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 export class ProfileComponent implements OnInit {
   myUser: any;
   errors: any;
+  dataLoggedUser: any;
   constructor(
     private authService: SocialAuthService,
     private userService: UserService,
@@ -36,20 +37,25 @@ export class ProfileComponent implements OnInit {
       .subscribe(
         (data: ResponseModel | SocialUser) => {
           this.myUser = data;
+          window.localStorage.setItem('user', JSON.stringify(this.myUser));
         },
         (err) => {
           this.errors = err;
         }
       );
+    // this.dataLoggedUser = JSON.parse(window.localStorage.getItem('user') || '');
+    // console.log(this.dataLoggedUser);
+    this.dataLoggedUser = JSON.parse(window.localStorage.getItem('user') || '');
   }
   getUserPhoto() {
-    return this.myUser?.photoUrl;
+    return this.dataLoggedUser.photoUrl;
   }
   getUserName() {
-    if (this.myUser?.name) {
-      return this.myUser?.name;
+    if (this.dataLoggedUser.name) {
+      // console.log(this.myUser);
+      return [this.dataLoggedUser.name];
     } else {
-      return [this.myUser?.nom + ' ' + this.myUser?.prenom];
+      return [this.dataLoggedUser.prenom + ' ' + this.dataLoggedUser.nom];
     }
   }
 
