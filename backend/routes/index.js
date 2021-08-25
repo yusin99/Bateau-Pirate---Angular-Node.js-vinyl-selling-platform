@@ -49,6 +49,50 @@ router.get("/", function (req, res, next) {
     .catch((err) => console.log(err));
 });
 
+router.get("/category", function (req, res, next) {
+  let page =
+    req.query.page !== undefined && req.query.page !== 0 ? req.query.page : 1; // set current page number
+  const limit =
+    req.query.limit !== undefined && req.query.limit !== 0
+      ? req.query.limit
+      : 10; // setting limit of items per page
+
+  let startValue;
+  let endValue;
+
+  if (page > 0) {
+    startValue = page * limit - limit; //10,20,30
+    endValue = page * limit;
+  } else {
+    startValue = 0;
+    endValue = 10;
+  }
+  database
+    .table("categories_musique as c")
+    // .join([
+    //   {
+    //     table: "categories_musique as c",
+    //     on: "v.idCategorie = c.idCategorie",
+    //   },
+    // ])
+    .slice(startValue, endValue)
+    // .sort({ idVinyl: 0.1 })
+    .getAll()
+    .then((categories) => {
+      if (categories.length > 0) {
+        res.status(200).json({
+          count: categories.length,
+          categories: categories,
+        });
+      } else {
+        res.json({
+          message: "No categories found",
+        });
+      }
+    })
+    .catch((err) => console.log(err));
+});
+
 router.get("/:vinylId", function (req, res, next) {
   let vinylId = req.params.vinylId;
 

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProductModelServer } from '../models/product.model';
 import { SingleProductModelServer } from '../models/product.model';
+import { CategoriesModel } from '../models/categories.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,14 @@ export class ProductService {
   getAllSongs(id: number): Observable<SingleProductModelServer> {
     return this.http.get<SingleProductModelServer>(
       this.API_KEY + '/products/piste/' + id
+    );
+  }
+  getAllCategories(): Observable<CategoriesModel> {
+    return this.http.get<CategoriesModel>(this.API_KEY + '/products/category');
+  }
+  getVinylsFromCategory(category: string): Observable<ProductModelServer> {
+    return this.http.get<ProductModelServer>(
+      this.API_KEY + '/products/category' + category
     );
   }
 }

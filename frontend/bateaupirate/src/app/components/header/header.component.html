@@ -139,25 +139,10 @@
               All categories</a
             >
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="page-category.html"
-                >Foods and Drink</a
-              >
-              <a class="dropdown-item" href="page-category.html"
-                >Home interior</a
-              >
-              <a class="dropdown-item" href="page-category.html"
-                >Computer electronics</a
-              >
-              <a class="dropdown-item" href="page-category.html">Clothing</a>
-              <a class="dropdown-item" href="page-category.html"
-                >Gardening and flowers</a
-              >
-              <a class="dropdown-item" href="page-category.html"
-                >Hand made items</a
-              >
-              <a class="dropdown-item" href="page-category.html">Smartphones</a>
-              <a class="dropdown-item" href="page-category.html"
-                >Digital products</a
+              <a
+                class="dropdown-item"
+                *ngFor="let cat of categories; let i = index"
+                >{{ cat.nom }}</a
               >
             </div>
           </li>
@@ -170,7 +155,7 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="page-blog.html">Blog</a>
+            <a class="nav-link" href="page-blog.html">Privacy policy</a>
           </li>
         </ul>
         <!--

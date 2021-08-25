@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CategoriesModel } from 'src/app/models/categories.model';
 import { ServerResponse } from 'src/app/models/product.model';
 import { ProductModelServer } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
@@ -12,6 +13,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class HomeComponent implements OnInit {
   products: ProductModelServer[] = [];
+  categories: CategoriesModel[] = [];
   prices: any[] = [];
   vinyl: any[] = [];
   public arr = JSON.parse(window.localStorage.getItem('cart') || '{}');
@@ -22,9 +24,14 @@ export class HomeComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
+    this.productService.getAllCategories().subscribe((cat: any) => {
+      console.log(cat.categories);
+      this.categories = cat.categories;
+    });
     // console.log(this.arr.prodData[0]);
     this.productService.getAllProducts(8).subscribe((prods: any) => {
       // console.log(prods);
+
       this.products = prods.products;
       for (let i = 0; i < prods.products.length; i++) {
         this.prices.push(prods.products[i].prixHT);

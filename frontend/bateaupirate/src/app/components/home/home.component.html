@@ -33,7 +33,11 @@
                   {{ product["nom"] }}</a
                 >
                 <a href="./product-detail.html" class="title">
-                  {{ vinyl[i] }}</a
+                  {{
+                    vinyl[i].length > 20
+                      ? (vinyl[i] | slice: 0:20) + ".."
+                      : vinyl[i]
+                  }}</a
                 >
                 <div class="price mt-1">{{ prices[i] | currency: "EUR" }}</div>
                 <!-- price-wrap.// -->
