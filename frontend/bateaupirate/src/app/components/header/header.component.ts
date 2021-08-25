@@ -24,9 +24,14 @@ export class HeaderComponent implements OnInit {
 
     this.cartService.cartData$.subscribe((data) => (this.cartData = data));
 
-    this.userService.authState$.subscribe(
-      (authState) => (this.authState = authState)
-    );
+    if (window.localStorage.getItem('user')) {
+      this.authState = true;
+    } else {
+      this.authState = false;
+    }
+    // this.userService.authState$.subscribe(
+    //   (authState) => (this.authState = authState)
+    // );
   }
   navigateAllProducts() {
     this.router.navigate(['/allproducts']).then();

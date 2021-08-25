@@ -23,9 +23,10 @@ export class ProfileGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const authToken = JSON.parse(window.localStorage.getItem('user') || '');
+    // const authToken = JSON.parse(window.localStorage.getItem('user') || '');
     // console.log(authToken.authToken);
-    if (typeof authToken == 'object') {
+    // if (this.userService.auth) {
+    if (window.localStorage.getItem('user') || this.userService.auth) {
       return true;
     } else {
       this.router.navigate(['/login'], {

@@ -44,6 +44,14 @@ export class UserService {
         // } else {
         //   window.localStorage.setItem('user', JSON.stringify(data));
         // }
+        window.localStorage.setItem('user', JSON.stringify(data));
+        // }
+        window.localStorage.setItem('token', JSON.stringify(data.token));
+        if (window.localStorage.getItem('user')) {
+          this.auth = true;
+        } else {
+          this.auth = false;
+        }
         this.auth = data.auth;
         this.authState$.next(this.auth);
         this.userData$.next(data);
@@ -80,10 +88,12 @@ export class UserService {
   }
 
   logout() {
-    this.authService.signOut();
     this.auth = false;
     this.authState$.next(this.auth);
+    this.authService.signOut();
     window.localStorage.removeItem('user');
+    window.localStorage.removeItem('token');
+    this.Router.navigate(['/login'])
   }
 }
 

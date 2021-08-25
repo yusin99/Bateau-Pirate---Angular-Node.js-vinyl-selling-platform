@@ -37,29 +37,40 @@ export class ProfileComponent implements OnInit {
       .subscribe(
         (data: ResponseModel | SocialUser) => {
           this.myUser = data;
-          window.localStorage.setItem('user', JSON.stringify(this.myUser));
+          // window.localStorage.setItem('user', JSON.stringify(this.myUser));
         },
         (err) => {
           this.errors = err;
         }
       );
-    // this.dataLoggedUser = JSON.parse(window.localStorage.getItem('user') || '');
-    // console.log(this.dataLoggedUser);
-    this.dataLoggedUser = JSON.parse(window.localStorage.getItem('user') || '');
+    if (!window.localStorage.getItem('user')) {
+      window.localStorage.setItem('user', JSON.stringify(this.myUser));
+    }
+    this.myUser = JSON.parse(window.localStorage.getItem('user') || '');
+    // }
+    console.log(this.myUser);
   }
   getUserPhoto() {
-    return this.dataLoggedUser.photoUrl;
+    return this.myUser.photoUrl;
   }
   getUserName() {
-    if (this.dataLoggedUser.name) {
+    if (this.myUser.name) {
       // console.log(this.myUser);
-      return [this.dataLoggedUser.name];
+      return [this.myUser.name];
     } else {
-      return [this.dataLoggedUser.prenom + ' ' + this.dataLoggedUser.nom];
+      return [this.myUser.prenom + ' ' + this.myUser.nom];
+    }
+  }
+  getProvider() {
+    if (this.myUser.provider) {
+      return this.myUser.provider;
+    } else {
+      return 'Bateau Pirate account';
     }
   }
 
   logout() {
     this.userService.logout();
+    this.router.navigate(['/login']);
   }
 }
