@@ -37,13 +37,17 @@ export class HeaderComponent implements OnInit {
     } else {
       this.authState = false;
     }
-    // this.userService.authState$.subscribe(
-    //   (authState) => (this.authState = authState)
-    // );
   }
   navigateAllProducts() {
     this.router.navigate(['/allproducts']).then();
   }
+
+  getVinylsCategory(text: any) {
+    this.productService.getVinylsFromCategory(text.id).subscribe((items) => {
+      console.log(items);
+    });
+  }
+
   logOut() {
     this.userService.logout();
   }

@@ -31,8 +31,9 @@ export class ProductService {
     return this.http.get<CategoriesModel>(this.API_KEY + '/products/category');
   }
   getVinylsFromCategory(category: string): Observable<ProductModelServer> {
+    this.router.navigate(['/category/' + category]);
     return this.http.get<ProductModelServer>(
-      this.API_KEY + '/products/category' + category
+      this.API_KEY + '/products/category/' + category
     );
   }
 }

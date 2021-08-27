@@ -50,23 +50,23 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/category", function (req, res, next) {
-  let page =
-    req.query.page !== undefined && req.query.page !== 0 ? req.query.page : 1; // set current page number
-  const limit =
-    req.query.limit !== undefined && req.query.limit !== 0
-      ? req.query.limit
-      : 10; // setting limit of items per page
+  // let page =
+  //   req.query.page !== undefined && req.query.page !== 0 ? req.query.page : 1; // set current page number
+  // const limit =
+  //   req.query.limit !== undefined && req.query.limit !== 0
+  //     ? req.query.limit
+  //     : 10; // setting limit of items per page
 
-  let startValue;
-  let endValue;
+  // let startValue;
+  // let endValue;
 
-  if (page > 0) {
-    startValue = page * limit - limit; //10,20,30
-    endValue = page * limit;
-  } else {
-    startValue = 0;
-    endValue = 10;
-  }
+  // if (page > 0) {
+  //   startValue = page * limit - limit; //10,20,30
+  //   endValue = page * limit;
+  // } else {
+  //   startValue = 0;
+  //   endValue = 12;
+  // }
   database
     .table("categories_musique as c")
     // .join([
@@ -75,7 +75,7 @@ router.get("/category", function (req, res, next) {
     //     on: "v.idCategorie = c.idCategorie",
     //   },
     // ])
-    .slice(startValue, endValue)
+    // .slice(startValue, endValue)
     // .sort({ idVinyl: 0.1 })
     .getAll()
     .then((categories) => {

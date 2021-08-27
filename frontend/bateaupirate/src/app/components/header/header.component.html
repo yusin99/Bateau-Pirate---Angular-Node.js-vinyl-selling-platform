@@ -142,7 +142,12 @@
               <a
                 class="dropdown-item"
                 *ngFor="let cat of categories; let i = index"
-                >{{ cat.nom }}</a
+                ><p
+                  id="{{ cat.nom }}"
+                  (click)="getVinylsCategory($event.target)"
+                >
+                  {{ cat.nom }}
+                </p></a
               >
             </div>
           </li>

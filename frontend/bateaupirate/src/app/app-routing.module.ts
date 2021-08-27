@@ -10,6 +10,7 @@ import { SingleProductComponent } from './components/single-product/single-produ
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileGuard } from './guard/profile.guard';
+import { CategoryComponent } from './components/category/category.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'category/:category',
+    component: CategoryComponent,
   },
   {
     path: 'profile',

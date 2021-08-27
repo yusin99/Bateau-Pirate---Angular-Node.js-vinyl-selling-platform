@@ -33,6 +33,7 @@ import {
   FacebookLoginProvider,
 } from 'angularx-social-login';
 import { RegisterComponent } from './components/register/register.component';
+import { CategoryComponent } from './components/category/category.component';
 
 // import {
 //   SocialLoginModule,
@@ -66,6 +67,7 @@ import { RegisterComponent } from './components/register/register.component';
     LoginComponent,
     ProfileComponent,
     RegisterComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,
