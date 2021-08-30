@@ -14,6 +14,8 @@ export interface CartModelPublic {
   total: number;
   prodData: [
     {
+      nomVinyl: string;
+      photo: string;
       id: number;
       incart: number;
     }

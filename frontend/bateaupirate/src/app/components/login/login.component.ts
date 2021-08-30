@@ -12,7 +12,7 @@ import { UserService } from '../../services/user.service';
 export class LoginComponent implements OnInit {
   email!: string;
   mdp!: string;
-  error: any;
+  error_message: any = this.getError();
   constructor(
     private authService: SocialAuthService,
     private router: Router,
@@ -33,10 +33,12 @@ export class LoginComponent implements OnInit {
         }
       },
       (err) => {
-        return (this.error = err);
+        console.log(err);
+        return (this.error_message = err);
       }
     );
   }
+
   isEmpty(obj: any) {
     return Object.keys(obj).length === 0;
   }
@@ -48,7 +50,7 @@ export class LoginComponent implements OnInit {
     this.userService.facebookLogin();
   }
   getError() {
-    return this.error;
+    return this.error_message;
   }
 
   login(form: NgForm) {

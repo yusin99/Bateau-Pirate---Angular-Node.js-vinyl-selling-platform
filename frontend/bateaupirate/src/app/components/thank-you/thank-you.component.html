@@ -10,32 +10,35 @@
         <p></p>
 
         <p>
-          Order Id : <strong>{{ orderId }}</strong>
+          {{ message }} <br />
+          Order Id : <strong>{{ orderId }}</strong> <br />
+          Items in cart :
+          <strong>{{ products.length }}</strong>
         </p>
       </div>
 
-      <!-- <table class="table table-striped">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>Image</th>
             <th>Title</th>
-            <th>Price</th>
-            <th>Quantity</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let p of products">
             <td>
               <img
-                src="assets/img/p.photo"
+                src="assets/img/{{ p.photo }}"
                 alt="{{ p.nomVinyl }}"
                 class="img-thumbnail"
                 width="100px"
               />
             </td>
             <td>{{ p.nomVinyl }}</td>
-            <td>{{ p.prixHT | currency: "EUR" }}</td>
-            <td>{{ p.quantityOrdered }}</td>
+            <!-- <td>{{ p.prixHT | currency: "EUR" }}</td>
+            <td>{{ p.quantityOrdered }}</td> -->
           </tr>
 
           <tr class="border-0">
@@ -45,7 +48,7 @@
             <td>{{ cartTotal | currency: "EUR" }}</td>
           </tr>
         </tbody>
-      </table> -->
+      </table>
     </div>
   </div>
 </div>

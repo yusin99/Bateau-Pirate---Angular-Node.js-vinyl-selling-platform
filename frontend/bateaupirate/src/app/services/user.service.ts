@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   auth = false;
+  error: any;
   private readonly API_KEY = 'http://localhost:3000/api/';
   user: any = {};
   authState$ = new BehaviorSubject<boolean>(this.auth);
@@ -31,13 +32,12 @@ export class UserService {
         this.userData$.next(user);
       }
     });
+    console.log(this.error);
   }
-
   //  Login User with Email and Password
   loginUser(email: string, mdp: string) {
-    this.httpClient
-      .post(`${this.API_KEY}auth/login`, { email, mdp })
-      .subscribe((data: any) => {
+    this.httpClient.post(`${this.API_KEY}auth/login`, { email, mdp }).subscribe(
+      (data: any) => {
         console.log(data);
         // var data1 = JSON.parse(window.localStorage.getItem('user') || '');
         // if (typeof data1 === 'object') {
@@ -55,7 +55,12 @@ export class UserService {
         this.auth = data.auth;
         this.authState$.next(this.auth);
         this.userData$.next(data);
-      });
+      },
+      (err) => {
+        console.log(err.error.message);
+        return (this.error = err);
+      }
+    );
   }
   registerUser(
     email: string,
@@ -83,6 +88,7 @@ export class UserService {
   googleLogin() {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
+
   facebookLogin(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
@@ -93,7 +99,7 @@ export class UserService {
     this.authService.signOut();
     window.localStorage.removeItem('user');
     window.localStorage.removeItem('token');
-    this.Router.navigate(['/login'])
+    this.Router.navigate(['/login']);
   }
 }
 

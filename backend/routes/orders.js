@@ -90,13 +90,8 @@ router.get("/:idCommande", async (req, res) => {
 });
 
 router.post("/new", async (req, res) => {
-  // let userId = req.body.userId;
-  // let data = JSON.parse(req.body);
-
-  let { userId, products } = req.body;
-  console.log(userId);
-  console.log(products);
-
+  let { userId } = req.body;
+  let { products } = req.body;
   if (userId !== null && userId > 0) {
     database
       .table("commandes")
@@ -105,17 +100,16 @@ router.post("/new", async (req, res) => {
       })
       .then((newOrderId) => {
         if (newOrderId > 0) {
+          console.log(req.body);
           products.forEach(async (p) => {
             try {
               let data = await database
                 .table("vinyl")
-                .filter({ idVinyl: p.id })
-                .withFields(["quantite_dispo", "prixHT"])
+                .withFields(["quantite_dispo", "prixHT", "nomVinyl", "photo"])
                 .get();
-
               let inCart = parseInt(p.incart);
               let prixTotal = p.incart * data.prixHT;
-              console.log(p.id + " idididiididididiididi");
+              // console.log(p.id + " idididiididididiididi");
               // Deduct the number of pieces ordered from the quantity in database
 
               if (data.quantite_dispo > 0) {
@@ -186,7 +180,7 @@ router.post("/new", async (req, res) => {
 router.post("/payment", function (req, res) {
   setTimeout(() => {
     res.status(200).json({ success: true });
-  }, 3000);
+  }, 4000);
 });
 
 module.exports = router;

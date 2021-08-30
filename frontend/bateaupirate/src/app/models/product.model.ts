@@ -1,4 +1,5 @@
 export interface ProductModelServer {
+  nomVinyl: string;
   anne_sortie: number;
   disponible: boolean;
   idCategorie: number;

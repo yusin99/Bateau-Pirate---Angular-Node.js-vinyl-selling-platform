@@ -19,6 +19,8 @@ export class CartService {
     total: 0,
     prodData: [
       {
+        nomVinyl: '',
+        photo: '',
         incart: 0,
         id: 0,
       },
@@ -107,6 +109,7 @@ export class CartService {
 
   AddProductToCart(id: number, quantity?: number) {
     this.productService.getSingleProduct(id).subscribe((prod) => {
+      console.log(prod);
       //  1. If the cart is empty
       if (this.cartDataServer.data[0].product === undefined) {
         this.cartDataServer.data[0].product = prod;
@@ -116,6 +119,8 @@ export class CartService {
         this.cartDataClient.prodData[0].incart =
           this.cartDataServer.data[0].numInCart;
         this.cartDataClient.prodData[0].id = prod.idVinyl;
+        this.cartDataClient.prodData[0].nomVinyl = prod.nomVinyl;
+        this.cartDataClient.prodData[0].photo = prod.photo;
         this.cartDataClient.total = this.cartDataServer.total;
         localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
         this.cartData$.next({ ...this.cartDataServer });
@@ -181,6 +186,8 @@ export class CartService {
           });
 
           this.cartDataClient.prodData.push({
+            nomVinyl: prod.nomVinyl,
+            photo: prod.photo,
             incart: 1,
             id: prod.idVinyl,
           });
@@ -241,7 +248,10 @@ export class CartService {
       this.cartDataClient.total = this.cartDataServer.total;
 
       if (this.cartDataClient.total === 0) {
-        this.cartDataClient = { total: 0, prodData: [{ incart: 0, id: 0 }] };
+        this.cartDataClient = {
+          total: 0,
+          prodData: [{ nomVinyl: '', photo: '', incart: 0, id: 0 }],
+        };
         localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
       } else {
         localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
@@ -263,6 +273,7 @@ export class CartService {
   }
   private dataInfo: any;
   CheckoutFromCart(userId: number) {
+    console.log(this.cartDataClient.prodData);
     this.http
       .post(`${this.API_KEY}orders/payment`, null)
       .subscribe((res: any) => {
@@ -274,6 +285,7 @@ export class CartService {
               products: this.cartDataClient.prodData,
             })
             .subscribe((data: any) => {
+              console.log(this.cartDataClient);
               this.orderService.getSingleOrder(data.order_id).then((prods) => {
                 console.log(data);
                 this.dataInfo = data;
@@ -281,12 +293,11 @@ export class CartService {
                   const navigationExtras: NavigationExtras = {
                     state: {
                       message: data.message,
-                      products: prods,
+                      products: this.cartDataClient.prodData,
                       orderId: data.order_id,
                       total: this.cartDataClient.total,
                     },
                   };
-                  console.log(prods);
 
                   this.spinner.hide().then();
                   this.router
@@ -294,7 +305,9 @@ export class CartService {
                     .then((p) => {
                       this.cartDataClient = {
                         total: 0,
-                        prodData: [{ incart: 0, id: 0 }],
+                        prodData: [
+                          { nomVinyl: '', photo: '', incart: 0, id: 0 },
+                        ],
                       };
                       this.cartTotal$.next(0);
                       localStorage.setItem(
