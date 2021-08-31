@@ -14,7 +14,43 @@
         <div class="profile-head">
           <h5>{{ getUserName() }}</h5>
           <h6>Provider: {{ getProvider() }}</h6>
-          <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+          <p class="proile-rating">Role:</p>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>ID Order</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let o of orders">
+                <td>{{ o.date_commande }}</td>
+                <td>
+                  <img
+                    src="assets/img/{{ o.photo }}"
+                    alt="{{ o.nomVinyl }}"
+                    class="img-thumbnail"
+                    width="100px"
+                  />
+                </td>
+                <td>
+                  {{ o.nomVinyl }}
+                </td>
+                <td>{{ o.idCommande }}</td>
+                <td>{{ o.quantite }}</td>
+              </tr>
+
+              <!-- <tr class="border-0">
+                <td style="border: none"></td>
+                <td></td>
+                <td>TOTAL</td>
+                <td>{{ cartTotal | currency: "EUR" }}</td>
+              </tr> -->
+            </tbody>
+          </table>
           <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
               <a
@@ -54,11 +90,15 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="profile-work">
-          <p>WORK LINK</p>
-          <a href="">Website Link</a><br />
-          <a href="">Bootsnipp Profile</a><br />
+          <!-- <p>{{ o.date_commande }}</p>
+          <p>{{ o.nomVinyl }}</p>
+          <img src="assets/img/{{ o.photo }}" alt="" /> -->
+
+          <!-- <a href="">Website Link</a><br /> -->
+          <a href="">EMAIL : {{ getUserEmail() }}</a
+          ><br />
           <a href="">Bootply Profile</a>
           <p>SKILLS</p>
           <a href="">Web Designer</a><br />
@@ -97,7 +137,7 @@
                 <label>Email</label>
               </div>
               <div class="col-md-6">
-                <p>kshitighelani@gmail.com</p>
+                <p>{{ getUserEmail() }}sss</p>
               </div>
             </div>
             <div class="row">

@@ -43,6 +43,52 @@ router.get("/", function (req, res) {
     });
 });
 
+// Get order by user logged in
+router.get("/client/:idClient", async (req, res) => {
+  try {
+    const clientId = req.params.idClient;
+    database
+      .table("commandes as com")
+      .join([
+        {
+          table: "clients as c",
+          on: "com.idClient = c.idClient",
+        },
+        {
+          table: "articles_commande as ac",
+          on: "com.idCommande = ac.idCommande",
+        },
+        {
+          table: "vinyl as v",
+          on: "ac.idVinyl = v.idVinyl",
+        },
+      ])
+      .withFields([
+        "ac.idCommande",
+        "com.date_commande",
+        "com.status_commande",
+        "c.prenom",
+        "v.nomVinyl",
+        "v.photo",
+        "ac.quantite",
+      ])
+      .filter({ "c.idClient": clientId })
+      .getAll()
+      .then((orders) => {
+        if (orders.length >= 0) {
+          res.status(200).json(orders);
+        } else {
+          res.json({ message: `No orders found with user id ${clientId}` });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // Get single order
 router.get("/:idCommande", async (req, res) => {
   try {
@@ -72,7 +118,7 @@ router.get("/:idCommande", async (req, res) => {
         "v.photo",
         "ac.quantite",
       ])
-      .filter({ "ac.id": orderId })
+      .filter({ "ac.idCommande": orderId })
       .getAll()
       .then((orders) => {
         if (orders.length >= 0) {

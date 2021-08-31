@@ -17,6 +17,11 @@ export class OrderService {
       .get<ProductResponseModel[]>(`${this.API_KEY}orders/${orderId}`)
       .toPromise();
   }
+  getOrderByClientId(clientId: number) {
+    return this.http
+      .get<ProductResponseModel[]>(`${this.API_KEY}orders/client/${clientId}`)
+      .toPromise();
+  }
 }
 
 interface ProductResponseModel {

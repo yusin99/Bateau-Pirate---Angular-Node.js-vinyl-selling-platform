@@ -3,6 +3,7 @@ import { SocialUser, SocialAuthService } from 'angularx-social-login';
 import { ResponseModel, UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { map, windowCount } from 'rxjs/operators';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,11 +12,13 @@ import { map, windowCount } from 'rxjs/operators';
 })
 export class ProfileComponent implements OnInit {
   myUser: any;
+  orders: any;
   errors: any;
   dataLoggedUser: any;
   constructor(
     private authService: SocialAuthService,
     private userService: UserService,
+    private orderService: OrderService,
     private router: Router
   ) {}
 
@@ -37,6 +40,7 @@ export class ProfileComponent implements OnInit {
       .subscribe(
         (data: ResponseModel | SocialUser) => {
           this.myUser = data;
+
           // window.localStorage.setItem('user', JSON.stringify(this.myUser));
         },
         (err) => {
@@ -48,10 +52,19 @@ export class ProfileComponent implements OnInit {
     }
     this.myUser = JSON.parse(window.localStorage.getItem('user') || '');
     // }
-    console.log(this.myUser);
+    // console.log(this.myUser);
+    this.orderService
+      .getOrderByClientId(this.myUser.idClient)
+      .then((orders) => {
+        this.orders = orders;
+        console.log(this.orders);
+      });
   }
   getUserPhoto() {
     return this.myUser.photoUrl;
+  }
+  getUserEmail() {
+    return this.myUser.email;
   }
   getUserName() {
     if (this.myUser.name) {
