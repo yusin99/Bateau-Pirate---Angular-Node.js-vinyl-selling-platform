@@ -10,32 +10,37 @@ import { SingleProductComponent } from './components/single-product/single-produ
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileGuard } from './guard/profile.guard';
-import { CategoryComponent } from './components/category/category.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    canActivate: [ProfileGuard],
   },
   {
     path: 'allproducts',
     component: AllproduComponent,
+    canActivate: [ProfileGuard],
   },
   {
     path: 'product/:id',
     component: SingleProductComponent,
+    canActivate: [ProfileGuard],
   },
   {
     path: 'cart',
     component: CartComponent,
+    canActivate: [ProfileGuard],
   },
   {
     path: 'checkout',
     component: CheckoutComponent,
+    canActivate: [ProfileGuard],
   },
   {
     path: 'thankyou',
     component: ThankYouComponent,
+    canActivate: [ProfileGuard],
   },
   {
     path: 'login',
@@ -45,10 +50,7 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
   },
-  {
-    path: 'category/:category',
-    component: CategoryComponent,
-  },
+
   {
     path: 'profile',
     component: ProfileComponent,

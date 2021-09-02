@@ -12,10 +12,12 @@ import { CategoriesModel } from '../models/categories.model';
 export class ProductService {
   constructor(private http: HttpClient, private router: Router) {}
   API_KEY = 'http://localhost:3000/api';
-  getAllProducts(numberOfResults: number = 6) {
+  getAllProducts(numberOfResults: number, page?: number) {
     return this.http.get(this.API_KEY + '/products/', {
       params: {
         limit: numberOfResults.toString(),
+
+        page: page ? page.toString() : '',
       },
     });
   }

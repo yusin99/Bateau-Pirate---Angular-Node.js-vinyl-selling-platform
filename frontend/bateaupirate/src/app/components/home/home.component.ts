@@ -13,7 +13,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class HomeComponent implements OnInit {
   products: ProductModelServer[] = [];
-  categories: CategoriesModel[] = [];
+
   prices: any[] = [];
   vinyl: any[] = [];
   public arr = JSON.parse(window.localStorage.getItem('cart') || '{}');
@@ -24,10 +24,6 @@ export class HomeComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.productService.getAllCategories().subscribe((cat: any) => {
-      console.log(cat.categories);
-      this.categories = cat.categories;
-    });
     // console.log(this.arr.prodData[0]);
     this.productService.getAllProducts(8).subscribe((prods: any) => {
       // console.log(prods);
@@ -37,11 +33,6 @@ export class HomeComponent implements OnInit {
         this.prices.push(prods.products[i].prixHT);
         this.vinyl.push(prods.products[i].nomVinyl);
       }
-      // console.log(prods);
-      // console.log(prods.products[0].nomVinyl);
-      // console.log(this.products[2].nomVinyl);
-      // this.prices.push(prods.products.prixHT);
-      // console.log(this.prices);
     });
   }
   selectProduct(id: Number) {

@@ -6,6 +6,7 @@ export interface ProductModelServer {
   idGroupe: number;
   idVinyl: number;
   nom: string;
+  description: string;
   photo: string;
   prix: number;
   quantite_dispo: number;
@@ -16,6 +17,7 @@ export interface SingleProductModelServer {
   nom: string;
   duree: string;
   idGroupe: number;
+  description: string;
   idCategorie: number;
   quantite_dispo: number;
   nomVinyl: string;

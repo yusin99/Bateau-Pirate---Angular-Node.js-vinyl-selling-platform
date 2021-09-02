@@ -13,7 +13,6 @@ import { UserService } from '../../services/user.service';
 })
 export class HeaderComponent implements OnInit {
   cartData!: CartModelServer;
-  categories: CategoriesModel[] = [];
   cartTotal!: number;
   authState!: boolean;
   constructor(
@@ -24,10 +23,6 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productService.getAllCategories().subscribe((cat: any) => {
-      console.log(cat.categories);
-      this.categories = cat.categories;
-    });
     this.cartService.cartTotal$.subscribe((total) => (this.cartTotal = total));
 
     this.cartService.cartData$.subscribe((data) => (this.cartData = data));
