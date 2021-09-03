@@ -22,6 +22,7 @@ import { AllproduComponent } from './components/allprodu/allprodu.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 // import {
 //   GoogleLoginProvider,
 //   SocialAuthServiceConfig,
@@ -77,6 +78,7 @@ import { RegisterComponent } from './components/register/register.component';
     ToastrModule.forRoot(),
     FormsModule,
     SocialLoginModule,
+    NgxPaginationModule,
   ],
   providers: [
     {

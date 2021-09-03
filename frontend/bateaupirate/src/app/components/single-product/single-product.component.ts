@@ -109,7 +109,7 @@ export class SingleProductComponent implements AfterViewInit, OnInit {
       id,
       this.quantityInput.nativeElement.value
     );
-    console.log(this.quantityInput.nativeElement.value + 'Qsadasdasdadasd');
+    // console.log(this.quantityInput.nativeElement.value + 'Qsadasdasdadasd');
   }
 
   Increase() {

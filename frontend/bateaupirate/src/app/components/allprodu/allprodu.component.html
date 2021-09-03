@@ -207,7 +207,6 @@
           <article class="filter-group">
             <header class="card-header">
               <a
-                href="#"
                 data-toggle="collapse"
                 data-target="#collapse_5"
                 aria-expanded="false"
@@ -274,7 +273,7 @@
               <option>Most Popular</option>
               <option>Cheapest</option>
             </select>
-            <div class="btn-group">
+            <!-- <div class="btn-group">
               <a
                 href="#"
                 class="btn btn-outline-secondary active"
@@ -293,19 +292,25 @@
               >
                 <i class="fa fa-th"></i
               ></a>
-            </div>
+            </div> -->
           </div>
         </header>
         <!-- sect-heading -->
 
         <article
           class="card card-product-list"
-          *ngFor="let product of products; index as i"
+          *ngFor="
+            let product of products
+              | paginate
+                : {
+                    itemsPerPage: 3,
+                    currentPage: page,
+                    totalItems: totalLength
+                  };
+            index as i
+          "
         >
-          <div
-            class="row no-gutters"
-            (click)="selectProduct(product['idVinyl'])"
-          >
+          <div class="row no-gutters">
             <aside class="col-md-3">
               <a class="img-wrap">
                 <span class="badge badge-danger"> NEW </span>
@@ -392,21 +397,10 @@
           </div>
           <!-- row.// -->
         </article>
-        <!-- card-product .// -->
-
-        <nav aria-label="Page navigation sample">
-          <ul class="pagination">
-            <li class="page-item disabled">
-              <a class="page-link" href="#">Previous</a>
-            </li>
-            <li class="page-item active">
-              <a class="page-link">1</a>
-            </li>
-            <li class="page-item"><a class="page-link">2</a></li>
-            <li class="page-item"><a class="page-link">3</a></li>
-            <li class="page-item"><a class="page-link">Next</a></li>
-          </ul>
-        </nav>
+        <pagination-controls
+          (pageChange)="page = $event"
+          style="bottom: 0"
+        ></pagination-controls>
       </main>
       <!-- col.// -->
     </div>

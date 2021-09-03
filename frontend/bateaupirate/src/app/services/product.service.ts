@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ProductModelServer } from '../models/product.model';
 import { SingleProductModelServer } from '../models/product.model';
 import { CategoriesModel } from '../models/categories.model';
+import { NumberFormatStyle } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +13,10 @@ import { CategoriesModel } from '../models/categories.model';
 export class ProductService {
   constructor(private http: HttpClient, private router: Router) {}
   API_KEY = 'http://localhost:3000/api';
-  getAllProducts(numberOfResults: number, page?: number) {
+  getAllProducts(numberOfResults: NumberFormatStyle) {
     return this.http.get(this.API_KEY + '/products/', {
       params: {
         limit: numberOfResults.toString(),
-
-        page: page ? page.toString() : '',
       },
     });
   }
