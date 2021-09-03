@@ -17,6 +17,7 @@ export class AllproduComponent implements OnInit {
   songs: any;
   totalLength: number | undefined;
   page = 1;
+  categories: any = [];
   // @ViewChild('page') pageInput: any;
   constructor(
     private cartServiece: CartService,
@@ -26,6 +27,10 @@ export class AllproduComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.productService.getAllCategories().subscribe((cat: any) => {
+      this.categories = cat;
+      console.log(cat.categories[0]);
+    });
     this.productService.getAllProducts(12).subscribe((prods: any) => {
       this.products = prods.products;
       this.totalLength = prods.products.length;

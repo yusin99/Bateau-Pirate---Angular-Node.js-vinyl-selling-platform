@@ -50,33 +50,8 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/category", function (req, res, next) {
-  // let page =
-  //   req.query.page !== undefined && req.query.page !== 0 ? req.query.page : 1; // set current page number
-  // const limit =
-  //   req.query.limit !== undefined && req.query.limit !== 0
-  //     ? req.query.limit
-  //     : 10; // setting limit of items per page
-
-  // let startValue;
-  // let endValue;
-
-  // if (page > 0) {
-  //   startValue = page * limit - limit; //10,20,30
-  //   endValue = page * limit;
-  // } else {
-  //   startValue = 0;
-  //   endValue = 12;
-  // }
   database
     .table("categories_musique as c")
-    // .join([
-    //   {
-    //     table: "categories_musique as c",
-    //     on: "v.idCategorie = c.idCategorie",
-    //   },
-    // ])
-    // .slice(startValue, endValue)
-    // .sort({ idVinyl: 0.1 })
     .getAll()
     .then((categories) => {
       if (categories.length > 0) {
@@ -87,6 +62,32 @@ router.get("/category", function (req, res, next) {
       } else {
         res.json({
           message: "No categories found",
+        });
+      }
+    })
+    .catch((err) => console.log(err));
+});
+
+router.get("/search/:search", function (req, res, next) {
+  let searchName = req.params.searchName;
+
+  database
+    .table("vinyl as v")
+    .join([
+      {
+        table: "categories_musique as c",
+        on: "c.idCategorie = v.idCategorie",
+      },
+    ])
+    .filter({ "v.nomVinyl": searchName })
+    .getAll()
+    .then((prods) => {
+      console.log(prods);
+      if (prods) {
+        res.status(200).json(prods);
+      } else {
+        res.json({
+          message: "No products found matching this name",
         });
       }
     })

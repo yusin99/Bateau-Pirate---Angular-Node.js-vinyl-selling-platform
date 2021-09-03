@@ -34,6 +34,7 @@ import {
   FacebookLoginProvider,
 } from 'angularx-social-login';
 import { RegisterComponent } from './components/register/register.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 // import {
 //   SocialLoginModule,
@@ -79,6 +80,7 @@ import { RegisterComponent } from './components/register/register.component';
     FormsModule,
     SocialLoginModule,
     NgxPaginationModule,
+    Ng2SearchPipeModule,
   ],
   providers: [
     {

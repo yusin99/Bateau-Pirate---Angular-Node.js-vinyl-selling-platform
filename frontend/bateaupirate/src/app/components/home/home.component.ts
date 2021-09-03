@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
 
   prices: any[] = [];
   vinyl: any[] = [];
+  totalLength: number | undefined;
+  page = 1;
   public arr = JSON.parse(window.localStorage.getItem('cart') || '{}');
 
   constructor(
@@ -25,10 +27,11 @@ export class HomeComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     // console.log(this.arr.prodData[0]);
-    this.productService.getAllProducts(8).subscribe((prods: any) => {
+    this.productService.getAllProducts(6000).subscribe((prods: any) => {
       // console.log(prods);
 
       this.products = prods.products;
+      this.totalLength = prods.products.length;
       for (let i = 0; i < prods.products.length; i++) {
         this.prices.push(prods.products[i].prixHT);
         this.vinyl.push(prods.products[i].nomVinyl);

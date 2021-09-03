@@ -166,4 +166,12 @@
       handle ? (priceInputMax.value = value) : (priceInputMin.value = value);
     });
   }
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
 })(jQuery);

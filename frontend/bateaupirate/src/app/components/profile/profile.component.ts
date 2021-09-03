@@ -15,6 +15,8 @@ export class ProfileComponent implements OnInit {
   orders: any;
   errors: any;
   dataLoggedUser: any;
+  totalLength: number | undefined;
+  page = 1;
   constructor(
     private authService: SocialAuthService,
     private userService: UserService,
@@ -56,6 +58,7 @@ export class ProfileComponent implements OnInit {
     this.orderService
       .getOrderByClientId(this.myUser.idClient)
       .then((orders) => {
+        this.totalLength = orders.length;
         this.orders = orders;
         console.log(this.orders);
       });

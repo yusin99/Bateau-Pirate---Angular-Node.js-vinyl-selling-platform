@@ -84,11 +84,11 @@ module.exports = {
       } else {
         res
           .status(401)
-          .json({ message: "Username or password incorrecttt", status: false });
+          .json({ message: "Username or password incorrect", status: false });
       }
     } else {
       res.status(401).json({
-        message: "Username or password incorrectastdatstsatdt",
+        message: "Username or password incorrect",
         status: false,
       });
     }
