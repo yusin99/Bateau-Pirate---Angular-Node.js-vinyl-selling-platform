@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-10">
+      <div class="card">
+        <div class="card-header pb-0 p-3">
+          <div class="d-flex justify-content-between">
+            <h6 class="mb-2">Vinyls</h6>
+            <a class="mb-2" routerLink="/addvinyl">Add New Vinyl</a>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center">
+            <tbody>
+              <tr
+                *ngFor="
+                  let product of products
+                    | paginate
+                      : {
+                          id: 'page',
+                          itemsPerPage: 3,
+                          currentPage: page,
+                          totalItems: totalLength
+                        };
+                  index as i
+                "
+              >
+                <td class="w-30">
+                  <div class="d-flex px-2 py-1 align-items-center">
+                    <div class="mr-5">
+                      <img
+                        src="assets/img/{{ product['photo'] }}"
+                        width="100"
+                        height="100"
+                        alt="Country flag"
+                      />
+                    </div>
+                    <div class="ms-4">
+                      <p class="text-xs font-weight-bold mb-0">Name:</p>
+                      <h6 class="text-sm mb-0">{{ product["nomVinyl"] }}</h6>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="text-center">
+                    <p class="text-xs font-weight-bold mb-0">Sales:</p>
+                    <h6 class="text-sm mb-0">2500</h6>
+                  </div>
+                </td>
+                <td>
+                  <div class="text-center">
+                    <p class="text-xs font-weight-bold mb-0">Value:</p>
+                    <h6 class="text-sm mb-0">$230,900</h6>
+                  </div>
+                </td>
+                <td class="align-middle text-sm">
+                  <div class="col text-center">
+                    <p class="text-xs font-weight-bold mb-0">Bounce:</p>
+                    <h6 class="text-sm mb-0">29.9%</h6>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pagination-controls
+    id="page"
+    (pageChange)="page = $event"
+    style="bottom: 0"
+  ></pagination-controls>
+
+  <div class="row mt-4 mr-4">
+    <div class="col-12 col-md-10">
+      <div class="card">
+        <div class="card-header pb-0 p-3">
+          <div class="d-flex justify-content-between">
+            <h6 class="mb-2">Users</h6>
+            <a class="mb-2" routerLink="/adduser">Add New User</a>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center" id="myTable">
+            <tbody>
+              <tr
+                *ngFor="
+                  let users of users
+                    | paginate
+                      : {
+                          id: 'pageUser',
+                          itemsPerPage: 3,
+                          currentPage: pageUser,
+                          totalItems: totalLengthUser
+                        };
+                  index as i
+                "
+              >
+                <td>
+                  <div class="d-flex px-2 py-1 align-items-center">
+                    <div class="ml-3">
+                      <img
+                        src="{{ users['photoUrl'] }}"
+                        width="100"
+                        height="100"
+                        alt="{{ users.nom }}"
+                      />
+                    </div>
+                    <div class="ml-2">
+                      <p class="text-xs font-weight-bold mb-0">Name:</p>
+                      <h6 class="text-sm mb-0">
+                        {{ users["nom"] }} {{ users["prenom"] }}
+                      </h6>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="text-center">
+                    <p class="text-xs font-weight-bold mb-0">Password:</p>
+                    <h6 class="text-sm mb-0">{{ users["mdp"] }}</h6>
+                  </div>
+                </td>
+                <td>
+                  <div class="text-center">
+                    <p class="text-xs font-weight-bold mb-0">Email:</p>
+                    <h6 class="text-sm mb-0">{{ users["email"] }}</h6>
+                  </div>
+                </td>
+                <td class="align-middle text-sm">
+                  <div class="col text-center">
+                    <p class="text-xs font-weight-bold mb-0">Delete:</p>
+                    <i
+                      class="fa fa-trash"
+                      (click)="deleteClient(users['idClient'])"
+                    ></i>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pagination-controls
+    id="pageUser"
+    (pageChange)="pageUser = $event"
+    style="bottom: 0"
+  ></pagination-controls>
+</div>

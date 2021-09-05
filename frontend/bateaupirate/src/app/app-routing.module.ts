@@ -10,6 +10,8 @@ import { SingleProductComponent } from './components/single-product/single-produ
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileGuard } from './guard/profile.guard';
+import { AdminComponent } from './components/admin/admin.component';
+import { AdminGuard } from './guard/admin.guard';
 
 const routes: Routes = [
   {
@@ -21,6 +23,11 @@ const routes: Routes = [
     path: 'allproducts',
     component: AllproduComponent,
     canActivate: [ProfileGuard],
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AdminGuard],
   },
   {
     path: 'product/:id',
@@ -60,6 +67,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

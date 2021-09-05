@@ -6,14 +6,16 @@ import {
   FacebookLoginProvider,
 } from 'angularx-social-login';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserModelServer } from './../models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   auth = false;
+  role = 555;
   error: any;
   private readonly API_KEY = 'http://localhost:3000/api/';
   user: any = {};
@@ -39,14 +41,13 @@ export class UserService {
     this.httpClient.post(`${this.API_KEY}auth/login`, { email, mdp }).subscribe(
       (data: any) => {
         console.log(data);
-        // var data1 = JSON.parse(window.localStorage.getItem('user') || '');
-        // if (typeof data1 === 'object') {
-        // } else {
-        //   window.localStorage.setItem('user', JSON.stringify(data));
-        // }
         window.localStorage.setItem('user', JSON.stringify(data));
-        // }
         window.localStorage.setItem('token', JSON.stringify(data.token));
+        if (data.role === 777) {
+          this.role = 777;
+        } else {
+          this.role === 555;
+        }
         if (window.localStorage.getItem('user')) {
           this.auth = true;
         } else {
@@ -100,6 +101,15 @@ export class UserService {
     window.localStorage.removeItem('user');
     window.localStorage.removeItem('token');
     this.Router.navigate(['/login']);
+  }
+  // API_KEY = 'http://localhost:3000/api';
+  getAllUsers() {
+    return this.httpClient.get(this.API_KEY + 'users');
+  }
+  deleteSingleUser(idClient: number): Observable<UserModelServer> {
+    return this.httpClient.delete<UserModelServer>(
+      this.API_KEY + 'users/' + idClient
+    );
   }
 }
 

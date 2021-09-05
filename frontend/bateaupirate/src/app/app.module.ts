@@ -35,25 +35,7 @@ import {
 } from 'angularx-social-login';
 import { RegisterComponent } from './components/register/register.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
-// import {
-//   SocialLoginModule,
-//   SocialAuthServiceConfig,
-// } from 'angularx-social-login';
-// import { GoogleLoginProvider } from 'angularx-social-login';
-// import { AuthServiceConfig } from 'angularx-social-login';
-// const config = new SocialAuthServiceConfig([
-//   {
-//     id: GoogleLoginProvider.PROVIDER_ID,
-//     provider: new GoogleLoginProvider(
-//       '478516489460-mg7or4i99mten76f5a0dibfgbkbkrrk9.apps.googleusercontent.com'
-//     ),
-//   },
-// ]);
-
-// export function provideConfig() {
-//   return config;
-// }
+import { AdminComponent } from './components/admin/admin.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +50,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     LoginComponent,
     ProfileComponent,
     RegisterComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

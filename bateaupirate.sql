@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2021 at 10:04 PM
+-- Generation Time: Sep 05, 2021 at 02:14 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -148,7 +148,58 @@ INSERT INTO `articles_commande` (`id`, `idCommande`, `idVinyl`, `montantHT`, `qu
 (190, 303, 1, 39.98, 2),
 (191, 304, 1, 39.98, 2),
 (192, 304, 6, 9.99, 1),
-(193, 304, 4, 33.98, 2);
+(193, 304, 4, 33.98, 2),
+(194, 305, 2, 15.99, 1),
+(195, 305, 4, 16.99, 1),
+(196, 306, 2, 47.97, 3),
+(197, 306, 1, 39.98, 2),
+(198, 307, 2, 15.99, 1),
+(199, 308, 2, 15.99, 1),
+(200, 309, 1, 19.99, 1),
+(201, 310, 1, 19.99, 1),
+(202, 311, 1, 19.99, 1),
+(203, 312, 1, 19.99, 1),
+(204, 313, 1, 19.99, 1),
+(205, 314, 2, 19.99, 1),
+(206, 315, 4, 19.99, 1),
+(207, 316, 1, 19.99, 1),
+(208, 317, 1, 19.99, 1),
+(209, 318, 1, 19.99, 1),
+(210, 319, 1, 19.99, 1),
+(211, 320, 1, 19.99, 1),
+(212, 321, 1, 19.99, 1),
+(213, 322, 1, 19.99, 1),
+(214, 322, 4, 19.99, 1),
+(215, 322, 2, 19.99, 1),
+(216, 323, 1, 19.99, 1),
+(217, 323, 2, 19.99, 1),
+(218, 324, 1, 79.96, 4),
+(219, 324, 4, 19.99, 1),
+(220, 324, 2, 59.97, 3),
+(221, 325, 1, 19.99, 1),
+(222, 325, 2, 19.99, 1),
+(223, 326, 4, 19.99, 1),
+(224, 326, 2, 19.99, 1),
+(225, 326, 1, 19.99, 1),
+(226, 327, 1, 59.97, 3),
+(227, 328, 1, 39.98, 2),
+(228, 328, 2, 19.99, 1),
+(229, 329, 1, 19.99, 1),
+(230, 330, 1, 19.99, 1),
+(231, 330, 2, 19.99, 1),
+(232, 331, 1, 19.99, 1),
+(233, 332, 1, 19.99, 1),
+(234, 333, 5, 19.99, 1),
+(235, 334, 1, 19.99, 1),
+(236, 335, 2, 59.97, 3),
+(237, 335, 1, 19.99, 1),
+(238, 336, 1, 39.98, 2),
+(239, 336, 2, 19.99, 1),
+(240, 337, 1, 39.98, 2),
+(241, 338, 2, 19.99, 1),
+(242, 338, 1, 19.99, 1),
+(243, 339, 8, 19.99, 1),
+(244, 339, 2, 19.99, 1);
 
 -- --------------------------------------------------------
 
@@ -290,15 +341,18 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`idClient`, `idParrain`, `nom`, `prenom`, `pseudo`, `mdp`, `role`, `adresse`, `code_postal`, `ville`, `email`, `tel`, `date_inscription`, `token`, `auth`, `photoUrl`, `type`) VALUES
-(1, 2, 'Sedrati', 'Yusin', 'yusin', '123456', 777, '462 Pierre Brossolette', 83300, 'Draguignan', 'sunkatabeckamaaa@gmail.com', 623857048, '2021-05-14 10:18:19', '', 0, '', ''),
-(2, 3, 'Dani', 'Stoyanova', 'danistoyanova', '123456', 555, 'Elenovo 8', 2700, 'Blagoevgrad', 'dani4kaaaa_05@gmail.com', 623857048, '2021-06-04 00:36:44', '', 0, '', ''),
+(1, 2, 'Sedrati', 'Yusin', 'yusin', '123456', 777, '462 Pierre Brossolette', 83300, 'Draguignan', 'sunkatabeckamaaa@gmail.com', 623857048, '2021-05-14 10:18:19', '', 0, 'https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png', ''),
+(2, 3, 'Dani', 'Stoyanova', 'danistoyanova', '123456', 555, 'Elenovo 8', 2700, 'Blagoevgrad', 'dani4kaaaa_05@gmail.com', 623857048, '2021-06-04 00:36:44', '', 0, 'https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png', ''),
 (14, 0, 'sunkaaaa', 'sunka', 'sunka', '$2b$10$RAJWkvXg6A1PV/chjYsfUOaryksrBy9OlbyLuQjV1P0ORqqEoXnMi', 555, '', 0, '', 'sunkatabeckama@gmail.com', 0, '2021-07-23 16:39:30', '', 0, 'https://marbellamodelagency.com/wp-content/uploads/2017/02/marbella-model-agency-male.jpg', ''),
-(15, 0, 'piskata', 'pisinka', 'pisi', '$2b$10$LMI5ZyXNIRhtnkapTiV0NeS.F4ukNLCI3tqgEDn30F9uP7ARyK8/W', 555, '', 0, '', 'petstore1999@gmail.com', 0, '2021-07-23 17:30:47', '', 0, '', ''),
-(16, 0, 'Sedrati', 'Yusin', 'sassaa', '$2b$10$EtL.G52L1a5BBjdMmPB3hOE/q9wDH9N2RLFXar35K8XKVjRdjrisy', 555, '', 0, '', 'sunkssassaasatabeckama@gmail.com', 0, '2021-07-24 17:43:05', '', 0, '', ''),
-(17, 0, 'hihi', 'hihi', 'hihi', '$2b$10$j6.P16.xuJKrU.FsdrXh1.8VlClHGXdkDNEj..QALuHReCUtweWOi', 555, '', 0, '', 'hihi@gmail.com', 0, '2021-07-24 17:46:43', '', 0, '', ''),
-(18, 0, 'peci', 'peci', 'peci', '$2b$10$bZaxsszMYlPRpN/IdOkSWORtswzQgo.Q5rIOxW0puDfu2G/zT6woq', 555, '', 0, '', 'peci@gmail.com', 0, '2021-07-24 17:52:38', '', 0, '', ''),
-(19, 0, 'kkk', 'kkk', 'kkk', '$2b$10$Q.qfxKWZcHcQIEeJavk.Y.qGLStplZpM6SAmOFVoeHxPoqEF5Cj.W', 555, '', 0, '', 'kkk@kkk.kk', 0, '2021-07-24 17:53:25', '', 0, '', ''),
-(20, 0, 'ppp', 'ppp', 'ppp', '$2b$10$VHR2GhWGzXSt2kkD//3QO.UpkuR7xZSVSP2mOVXXf6U7/WFVU1mLm', 555, '', 0, '', 'ppp@gmail.com', 0, '2021-07-24 17:54:52', '', 0, '', '');
+(15, 0, 'piskata', 'pisinka', 'pisi', '$2b$10$LMI5ZyXNIRhtnkapTiV0NeS.F4ukNLCI3tqgEDn30F9uP7ARyK8/W', 555, '', 0, '', 'petstore1999@gmail.com', 0, '2021-07-23 17:30:47', '', 0, 'https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png', ''),
+(16, 0, 'Sedrati', 'Yusin', 'sassaa', '$2b$10$EtL.G52L1a5BBjdMmPB3hOE/q9wDH9N2RLFXar35K8XKVjRdjrisy', 555, '', 0, '', 'sunkssassaasatabeckama@gmail.com', 0, '2021-07-24 17:43:05', '', 0, 'https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png', ''),
+(17, 0, 'hihi', 'hihi', 'hihi', '$2b$10$j6.P16.xuJKrU.FsdrXh1.8VlClHGXdkDNEj..QALuHReCUtweWOi', 555, '', 0, '', 'hihi@gmail.com', 0, '2021-07-24 17:46:43', '', 0, 'https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png', ''),
+(18, 0, 'peci', 'peci', 'peci', '$2b$10$bZaxsszMYlPRpN/IdOkSWORtswzQgo.Q5rIOxW0puDfu2G/zT6woq', 555, '', 0, '', 'peci@gmail.com', 0, '2021-07-24 17:52:38', '', 0, 'https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png', ''),
+(19, 0, 'kkk', 'kkk', 'kkk', '$2b$10$Q.qfxKWZcHcQIEeJavk.Y.qGLStplZpM6SAmOFVoeHxPoqEF5Cj.W', 555, '', 0, '', 'kkk@kkk.kk', 0, '2021-07-24 17:53:25', '', 0, 'https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png', ''),
+(20, 0, 'ppp', 'ppp', 'ppp', '$2b$10$VHR2GhWGzXSt2kkD//3QO.UpkuR7xZSVSP2mOVXXf6U7/WFVU1mLm', 555, '', 0, '', 'ppp@gmail.com', 0, '2021-07-24 17:54:52', '', 0, 'https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png', ''),
+(21, 0, 'Yusin', 'Sedrati', 'kiki', '$2b$10$g4R4U93E1Q9HpwqCmfSFjuZsZfADoGF0UaVf.9Xgfg/XNfqms4q.e', 555, '', 0, '', 'kiki@gmail.com', 0, '2021-08-09 13:18:39', '', 0, '', ''),
+(22, 0, 'Trenkov', 'Kiril', 'kikitrenkov', '$2b$10$ohp8IlQ5bg/IvCpy8y5pvePmcTwPU2PmD5JW7.wbipGYuGYkfOxhS', 555, '', 0, '', 'kiriltrenkov@gmail.com', 0, '2021-08-17 15:57:06', '', 0, 'https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png', ''),
+(23, 0, 'sadasd', '<script>alert(\"hahahah\")</script>', 'ascdsacasc', '$2b$10$ndn0oLbd81OTiZpkVFpUQORKDkmrEcOtOGBECnnNRhdgWa/pTzRd.', 555, '', 0, '', 'asdasd@sadsadas.cacas', 0, '2021-08-23 19:05:32', '', 0, 'https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png', '');
 
 -- --------------------------------------------------------
 
@@ -395,7 +449,42 @@ INSERT INTO `commandes` (`idCommande`, `idClient`, `date_commande`, `status_comm
 (301, 2, '2021-07-23 22:40:40', 0),
 (302, 2, '2021-07-24 20:09:04', 0),
 (303, 2, '2021-07-26 22:35:17', 0),
-(304, 2, '2021-07-27 20:51:48', 0);
+(304, 2, '2021-07-27 20:51:48', 0),
+(305, 2, '2021-08-18 16:53:37', 0),
+(306, 2, '2021-08-27 21:06:38', 0),
+(307, 2, '2021-08-30 19:34:20', 0),
+(308, 2, '2021-08-30 19:36:57', 0),
+(309, 2, '2021-08-30 19:42:01', 0),
+(310, 2, '2021-08-30 19:42:52', 0),
+(311, 2, '2021-08-30 19:45:24', 0),
+(312, 2, '2021-08-30 19:46:57', 0),
+(313, 2, '2021-08-30 19:49:29', 0),
+(314, 2, '2021-08-30 19:54:54', 0),
+(315, 2, '2021-08-30 19:59:48', 0),
+(316, 2, '2021-08-30 20:00:04', 0),
+(317, 2, '2021-08-30 20:00:39', 0),
+(318, 2, '2021-08-30 20:01:03', 0),
+(319, 2, '2021-08-30 20:04:15', 0),
+(320, 2, '2021-08-30 20:06:37', 0),
+(321, 2, '2021-08-30 20:08:31', 0),
+(322, 2, '2021-08-30 20:12:36', 0),
+(323, 2, '2021-08-30 20:15:42', 0),
+(324, 2, '2021-08-30 20:19:19', 0),
+(325, 2, '2021-08-30 20:19:52', 0),
+(326, 2, '2021-08-30 20:30:22', 0),
+(327, 2, '2021-08-30 20:31:21', 0),
+(328, 2, '2021-08-30 20:34:28', 0),
+(329, 2, '2021-08-30 20:35:41', 0),
+(330, 2, '2021-08-30 20:39:50', 0),
+(331, 2, '2021-08-30 20:40:53', 0),
+(332, 2, '2021-08-30 20:42:26', 0),
+(333, 2, '2021-08-30 20:46:05', 0),
+(334, 2, '2021-08-30 20:47:16', 0),
+(335, 2, '2021-08-30 20:48:56', 0),
+(336, 2, '2021-08-30 20:56:17', 0),
+(337, 14, '2021-08-30 20:59:26', 0),
+(338, 14, '2021-08-30 22:01:19', 0),
+(339, 14, '2021-09-02 19:17:15', 0);
 
 -- --------------------------------------------------------
 
@@ -550,16 +639,16 @@ CREATE TABLE `vinyl` (
 --
 
 INSERT INTO `vinyl` (`idVinyl`, `idGroupe`, `idCategorie`, `quantite_dispo`, `nomVinyl`, `annee_sortie`, `prixHT`, `photo`, `disponible`, `description`) VALUES
-(1, 1, 4, 227, 'Through The Mists Of Time', 2021, 19.99, 'cabrel.jpg', 1, ''),
-(2, 6, 13, 0, 'Or Noir', 2013, 15.99, 'kaarisornoir.jpg', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quasi nam voluptas, accusamus facilis amet eius at quaerat porro blanditiis, animi pariatur rerum laboriosam dolores non vel reprehenderit tempora explicabo cum unde omnis? Dolores voluptates a'),
-(3, 7, 4, 0, 'Abba', 1975, 10.99, 'abba.jpg', 1, ''),
-(4, 1, 7, 499, 'T.N.T', 1975, 16.99, 'acdc.jpg', 1, ''),
-(5, 8, 4, 22, 'Big Bisous', 1979, 9.99, 'bisous.jpg', 1, ''),
-(6, 8, 4, 20, 'Big Bisous', 1979, 9.99, 'bisous.jpg', 1, ''),
-(7, 1, 7, 662, 'T.N.T', 1975, 16.99, 'acdc.jpg', 1, ''),
-(8, 6, 13, 5151, 'Or Noir', 2013, 15.99, 'kaarisornoir.jpg', 1, ''),
-(9, 1, 7, 511, 'T.N.T', 1975, 16.99, 'acdc.jpg', 1, ''),
-(10, 1, 4, 10, 'Witch’s Spell / Through The Mists Of Time', 2021, 19.99, 'cabrel.jpg', 1, ''),
+(1, 1, 4, 0, 'Through The Mists Of Time', 2021, 19.99, 'cabrel.jpg', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quasi nam voluptas, accusamus facilis amet eius at quaerat porro blanditiis, animi pariatur rerum laboriosam dolores non vel reprehenderit tempora explicabo cum unde omnis? Dolores voluptates a'),
+(2, 6, 13, 189, 'Or Noir', 2013, 15.99, 'kaarisornoir.jpg', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quasi nam voluptas, accusamus facilis amet eius at quaerat porro blanditiis, animi pariatur rerum laboriosam dolores non vel reprehenderit tempora explicabo cum unde omnis? Dolores voluptates a'),
+(3, 7, 4, 29, 'Abba', 1975, 10.99, 'abba.jpg', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quasi nam voluptas, accusamus facilis amet eius at quaerat porro blanditiis, animi pariatur rerum laboriosam dolores non vel reprehenderit tempora explicabo cum unde omnis? Dolores voluptates a'),
+(4, 1, 7, 206, 'T.N.T', 1975, 16.99, 'acdc.jpg', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quasi nam voluptas, accusamus facilis amet eius at quaerat porro blanditiis, animi pariatur rerum laboriosam dolores non vel reprehenderit tempora explicabo cum unde omnis? Dolores voluptates a'),
+(5, 8, 4, 196, 'Big Bisous', 1979, 9.99, 'bisous.jpg', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quasi nam voluptas, accusamus facilis amet eius at quaerat porro blanditiis, animi pariatur rerum laboriosam dolores non vel reprehenderit tempora explicabo cum unde omnis? Dolores voluptates a'),
+(6, 8, 4, 20, 'Big Bisous', 1979, 9.99, 'bisous.jpg', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quasi nam voluptas, accusamus facilis amet eius at quaerat porro blanditiis, animi pariatur rerum laboriosam dolores non vel reprehenderit tempora explicabo cum unde omnis? Dolores voluptates a'),
+(7, 1, 7, 73, 'T.N.T', 1975, 16.99, 'acdc.jpg', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quasi nam voluptas, accusamus facilis amet eius at quaerat porro blanditiis, animi pariatur rerum laboriosam dolores non vel reprehenderit tempora explicabo cum unde omnis? Dolores voluptates a'),
+(8, 6, 13, 189, 'Or Noir', 2013, 15.99, 'kaarisornoir.jpg', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quasi nam voluptas, accusamus facilis amet eius at quaerat porro blanditiis, animi pariatur rerum laboriosam dolores non vel reprehenderit tempora explicabo cum unde omnis? Dolores voluptates a'),
+(9, 1, 7, 511, 'T.N.T', 1975, 16.99, 'acdc.jpg', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quasi nam voluptas, accusamus facilis amet eius at quaerat porro blanditiis, animi pariatur rerum laboriosam dolores non vel reprehenderit tempora explicabo cum unde omnis? Dolores voluptates a'),
+(10, 1, 4, 10, 'Witch’s Spell / Through The Mists Of Time', 2021, 19.99, 'cabrel.jpg', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quasi nam voluptas, accusamus facilis amet eius at quaerat porro blanditiis, animi pariatur rerum laboriosam dolores non vel reprehenderit tempora explicabo cum unde omnis? Dolores voluptates a'),
 (11, 8, 4, 23, 'Big Bisous', 1979, 9.99, 'bisous.jpg', 1, '');
 
 --
@@ -655,7 +744,7 @@ ALTER TABLE `vinyl`
 -- AUTO_INCREMENT for table `articles_commande`
 --
 ALTER TABLE `articles_commande`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
 
 --
 -- AUTO_INCREMENT for table `auteurs`
@@ -673,13 +762,13 @@ ALTER TABLE `categories_musique`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `idClient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idClient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `idCommande` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
+  MODIFY `idCommande` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=343;
 
 --
 -- AUTO_INCREMENT for table `groupes`

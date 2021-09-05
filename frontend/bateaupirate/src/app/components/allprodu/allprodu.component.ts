@@ -41,10 +41,6 @@ export class AllproduComponent implements OnInit {
     });
   }
 
-  // onChangePage(products: Array<any>) {
-  //   this.products = products;
-  // }
-
   selectProduct(id: Number) {
     this.router.navigate(['/product/', id]).then();
     console.log(id);

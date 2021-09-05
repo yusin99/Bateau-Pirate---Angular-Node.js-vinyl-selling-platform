@@ -23,13 +23,16 @@ app.use(express.json());
 // Input routes
 
 const productRouter = require("./routes/index");
+const userRouter = require("./routes/users");
 const ordersRouter = require("./routes/orders");
 const authRouter = require("./routes/auth");
 // Use routes
 
 app.use("/api/products", productRouter);
+app.use("/api/users", userRouter);
 app.use("/api/orders", ordersRouter);
 app.use("/api/auth", authRouter);
+// app.use("/api/users", userRouter);
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
