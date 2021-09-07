@@ -13,8 +13,9 @@ import { UserService } from 'src/app/services/user.service';
 export class AddVinylComponent implements OnInit {
   nomVinyl!: string;
   annee_sortie!: number;
-  idCategorie!: string;
+  idCategorie!: number;
   idGroupe!: number;
+  prixHT!: number;
   quantite_dispo!: number;
   description!: string;
   error!: string;
@@ -31,6 +32,7 @@ export class AddVinylComponent implements OnInit {
     const annee_sortie = this.annee_sortie;
     const idCategorie = this.idCategorie;
     const idGroupe = this.idGroupe;
+    const prixHT = this.prixHT;
     const quantite_dispo = this.quantite_dispo;
     const description = this.description;
     if (form.invalid) {
@@ -42,6 +44,7 @@ export class AddVinylComponent implements OnInit {
         annee_sortie,
         idCategorie,
         idGroupe,
+        prixHT,
         quantite_dispo,
         description
       )

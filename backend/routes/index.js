@@ -3,6 +3,7 @@ var express = require("express");
 const { check, validationResult, body } = require("express-validator");
 var router = express.Router();
 const { database } = require("../config/helpers");
+const helper = require("../config/helpers");
 
 /* GET home page. */
 
@@ -217,85 +218,94 @@ router.get("/category/:catName", function (req, res) {
     })
     .catch((err) => console.log(err));
 });
-// router.post(
-//   "/addVinyl",
-//   [
-//     check("nomVinyl").not().isEmpty().withMessage("Field can't be empty"),
-//     check("annee_sortie")
-//       .trim()
-//       .not()
-//       .isEmpty()
-//       .withMessage("Field can't be empty"),
-//     check("prixHT")
-//       .isFloat()
-//       .not()
-//       .isEmpty()
-//       .withMessage("Field can't be empty"),
-//     check("quantite_dispo")
-//       .trim()
-//       .not()
-//       .isEmpty()
-//       .withMessage("Field can't be empty"),
-//     check("description").not().isEmpty().withMessage("Field can't be empty"),
-//     body("nomVinyl").custom((value) => {
-//       return helper.database
-//         .table("vinyl")
-//         .filter({ nomVinyl: value })
-//         .get()
-//         .then((vinyl) => {
-//           console.log(vinyl);
-//           if (vinyl) {
-//             console.log(vinyl);
-//             return Promise.reject(
-//               "Vinyl name " + vinyl + " already exists, choose another one."
-//             );
-//           }
-//         });
-//     }),
-//   ],
-//   async (res, req) => {
-//     try {
-//       let nomVinyl = req.body.nomVinyl;
-//       let { annee_sortie } = req.body;
-//       let { idCategorie } = req.body;
-//       let { idGroupe } = req.body;
-//       let { quantite_dispo } = req.body;
-//       let { description } = req.body;
-//       console.log(nomVinyl);
-//       // let data = await database
-//       //   .table("vinyl")
-//       //   .insert({
-//       //     nomVinyl: nomVinyl,
-//       //     annee_sortie: annee_sortie,
-//       //     idCategorie: idCategorie,
-//       //     idGroupe: idGroupe,
-//       //     quantite_dispo: quantite_dispo || null,
-//       //     description: description || null,
-//       //   })
-//       //   .then((lastId) => {
-//       //     console.log(lastId);
-//       //     if (lastId > 0) {
-//       //       res
-//       //         .status(201)
-//       //         .json({ message: "Registration of new vinyl is successful." });
-//       //     } else {
-//       //       res
-//       //         .status(501)
-//       //         .json({ message: "Registration  of new vinyl has failed." });
-//       //     }
-//       //   })
-//       // .catch((err) => res.status(433).json({ error: err }));
-//     } catch (error) {
-//       console.log(error);
-//     }
+router.post(
+  "/addVinyl",
+  [
+    check("nomVinyl").not().isEmpty().withMessage("Field can't be empty"),
+    check("annee_sortie")
+      .trim()
+      .not()
+      .isEmpty()
+      .withMessage("Field can't be empty")
+      .isLength({ min: 4, max: 4 }),
+    check("prixHT").not().isEmpty().withMessage("Field can't be empty"),
+    check("quantite_dispo")
+      .trim()
+      .not()
+      .isEmpty()
+      .withMessage("Field can't be empty"),
+    check("description").not().isEmpty().withMessage("Field can't be empty"),
+    body("nomVinyl").custom((value) => {
+      return helper.database
+        .table("vinyl")
+        .filter({ nomVinyl: value })
+        .get()
+        .then((vinyl) => {
+          console.log(vinyl);
+          if (vinyl) {
+            console.log(vinyl);
+            return Promise.reject(
+              "Vinyl name " + vinyl + " already exists, choose another one."
+            );
+          }
+        });
+    }),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    // try {
+    if (!errors.isEmpty()) {
+      console.log(errors);
+      return res.status(422).json({ errors: errors.array() });
+    } else {
+      let { annee_sortie } = req.body;
+      let { nomVinyl } = req.body;
+      let { idCategorie } = req.body;
+      let { idGroupe } = req.body;
+      let { quantite_dispo } = req.body;
+      let { prixHT } = req.body;
+      let { description } = req.body;
+      console.log(idCategorie);
+      database
+        .table("vinyl")
+        .insert({
+          nomVinyl: nomVinyl,
+          annee_sortie: annee_sortie,
+          idCategorie: idCategorie,
+          idGroupe: idGroupe || null,
+          quantite_dispo: quantite_dispo || null,
+          prixHT: prixHT,
+          description: description || null,
+        })
+        .then((lastId) => {
+          console.log(lastId);
+          if (lastId > 0) {
+            res
+              .status(201)
+              .json({ message: "Registration of new vinyl is successful." });
+          } else {
+            res
+              .status(501)
+              .json({ message: "Registration  of new vinyl has failed." });
+          }
+        })
+        .catch((err) => {
+          res.status(433).json({ error: err });
+          console.log(err);
+        });
+    }
 
-//     // const errors = validationResult(req);
-//     // if (!errors.isEmpty()) {
-//     //   console.log(errors);
-//     //   return res.status(422).json({ errors: errors.array() });
-//     // } else {
-//   }
-//   // }
-// );
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //   console.log(errors);
+    //   return res.status(422).json({ errors: errors.array() });
+    // } else {
+  }
+  // }
+);
 
 module.exports = router;

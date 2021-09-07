@@ -45,16 +45,18 @@ export class ProductService {
   postNewVinyl(
     nomVinyl: string,
     annee_sortie: number,
-    categorie: string,
+    idCategorie: number,
     idGroupe: number,
+    prixHT: number,
     quantite_dispo: number,
     description: string
   ): Observable<any> {
     console.log(
       nomVinyl,
       annee_sortie,
-      categorie,
+      idCategorie,
       idGroupe,
+      prixHT,
       quantite_dispo,
       description
     );
@@ -62,8 +64,9 @@ export class ProductService {
       .post<any>(this.API_KEY + '/products/addVinyl', {
         nomVinyl,
         annee_sortie,
-        categorie,
+        idCategorie,
         idGroupe,
+        prixHT,
         quantite_dispo,
         description,
       })
