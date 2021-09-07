@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   myUser: any;
   orders: any;
   errors: any;
+  id: any;
   dataLoggedUser: any;
   totalLength: number | undefined;
   page = 1;
@@ -42,7 +43,6 @@ export class ProfileComponent implements OnInit {
       .subscribe(
         (data: ResponseModel | SocialUser) => {
           this.myUser = data;
-
           // window.localStorage.setItem('user', JSON.stringify(this.myUser));
         },
         (err) => {
@@ -84,7 +84,10 @@ export class ProfileComponent implements OnInit {
       return 'Bateau Pirate account';
     }
   }
-
+  navigateUpdate(idClient: number) {
+    idClient = this.myUser.idClient;
+    this.router.navigate(['/updateUser/', idClient]);
+  }
   logout() {
     this.userService.logout();
     this.router.navigate(['/login']);

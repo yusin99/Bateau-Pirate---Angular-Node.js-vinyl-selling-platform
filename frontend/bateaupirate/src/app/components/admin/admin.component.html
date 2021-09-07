@@ -102,6 +102,7 @@
               <th>✔️Name:</th>
               <th>🔑Password</th>
               <th>📧Email</th>
+              <th>🖊️Modify</th>
               <th>🗑️Delete</th>
             </thead>
             <tbody>
@@ -157,6 +158,11 @@
                         ? (users["email"] | slice: 0:15) + "..."
                         : users["email"]
                     }}
+                  </h6>
+                </td>
+                <td>
+                  <h6 class="text-sm mb-0" (click)="navigateUpdate(users['idClient'])">
+                    🖊️ Modify
                   </h6>
                 </td>
                 <td class="text-sm">

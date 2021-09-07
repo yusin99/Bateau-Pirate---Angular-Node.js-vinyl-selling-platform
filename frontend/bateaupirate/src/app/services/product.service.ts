@@ -7,6 +7,7 @@ import { SingleProductModelServer } from '../models/product.model';
 import { CategoriesModel } from '../models/categories.model';
 import { NumberFormatStyle } from '@angular/common';
 import { catchError } from 'rxjs/operators';
+import { GroupesModel } from './../models/groupes.model';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +33,9 @@ export class ProductService {
   getAllCategories(): Observable<CategoriesModel> {
     return this.http.get<CategoriesModel>(this.API_KEY + '/products/category');
   }
+  getAllGroupes(): Observable<GroupesModel> {
+    return this.http.get<GroupesModel>(this.API_KEY + '/products/groupes');
+  }
   getVinylsFromCategory(category: string): Observable<ProductModelServer> {
     this.router.navigate(['/category/' + category]);
     return this.http.get<ProductModelServer>(
@@ -47,6 +51,7 @@ export class ProductService {
     annee_sortie: number,
     idCategorie: number,
     idGroupe: number,
+    photo: string,
     prixHT: number,
     quantite_dispo: number,
     description: string
@@ -66,6 +71,7 @@ export class ProductService {
         annee_sortie,
         idCategorie,
         idGroupe,
+        photo,
         prixHT,
         quantite_dispo,
         description,

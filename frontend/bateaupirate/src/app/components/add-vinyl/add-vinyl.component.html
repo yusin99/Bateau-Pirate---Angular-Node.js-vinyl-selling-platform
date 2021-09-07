@@ -36,16 +36,34 @@
         <!-- form-row end.// -->
         <div class="form-group">
           <label for="idGroupe">Group Name</label>
-          <input
-            type="number"
-            id="idGroupe"
+          <select class="form-control" [(ngModel)]="idGroupe" name="idGroupe">
+            <option *ngFor="let g of groupes.groupes; index as i">
+              {{ g.idGroupe }}-{{ g.nom }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="idCategorie">Category Name</label>
+          <select
             class="form-control"
-            placeholder="Group Name"
-            [(ngModel)]="idGroupe"
-            name="idGroupe"
+            [(ngModel)]="idCategorie"
+            name="idCategorie"
+            required
+          >
+            <option *ngFor="let c of categories.categories; index as i">
+              {{ c.idCategorie }}-{{ c.nom }}
+            </option>
+          </select>
+          <!-- <input
+            type="text"
+            id="photo"
+            class="form-control"
+            placeholder="kaaris.jpg"
+            [(ngModel)]="photo"
+            name="photo"
             required
             autofocus
-          />
+          /> -->
         </div>
         <!-- form-row end.// -->
         <div class="form-group">
@@ -62,14 +80,14 @@
           />
         </div>
         <div class="form-group">
-          <label for="idCategorie">Category Name</label>
+          <label for="photo">Photo Name</label>
           <input
-            type="number"
-            id="idCategorie"
+            type="text"
+            id="photo"
             class="form-control"
-            placeholder="Category Name"
-            [(ngModel)]="idCategorie"
-            name="idCategorie"
+            placeholder="kaarisornoir.jpg"
+            [(ngModel)]="photo"
+            name="photo"
             required
             autofocus
           />

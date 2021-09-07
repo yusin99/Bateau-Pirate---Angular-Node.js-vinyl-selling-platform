@@ -14,6 +14,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AdminGuard } from './guard/admin.guard';
 import { AddVinylComponent } from './components/add-vinyl/add-vinyl.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
+import { UpdateUserComponent } from './components/update-user/update-user.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,11 @@ const routes: Routes = [
   {
     path: 'addVinyl',
     component: AddVinylComponent,
+    canActivate: [ProfileGuard],
+  },
+  {
+    path: 'updateUser/:idClient',
+    component: UpdateUserComponent,
     canActivate: [ProfileGuard],
   },
   {

@@ -8,7 +8,7 @@ import {
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { UserModelServer } from './../models/user.model';
+import { SingleUserModel, UserModelServer } from './../models/user.model';
 import { catchError } from 'rxjs/operators';
 import { ProductModelServer } from '../models/product.model';
 
@@ -131,6 +131,11 @@ export class UserService {
   getAllUsers() {
     return this.httpClient.get(this.API_KEY + 'users');
   }
+  getSingleUser(idClient: number): Observable<SingleUserModel> {
+    return this.httpClient.get<SingleUserModel>(
+      this.API_KEY + 'users/' + idClient
+    );
+  }
   deleteSingleUser(idClient: number): Observable<UserModelServer> {
     return this.httpClient.delete<UserModelServer>(
       this.API_KEY + 'users/' + idClient
@@ -140,6 +145,11 @@ export class UserService {
     return this.httpClient.delete<ProductModelServer>(
       this.API_KEY + 'products/delete/' + idVinyl
     );
+  }
+  updateSingleUser(idClient: number, body: any): Observable<any> {
+    return this.httpClient
+      .put<any>(this.API_KEY + 'users/updateUser/' + idClient, body)
+      .pipe(catchError(this.errorHandler));
   }
 }
 

@@ -1,8 +1,8 @@
 const { json } = require("body-parser");
 var express = require("express");
-const { check, validationResult, body } = require("express-validator");
 var router = express.Router();
 const { database } = require("../config/helpers");
+const { check, validationResult, body } = require("express-validator");
 const helper = require("../config/helpers");
 
 /* GET home page. */
@@ -87,6 +87,25 @@ router.get("/category", function (req, res, next) {
       } else {
         res.json({
           message: "No categories found",
+        });
+      }
+    })
+    .catch((err) => console.log(err));
+});
+
+router.get("/groupes", function (req, res, next) {
+  database
+    .table("groupes as g")
+    .getAll()
+    .then((groupes) => {
+      if (groupes.length > 0) {
+        res.status(200).json({
+          count: groupes.length,
+          groupes: groupes,
+        });
+      } else {
+        res.json({
+          message: "No groupes found",
         });
       }
     })
@@ -262,10 +281,11 @@ router.post(
       let { nomVinyl } = req.body;
       let { idCategorie } = req.body;
       let { idGroupe } = req.body;
+      let { photo } = req.body;
       let { quantite_dispo } = req.body;
       let { prixHT } = req.body;
       let { description } = req.body;
-      console.log(idCategorie);
+      console.log(photo);
       database
         .table("vinyl")
         .insert({
@@ -273,6 +293,7 @@ router.post(
           annee_sortie: annee_sortie,
           idCategorie: idCategorie,
           idGroupe: idGroupe || null,
+          photo: photo || null,
           quantite_dispo: quantite_dispo || null,
           prixHT: prixHT,
           description: description || null,

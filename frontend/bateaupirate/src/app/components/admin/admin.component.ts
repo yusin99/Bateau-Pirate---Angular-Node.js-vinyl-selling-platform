@@ -59,4 +59,7 @@ export class AdminComponent implements OnInit {
       });
     }
   }
+  navigateUpdate(idClient: number) {
+    this.router.navigate(['/updateUser/', idClient]).then();
+  }
 }
