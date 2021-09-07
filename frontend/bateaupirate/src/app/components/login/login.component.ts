@@ -24,13 +24,15 @@ export class LoginComponent implements OnInit {
     this.userService.authState$.subscribe(
       (authState) => {
         console.log(authState);
-        if (authState) {
-          this.router.navigateByUrl(
-            this.route.snapshot.queryParams['returnUrl'] || '/profile'
-          );
-        } else {
-          this.router.navigateByUrl('/login');
-        }
+        this.userService.userData$.subscribe((data) => {
+          if (authState) {
+            this.router.navigateByUrl(
+              this.route.snapshot.queryParams['returnUrl'] || '/'
+            );
+          } else {
+            this.router.navigateByUrl('/login');
+          }
+        });
       },
       (err) => {
         console.log(err);
@@ -56,12 +58,14 @@ export class LoginComponent implements OnInit {
   login(form: NgForm) {
     const email = this.email;
     const mdp = this.mdp;
-
     if (form.invalid) {
       return;
     }
-
     form.reset();
     this.userService.loginUser(email, mdp);
+    if (!this.userService.auth) {
+      this.error_message = 'Username or password are incorrect';
+    }
+    this.userService.authState$.next(true);
   }
 }

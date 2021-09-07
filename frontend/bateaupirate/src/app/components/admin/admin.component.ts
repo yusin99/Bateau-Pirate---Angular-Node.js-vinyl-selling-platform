@@ -27,6 +27,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getAllProducts(6000).subscribe((prods: any) => {
+      console.log(prods.products[0]);
       this.products = prods.products;
       this.totalLength = prods.products.length;
     });
@@ -42,6 +43,18 @@ export class AdminComponent implements OnInit {
       this.userService.deleteSingleUser(idClient).subscribe((data) => {
         this.users = this.users.filter((item) => item.idClient !== idClient);
         this.totalLengthUser = this.users.length;
+        console.log(data);
+      });
+    }
+  }
+  deleteVinyl(idVinyl: number) {
+    var result = confirm('Do you really want to delete the vinyl?');
+    if (result) {
+      this.userService.deleteSingleVinyl(idVinyl).subscribe((data) => {
+        this.products = this.products.filter(
+          (item) => item.idVinyl !== idVinyl
+        );
+        this.totalLength = this.products.length;
         console.log(data);
       });
     }

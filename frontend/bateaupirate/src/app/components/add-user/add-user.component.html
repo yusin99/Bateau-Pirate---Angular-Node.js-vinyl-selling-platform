@@ -1,0 +1,122 @@
+<div class="container w-50">
+  <div class="card">
+    <article class="card-body">
+      <header class="mb-4">
+        <h4 class="card-title">Add New User</h4>
+      </header>
+      <form novalidate #myform="ngForm">
+        <div class="form-row">
+          <div class="col form-group">
+            <label for="prenom">Name</label>
+            <input
+              type="text"
+              id="prenom"
+              class="form-control"
+              placeholder="Name"
+              [(ngModel)]="prenom"
+              name="prenom"
+              required
+            />
+          </div>
+          <!-- form-group end.// -->
+          <div class="col form-group">
+            <label for="nom">Surname</label>
+            <input
+              type="text"
+              id="nom"
+              class="form-control"
+              placeholder="Surname"
+              [(ngModel)]="nom"
+              name="nom"
+              required
+            />
+          </div>
+          <!-- form-group end.// -->
+        </div>
+        <!-- form-row end.// -->
+        <div class="form-group">
+          <label for="inputEmail">Email address</label>
+          <input
+            type="email"
+            id="inputEmail"
+            class="form-control"
+            placeholder="Email address"
+            [(ngModel)]="email"
+            name="email"
+            required
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="inputPhoto">PhotoUrl</label>
+          <input
+            type="text"
+            id="inputPhoto"
+            class="form-control"
+            placeholder="PhotoUrl"
+            [(ngModel)]="photoUrl"
+            name="photoUrl"
+            required
+            autofocus
+          />
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="pseudo">Username</label>
+            <input
+              type="text"
+              id="pseudo"
+              class="form-control"
+              placeholder="Username"
+              [(ngModel)]="pseudo"
+              name="pseudo"
+              required
+            />
+          </div>
+        </div>
+        <!-- form-row.// -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputPassword1">Create password</label>
+            <input
+              type="password"
+              id="inputPassword1"
+              class="form-control"
+              placeholder="Password"
+              [(ngModel)]="mdp1"
+              name="mdp1"
+              required
+            />
+          </div>
+          <!-- form-group end.// -->
+          <div class="form-group col-md-6">
+            <label for="inputPassword2">Repeat password</label>
+            <input
+              type="password"
+              id="inputPassword2"
+              class="form-control"
+              placeholder="Password"
+              [(ngModel)]="mdp2"
+              name="mdp2"
+              required
+            />
+          </div>
+          <div class="text-danger">{{ error }}</div>
+          <div class="text-success">{{ success }}</div>
+          <!-- form-group end.// -->
+        </div>
+        <div class="form-group mt-3">
+          <button
+            type="submit"
+            class="btn btn-primary btn-block"
+            (click)="register(myform)"
+          >
+            Register new user
+          </button>
+        </div>
+      </form>
+      <hr />
+    </article>
+    <!-- card-body end .// -->
+  </div>
+</div>

@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { SocialAuthService } from 'angularx-social-login';
-import { UserService } from './../../services/user.service';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SocialAuthService } from 'angularx-social-login';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'app-add-user',
+  templateUrl: './add-user.component.html',
+  styleUrls: ['./add-user.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class AddUserComponent implements OnInit {
   email!: string;
   mdp1!: string;
   mdp2!: string;
   nom!: string;
   prenom!: string;
   pseudo!: string;
-  photoUrl!: string;
+  photoUrl: string =
+    'https://www.seekpng.com/png/full/356-3562377_personal-user.png';
   error!: string;
   success!: string;
   constructor(
@@ -26,24 +27,7 @@ export class RegisterComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
-    this.userService.authState$.subscribe(
-      (authState) => {
-        console.log(authState);
-        if (authState) {
-          this.router.navigateByUrl(
-            this.route.snapshot.queryParams['returnUrl'] || '/profile'
-          );
-        } else {
-          this.router.navigateByUrl('/register');
-        }
-      },
-      (err) => {
-        console.log(err);
-        return (this.error = err);
-      }
-    );
-  }
+  ngOnInit(): void {}
   register(form: NgForm) {
     const email = this.email;
     const mdp1 = this.mdp1;

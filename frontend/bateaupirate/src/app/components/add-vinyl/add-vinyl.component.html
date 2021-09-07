@@ -1,0 +1,105 @@
+<div class="container w-50">
+  <div class="card">
+    <article class="card-body">
+      <header class="mb-4">
+        <h4 class="card-title">Add New Vinyl</h4>
+      </header>
+      <form novalidate #form="ngForm">
+        <div class="form-row">
+          <div class="col form-group">
+            <label for="nomVinyl">Name</label>
+            <input
+              type="text"
+              id="nomVinyl"
+              class="form-control"
+              placeholder="Vinyl name"
+              [(ngModel)]="nomVinyl"
+              name="nomVinyl"
+              required
+            />
+          </div>
+          <!-- form-group end.// -->
+          <div class="col form-group">
+            <label for="annee_sortie">Release year</label>
+            <input
+              type="number"
+              id="annee_sortie"
+              class="form-control"
+              placeholder="ex. 2015"
+              [(ngModel)]="annee_sortie"
+              name="annee_sortie"
+              required
+            />
+          </div>
+          <!-- form-group end.// -->
+        </div>
+        <!-- form-row end.// -->
+        <div class="form-group">
+          <label for="idGroupe">Group Name</label>
+          <input
+            type="number"
+            id="idGroupe"
+            class="form-control"
+            placeholder="Group Name"
+            [(ngModel)]="idGroupe"
+            name="idGroupe"
+            required
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="idCategorie">Category Name</label>
+          <input
+            type="number"
+            id="idCategorie"
+            class="form-control"
+            placeholder="Category Name"
+            [(ngModel)]="idCategorie"
+            name="idCategorie"
+            required
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="quantite_dispo">In stock</label>
+          <input
+            type="number"
+            id="quantite_dispo"
+            class="form-control"
+            placeholder="ex. 16"
+            [(ngModel)]="quantite_dispo"
+            name="quantite_dispo"
+            required
+            autofocus
+          />
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              id="description"
+              class="form-control"
+              placeholder="Lorem ipsum..."
+              [(ngModel)]="description"
+              name="description"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <button
+            type="submit"
+            class="btn btn-primary btn-block"
+            (click)="registerVinyl(form)"
+          >
+            Register new vinyl
+          </button>
+        </div>
+      </form>
+      <hr />
+    </article>
+    <!-- card-body end .// -->
+  </div>
+</div>

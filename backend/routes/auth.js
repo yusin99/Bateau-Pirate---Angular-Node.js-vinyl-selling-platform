@@ -48,8 +48,14 @@ router.post(
       .not()
       .isEmpty()
       .withMessage("Field can't be empty")
-      .isLength({ min: 6 })
-      .withMessage("must be 6 characters long"),
+      .isLength({ min: 8, max: 16 })
+      .withMessage(
+        "Password must be 8 characters atleast long and no more than 16"
+      )
+      .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i")
+      .withMessage(
+        "The password should contain atleast 1 Uppercase, 1 Lowercase and 1 special character"
+      ),
     body("email").custom((value) => {
       return helper.database
         .table("clients")
@@ -80,11 +86,13 @@ router.post(
       let mdp = await bcrypt.hash(req.body.mdp, 10);
       let prenom = req.body.prenom;
       let nom = req.body.nom;
+      let photoUrl = req.body.photoUrl;
 
       /**
        * ROLE 777 = ADMIN
        * ROLE 555 = CUSTOMER
        **/
+
       helper.database
         .table("clients")
         .insert({
@@ -94,6 +102,7 @@ router.post(
           role: 555,
           nom: nom || null,
           prenom: prenom || null,
+          photoUrl: photoUrl || null,
         })
         .then((lastId) => {
           if (lastId > 0) {

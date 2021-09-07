@@ -1,3 +1,4 @@
+import { JSDocTagName } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriesModel } from 'src/app/models/categories.model';
@@ -14,7 +15,8 @@ import { UserService } from '../../services/user.service';
 export class HeaderComponent implements OnInit {
   cartData!: CartModelServer;
   cartTotal!: number;
-  authState!: boolean;
+  authState!: any;
+  role!: number;
   constructor(
     public cartService: CartService,
     public productService: ProductService,
@@ -24,17 +26,17 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartService.cartTotal$.subscribe((total) => (this.cartTotal = total));
-
     this.cartService.cartData$.subscribe((data) => (this.cartData = data));
-
     if (window.localStorage.getItem('user')) {
       this.authState = true;
+      this.role = JSON.parse(window.localStorage.getItem('user') || '').role;
     } else {
       this.authState = false;
     }
   }
   navigateAllProducts() {
-    this.router.navigate(['/allproducts']).then();
+    this.role = JSON.parse(window.localStorage.getItem('user') || '').role;
+    this.router.navigate(['/allproducts']).then(() => {});
   }
 
   getVinylsCategory(text: any) {
@@ -45,5 +47,7 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     this.userService.logout();
+    this.authState = false;
+    window.localStorage.removeitem('user');
   }
 }

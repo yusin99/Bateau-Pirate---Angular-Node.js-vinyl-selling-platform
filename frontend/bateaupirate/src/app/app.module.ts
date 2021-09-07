@@ -36,6 +36,8 @@ import {
 import { RegisterComponent } from './components/register/register.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AdminComponent } from './components/admin/admin.component';
+import { AddVinylComponent } from './components/add-vinyl/add-vinyl.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +53,8 @@ import { AdminComponent } from './components/admin/admin.component';
     ProfileComponent,
     RegisterComponent,
     AdminComponent,
+    AddVinylComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,

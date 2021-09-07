@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { ProductModelServer } from '../models/product.model';
 import { SingleProductModelServer } from '../models/product.model';
 import { CategoriesModel } from '../models/categories.model';
 import { NumberFormatStyle } from '@angular/common';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -36,5 +37,36 @@ export class ProductService {
     return this.http.get<ProductModelServer>(
       this.API_KEY + '/products/category/' + category
     );
+  }
+  errorHandler(error: HttpErrorResponse) {
+    return throwError(error);
+  }
+
+  postNewVinyl(
+    nomVinyl: string,
+    annee_sortie: number,
+    categorie: string,
+    idGroupe: number,
+    quantite_dispo: number,
+    description: string
+  ): Observable<any> {
+    console.log(
+      nomVinyl,
+      annee_sortie,
+      categorie,
+      idGroupe,
+      quantite_dispo,
+      description
+    );
+    return this.http
+      .post<any>(this.API_KEY + '/products/addVinyl', {
+        nomVinyl,
+        annee_sortie,
+        categorie,
+        idGroupe,
+        quantite_dispo,
+        description,
+      })
+      .pipe(catchError(this.errorHandler));
   }
 }

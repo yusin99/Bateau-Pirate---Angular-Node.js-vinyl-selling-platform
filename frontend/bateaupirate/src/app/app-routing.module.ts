@@ -12,6 +12,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileGuard } from './guard/profile.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminGuard } from './guard/admin.guard';
+import { AddVinylComponent } from './components/add-vinyl/add-vinyl.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,16 @@ const routes: Routes = [
   {
     path: 'allproducts',
     component: AllproduComponent,
+    canActivate: [ProfileGuard],
+  },
+  {
+    path: 'addVinyl',
+    component: AddVinylComponent,
+    canActivate: [ProfileGuard],
+  },
+  {
+    path: 'addUser',
+    component: AddUserComponent,
     canActivate: [ProfileGuard],
   },
   {

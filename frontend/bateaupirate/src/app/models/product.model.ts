@@ -1,6 +1,6 @@
 export interface ProductModelServer {
   nomVinyl: string;
-  anne_sortie: number;
+  annee_sortie: number;
   disponible: boolean;
   idCategorie: number;
   idGroupe: number;
@@ -8,7 +8,7 @@ export interface ProductModelServer {
   nom: string;
   description: string;
   photo: string;
-  prix: number;
+  prixHT: number;
   quantite_dispo: number;
 }
 export interface SingleProductModelServer {

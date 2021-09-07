@@ -24,8 +24,8 @@ export class AdminGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (
-      JSON.parse(window.localStorage.getItem('user') || '').pseudo ===
-        'admin' &&
+      // JSON.parse(window.localStorage.getItem('user') || '').pseudo ===
+      //   'admin' &&
       JSON.parse(window.localStorage.getItem('user') || '').role === 777
       // this.userService.role === 777
     ) {
@@ -38,8 +38,5 @@ export class AdminGuard implements CanActivate {
       });
       return false;
     }
-  }
-  isEmpty(obj: any) {
-    return Object.keys(obj).length === 0;
   }
 }
