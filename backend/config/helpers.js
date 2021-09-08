@@ -1,6 +1,7 @@
 const Mysqli = require("mysqli");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { check } = require("express-validator");
 
 let conn = new Mysqli({
   host: "localhost",
@@ -57,6 +58,33 @@ module.exports = {
         .send({ errors: "Missing email and password fields" });
     }
   },
+  // hasPassword: (req, res, next) => {
+  //   if (req.body) {
+  //     if (req.body.mdp) {
+  //       check("mdp")
+  //         .escape()
+  //         .trim()
+  //         .not()
+  //         .isEmpty()
+  //         .withMessage("Field can't be empty")
+  //         .isLength({ min: 8, max: 16 })
+  //         .withMessage(
+  //           "Password must be 8 characters atleast long and no more than 16"
+  //         )
+  //         .matches(
+  //           /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/,
+  //           "i"
+  //         )
+  //         .withMessage(
+  //           "The password should contain atleast 1 Uppercase, 1 Lowercase and 1 special character"
+  //         );
+  //     }
+  //   } else {
+  //     return res
+  //       .status(400)
+  //       .send({ errors: "Missing email and password fields" });
+  //   }
+  // },
   isPasswordAndUserMatch: async (req, res, next) => {
     const myPlaintextPassword = req.body.mdp;
     const myEmail = req.body.email;

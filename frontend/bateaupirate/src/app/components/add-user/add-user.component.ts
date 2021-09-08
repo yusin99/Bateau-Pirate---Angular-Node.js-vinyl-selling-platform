@@ -36,11 +36,6 @@ export class AddUserComponent implements OnInit {
     const prenom = this.prenom;
     const pseudo = this.pseudo;
     const photoUrl = this.photoUrl;
-    // console.log(email, mdp, pseudo, nom, prenom);
-    // this.userService.error
-    //   ? (this.error = this.userService.error)
-    //   : (this.error = 'Invalid Inputs');
-    // this.error = this.userService.error;
     if (form.invalid) {
       return;
     }

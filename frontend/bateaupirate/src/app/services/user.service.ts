@@ -89,24 +89,6 @@ export class UserService {
         photoUrl,
       })
       .pipe(catchError(this.errorHandler));
-    // .subscribe(
-    //   (data: any) => {
-    //     this.auth = data.auth;
-    //     if (data.message === 'Registration successful') {
-    //       this.Router.navigate(['/login']);
-    //       console.log(data);
-    //     } else {
-    //       console.log(data);
-
-    //       console.log('error');
-    //     }
-    //   },
-    //   (err) => {
-    //     // console.log(err.error.errors[0].msg);
-    //     this.error = err.error.errors[0].msg;
-    //     return this.error;
-    //   }
-    // );
   }
 
   //  Google Authentication

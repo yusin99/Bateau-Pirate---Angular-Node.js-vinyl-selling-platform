@@ -86,7 +86,6 @@
               placeholder="Password"
               [(ngModel)]="mdp1"
               name="mdp1"
-              required
             />
           </div>
           <!-- form-group end.// -->
@@ -99,7 +98,6 @@
               placeholder="Password"
               [(ngModel)]="mdp2"
               name="mdp2"
-              required
             />
           </div>
           <div class="text-danger">{{ error }}</div>
@@ -107,9 +105,12 @@
           <!-- form-group end.// -->
         </div>
         <div class="form-group mt-3">
-          <button type="submit" class="btn btn-primary btn-block">
+          <button
+            type="submit"
+            class="btn btn-primary btn-block"
+            (click)="updateUser(id, myform)"
+          >
             Register new user
-            <!-- (click)="register(myform)" -->
           </button>
         </div>
       </form>

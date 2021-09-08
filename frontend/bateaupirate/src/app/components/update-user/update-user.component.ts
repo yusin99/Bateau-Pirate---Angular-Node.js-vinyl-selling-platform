@@ -5,6 +5,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { CartService } from './../../services/cart.service';
 import { SingleProductComponent } from './../single-product/single-product.component';
 import { UserService } from 'src/app/services/user.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-update-user',
@@ -52,5 +53,51 @@ export class UpdateUserComponent implements OnInit {
           this.pseudo = this.user.users[0].pseudo;
         });
       });
+  }
+  updateUser(id: number, form: NgForm) {
+    if (this.mdp1 || this.mdp2) {
+      if (this.mdp1 === this.mdp2) {
+        let body = {
+          email: this.email,
+          nom: this.nom,
+          prenom: this.prenom,
+          pseudo: this.pseudo,
+          photoUrl: this.photoUrl,
+          mdp: this.mdp1,
+        };
+        this.userService.updateSingleUser(id, body).subscribe(
+          (data) => {
+            this.error = '';
+            this.success = data.message;
+            console.log(data);
+          },
+          (error) => {
+            this.success = '';
+            this.error = error.error.errors[0].msg;
+            // console.log(error.error.errors[0].msg);
+          }
+        );
+        console.log(id);
+      }
+    } else {
+      let body = {
+        email: this.email,
+        nom: this.nom,
+        prenom: this.prenom,
+        pseudo: this.pseudo,
+        photoUrl: this.photoUrl,
+      };
+      this.userService.updateSingleUser(id, body).subscribe(
+        (data) => {
+          this.error = '';
+          this.success = data.message;
+          console.log(data);
+        },
+        (error) => {
+          this.success = '';
+          this.error = error.error.errors[0].msg;
+        }
+      );
+    }
   }
 }

@@ -67,6 +67,7 @@ export class AddVinylComponent implements OnInit {
       )
       .subscribe(
         (data) => {
+          form.reset();
           console.log(data);
         },
         (error) => {
