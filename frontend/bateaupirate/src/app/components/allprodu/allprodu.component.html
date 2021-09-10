@@ -8,7 +8,19 @@
             <div class="card mb-3">
               <div class="card-body">
                 <h5 class="card-title">Categories</h5>
-
+                <label
+                class="custom-control custom-radio"
+              >
+                <input
+                  type="radio"
+                  name="myfilter_radio"
+                  class="custom-control-input"
+                  (click)="filterItemsByCategory(categories)"
+                />
+                <div class="custom-control-label">
+                  All
+                </div>
+              </label>
                 <label
                   class="custom-control custom-radio"
                   *ngFor="let categories of categories.categories; index as i"
@@ -208,7 +220,7 @@
 <!--  -->
 <!--  -->
 <!--  -->
-<div *ngIf="filteredItems.length > 0">
+<div *ngIf="filteredItems.length >= 1">
   <article
         
   class="card card-product-list"
@@ -218,7 +230,7 @@
         : {
             itemsPerPage: 2,
             currentPage: page,
-            totalItems: totalLength
+            totalItems: totalLengthP 
           };
     index as i
   "
@@ -313,6 +325,8 @@
 </div> 
         <pagination-controls
           (pageChange)="page = $event"
+          previousLabel="Previous"
+          nextLabel="Next Page"
           style="bottom: 0"
         ></pagination-controls>
       </main>

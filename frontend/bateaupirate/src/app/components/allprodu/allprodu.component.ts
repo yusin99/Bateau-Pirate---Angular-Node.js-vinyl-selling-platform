@@ -16,6 +16,7 @@ export class AllproduComponent implements OnInit {
   vinyl: any[] = [];
   songs: any;
   totalLength: number | undefined;
+  totalLengthP: number | undefined;
   page = 1;
   categories: any = [];
   filterTerm!: string;
@@ -36,6 +37,7 @@ export class AllproduComponent implements OnInit {
     this.productService.getAllProducts(57864).subscribe((prods: any) => {
       this.products = prods.products;
       this.totalLength = prods.products.length;
+      // this.totalLengthP = this.products.length
       for (let i = 0; i < prods.products.length; i++) {
         this.prices.push(prods.products[i].prixHT);
         this.vinyl.push(prods.products[i].nomVinyl);
@@ -50,8 +52,9 @@ export class AllproduComponent implements OnInit {
 
   filterItemsByCategory(category: any) {
     this.filteredItems = this.products.filter((item: any) => {
-      // this.totalLength = this.filteredItems.length;
-      let cas = [item.idCategorie]
+      // console.log(this.filteredItems.length)
+      this.totalLengthP = this.filteredItems.length;
+      let cas = [item.idCategorie];
       return cas.includes(category.idCategorie);
     })
   }
