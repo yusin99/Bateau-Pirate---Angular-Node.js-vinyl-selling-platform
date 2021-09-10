@@ -69,7 +69,7 @@ import { UpdateUserComponent } from './components/update-user/update-user.compon
     FormsModule,
     SocialLoginModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule,
+    Ng2SearchPipeModule, 
   ],
   providers: [
     {

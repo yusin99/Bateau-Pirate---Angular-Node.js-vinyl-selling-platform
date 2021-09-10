@@ -18,6 +18,7 @@ export class AllproduComponent implements OnInit {
   totalLength: number | undefined;
   page = 1;
   categories: any = [];
+  filterTerm!: string;
   // @ViewChild('page') pageInput: any;
   constructor(
     private cartServiece: CartService,

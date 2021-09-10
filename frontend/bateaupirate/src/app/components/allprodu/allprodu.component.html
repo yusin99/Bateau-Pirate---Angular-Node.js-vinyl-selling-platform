@@ -23,8 +23,13 @@
                   </div>
                 </label>
               </div>
+
+                
+          
             </div>
+            
           </article>
+          
           <!-- filter-group .// -->
         </div>
         <!-- card.// -->
@@ -32,14 +37,17 @@
       <!-- col.// -->
       <main class="col-md-9">
         <header class="border-bottom mb-4 pb-3">
+          
           <div class="form-inline">
             <span class="mr-md-auto">{{ products.length }} Items found </span>
+            
             <select class="mr-2 form-control">
               <option>Latest items</option>
               <option>Trending</option>
               <option>Most Popular</option>
               <option>Cheapest</option>
             </select>
+            
             <!-- <div class="btn-group">
               <a
                 href="#"
@@ -61,16 +69,32 @@
               ></a>
             </div> -->
           </div>
+          <div class="input-group mt-3">
+            <input
+              type="search"
+              name="search"
+              class="form-control"
+              placeholder="Search"
+              required=""
+              [(ngModel)]="filterTerm"
+              
+            />
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-secondary">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
         </header>
         <!-- sect-heading -->
 
         <article
           class="card card-product-list"
           *ngFor="
-            let product of products
+            let product of products | filter:filterTerm
               | paginate
                 : {
-                    itemsPerPage: 3,
+                    itemsPerPage: 5,
                     currentPage: page,
                     totalItems: totalLength
                   };
