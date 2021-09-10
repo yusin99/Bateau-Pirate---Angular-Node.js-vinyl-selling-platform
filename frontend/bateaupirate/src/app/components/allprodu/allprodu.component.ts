@@ -10,8 +10,8 @@ import { ProductModelServer } from './../../models/product.model';
   styleUrls: ['./allprodu.component.scss'],
 })
 export class AllproduComponent implements OnInit {
-  products: ProductModelServer[] = [];
 
+  products: ProductModelServer[] = [];
   prices: any[] = [];
   vinyl: any[] = [];
   songs: any;
@@ -19,7 +19,8 @@ export class AllproduComponent implements OnInit {
   page = 1;
   categories: any = [];
   filterTerm!: string;
-  // @ViewChild('page') pageInput: any;
+  filteredItems: any[] = [...this.products];
+
   constructor(
     private cartServiece: CartService,
     private productService: ProductService,
@@ -32,7 +33,7 @@ export class AllproduComponent implements OnInit {
       this.categories = cat;
       console.log(cat.categories[0]);
     });
-    this.productService.getAllProducts(12).subscribe((prods: any) => {
+    this.productService.getAllProducts(57864).subscribe((prods: any) => {
       this.products = prods.products;
       this.totalLength = prods.products.length;
       for (let i = 0; i < prods.products.length; i++) {
@@ -45,6 +46,14 @@ export class AllproduComponent implements OnInit {
   selectProduct(id: Number) {
     this.router.navigate(['/product/', id]).then();
     console.log(id);
+  }
+
+  filterItemsByCategory(category: any) {
+    this.filteredItems = this.products.filter((item: any) => {
+      // this.totalLength = this.filteredItems.length;
+      let cas = [item.idCategorie]
+      return cas.includes(category.idCategorie);
+    })
   }
 
   addToCart(idVinyl: number) {

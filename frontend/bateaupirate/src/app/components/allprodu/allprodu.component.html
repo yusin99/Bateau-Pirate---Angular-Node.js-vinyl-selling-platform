@@ -17,6 +17,7 @@
                     type="radio"
                     name="myfilter_radio"
                     class="custom-control-input"
+                    (click)="filterItemsByCategory(categories)"
                   />
                   <div class="custom-control-label">
                     {{ categories.nom }}
@@ -39,7 +40,7 @@
         <header class="border-bottom mb-4 pb-3">
           
           <div class="form-inline">
-            <span class="mr-md-auto">{{ products.length }} Items found </span>
+            <span class="mr-md-auto">{{ filteredItems.length > 0 ? filteredItems.length : products.length }} Items found </span>
             
             <select class="mr-2 form-control">
               <option>Latest items</option>
@@ -80,114 +81,236 @@
               
             />
             <div class="input-group-append">
-              <button type="submit" class="btn btn-secondary">
+              <button type="submit" class="btn btn-primary">
                 <i class="fas fa-search"></i>
               </button>
             </div>
           </div>
         </header>
         <!-- sect-heading -->
+<div *ngIf="filteredItems.length === 0">
+  <div class="mb-5 mt-5">
+    <p>{{filteredItems ? 'No items found with that category' : ''}}</p>
+  
+    <h3>Suggested:</h3>
+  </div>
+  <article
+        
+  class="card card-product-list"
+  *ngFor="
+    let product of products | filter:filterTerm
+      | paginate
+        : {
+            itemsPerPage: 2,
+            currentPage: page,
+            totalItems: totalLength
+          };
+    index as i
+  "
+>
 
-        <article
-          class="card card-product-list"
-          *ngFor="
-            let product of products | filter:filterTerm
-              | paginate
-                : {
-                    itemsPerPage: 5,
-                    currentPage: page,
-                    totalItems: totalLength
-                  };
-            index as i
-          "
-        >
-          <div class="row no-gutters">
-            <aside class="col-md-3">
-              <a class="img-wrap">
-                <span class="badge badge-danger"> NEW </span>
-                <img
-                  src="assets/img/{{ product['photo'] }}"
-                  (click)="selectProduct(product['idVinyl'])"
-                />
-              </a>
-            </aside>
-            <!-- col.// -->
-            <div class="col-md-6">
-              <div class="info-main">
-                <a class="h5 title"> {{ product["nomVinyl"] }} </a>
-                <div class="rating-wrap mb-3">
-                  <!-- <ul class="rating-stars">
-                    <li style="width: 80%" class="stars-active">
-                      <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </li>
-                    <li>
-                      <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </li>
-                  </ul> -->
-                  <div class="label-rating">
-                    <p
-                      class="{{
-                        product['quantite_dispo']
-                          ? 'text-success'
-                          : 'text-danger'
-                      }}"
-                    >
-                      In Stock: {{ product["quantite_dispo"] }}
-                    </p>
-                  </div>
-                </div>
-                <!-- rating-wrap.// -->
-
-                <p>
-                  <!-- {{ product["description"] }} -->
-                  {{
-                    product["description"].length > 20
-                      ? (product["description"] | slice: 0:100) + ".."
-                      : product["description"]
-                  }}
-                </p>
-              </div>
-              <!-- info-main.// -->
-            </div>
-            <!-- col.// -->
-            <aside class="col-sm-3">
-              <div class="info-aside">
-                <div class="price-wrap">
-                  <span class="price h5">
-                    {{ prices[i] | currency: "EUR" }}
-                  </span>
-                  <!-- <del class="price-old"> $198</del> -->
-                </div>
-                <!-- info-price-detail // -->
-                <p class="text-success">Free reservation</p>
-                <br />
-                <p>
-                  <a
-                    class="btn btn-primary btn-block"
-                    (click)="selectProduct(product['idVinyl'])"
-                  >
-                    Details
-                  </a>
-                  <button
-                    class="btn btn-light btn-block"
-                    [disabled]="product['quantite_dispo'] < 1"
-                    (click)="addToCart(product['idVinyl'])"
-                  >
-                    <i class="fa fa-shopping-cart"></i>
-                    <span class="text">Add to Cart</span>
-                  </button>
-                </p>
-              </div>
-              <!-- info-aside.// -->
-            </aside>
-            <!-- col.// -->
+  <div class="row no-gutters">
+    <aside class="col-md-3">
+      <a class="img-wrap">
+        <span class="badge badge-danger"> NEW </span>
+        <img
+          src="assets/img/{{ product['photo'] }}"
+          (click)="selectProduct(product['idVinyl'])"
+        />
+      </a>
+    </aside>
+    <!-- col.// -->
+    <div class="col-md-6">
+      <div class="info-main">
+        <a class="h5 title"> {{ product["nomVinyl"] }} </a>
+        <div class="rating-wrap mb-3">
+          <!-- <ul class="rating-stars">
+            <li style="width: 80%" class="stars-active">
+              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </li>
+          </ul> -->
+          <div class="label-rating">
+            <p
+              class="{{
+                product['quantite_dispo']
+                  ? 'text-success'
+                  : 'text-danger'
+              }}"
+            >
+              In Stock: {{ product["quantite_dispo"] }}
+            </p>
           </div>
-          <!-- row.// -->
-        </article>
+        </div>
+        <!-- rating-wrap.// -->
+
+        <p>
+          <!-- {{ product["description"] }} -->
+          {{
+            product["description"].length > 20
+              ? (product["description"] | slice: 0:100) + ".."
+              : product["description"]
+          }}
+        </p>
+      </div>
+      <!-- info-main.// -->
+    </div>
+    <!-- col.// -->
+    <aside class="col-sm-3">
+      <div class="info-aside">
+        <div class="price-wrap">
+          <span class="price h5">
+            {{ prices[i] | currency: "EUR" }}
+          </span>
+          <!-- <del class="price-old"> $198</del> -->
+        </div>
+        <!-- info-price-detail // -->
+        <p class="text-success">Free reservation</p>
+        <br />
+        <p>
+          <a
+            class="btn btn-primary btn-block"
+            (click)="selectProduct(product['idVinyl'])"
+          >
+            Details
+          </a>
+          <button
+            class="btn btn-light btn-block"
+            [disabled]="product['quantite_dispo'] < 1"
+            (click)="addToCart(product['idVinyl'])"
+          >
+            <i class="fa fa-shopping-cart"></i>
+            <span class="text">Add to Cart</span>
+          </button>
+        </p>
+      </div>
+      <!-- info-aside.// -->
+    </aside>
+    <!-- col.// -->
+  </div>
+  <!-- row.// -->
+</article>
+</div>
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<div *ngIf="filteredItems.length > 0">
+  <article
+        
+  class="card card-product-list"
+  *ngFor="
+    let product of filteredItems | filter:filterTerm
+      | paginate
+        : {
+            itemsPerPage: 2,
+            currentPage: page,
+            totalItems: totalLength
+          };
+    index as i
+  "
+>
+  <div class="row no-gutters">
+    <aside class="col-md-3">
+      <a class="img-wrap">
+        <span class="badge badge-danger"> NEW </span>
+        <img
+          src="assets/img/{{ product['photo'] }}"
+          (click)="selectProduct(product['idVinyl'])"
+        />
+      </a>
+    </aside>
+    <!-- col.// -->
+    <div class="col-md-6">
+      <div class="info-main">
+        <a class="h5 title"> {{ product["nomVinyl"] }} </a>
+        <div class="rating-wrap mb-3">
+          <!-- <ul class="rating-stars">
+            <li style="width: 80%" class="stars-active">
+              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </li>
+          </ul> -->
+          <div class="label-rating">
+            <p
+              class="{{
+                product['quantite_dispo']
+                  ? 'text-success'
+                  : 'text-danger'
+              }}"
+            >
+              In Stock: {{ product["quantite_dispo"] }}
+            </p>
+          </div>
+        </div>
+        <!-- rating-wrap.// -->
+
+        <p>
+          <!-- {{ product["description"] }} -->
+          {{
+            product["description"].length > 20
+              ? (product["description"] | slice: 0:100) + ".."
+              : product["description"]
+          }}
+        </p>
+      </div>
+      <!-- info-main.// -->
+    </div>
+    <!-- col.// -->
+    <aside class="col-sm-3">
+      <div class="info-aside">
+        <div class="price-wrap">
+          <span class="price h5">
+            {{ prices[i] | currency: "EUR" }}
+          </span>
+          <!-- <del class="price-old"> $198</del> -->
+        </div>
+        <!-- info-price-detail // -->
+        <p class="text-success">Free reservation</p>
+        <br />
+        <p>
+          <a
+            class="btn btn-primary btn-block"
+            (click)="selectProduct(product['idVinyl'])"
+          >
+            Details
+          </a>
+          <button
+            class="btn btn-light btn-block"
+            [disabled]="product['quantite_dispo'] < 1"
+            (click)="addToCart(product['idVinyl'])"
+          >
+            <i class="fa fa-shopping-cart"></i>
+            <span class="text">Add to Cart</span>
+          </button>
+        </p>
+      </div>
+      <!-- info-aside.// -->
+    </aside>
+    <!-- col.// -->
+  </div>
+  <!-- row.// -->
+</article>
+</div> 
         <pagination-controls
           (pageChange)="page = $event"
           style="bottom: 0"

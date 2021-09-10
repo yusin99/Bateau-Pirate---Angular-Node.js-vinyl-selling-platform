@@ -13,7 +13,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class HomeComponent implements OnInit {
   products: ProductModelServer[] = [];
-
+  filterTerm!:any;
   prices: any[] = [];
   vinyl: any[] = [];
   totalLength: number | undefined;
