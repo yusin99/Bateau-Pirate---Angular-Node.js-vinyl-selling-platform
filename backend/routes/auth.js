@@ -14,10 +14,12 @@ router.post(
       { state: "true", email: req.body.email, pseudo: req.body.pseudo },
       helper.secret,
       {
-        algorithm: "HS512",
-        expiresIn: "4h",
+        algorithm: "HS256",
+        expiresIn: "120s",
       }
     );
+    // console.log(token);
+    // res.cookie("SESSIONID", token, { httpOnly: true, secure: true });
     res.json({
       token: token,
       auth: true,
@@ -60,7 +62,7 @@ router.post(
       return helper.database
         .table("clients")
         .filter({
-          $or: [{ email: value }, { pseudo: value.split("@")[0] }],
+          $or: [{ email: value }],
         })
         .get()
         .then((user) => {

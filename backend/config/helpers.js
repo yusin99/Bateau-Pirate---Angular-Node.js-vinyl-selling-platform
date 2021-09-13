@@ -19,20 +19,24 @@ module.exports = {
   database: db,
   secret: secret,
   validJWTNeeded: (req, res, next) => {
-    if (req.headers["authorization"]) {
+    if (req.headers.authorization) {
       try {
-        let authorization = req.headers["authorization"].split(" ");
+        // console.log(authorization);
+        let authorization = req.headers.authorization.split(" ");
         if (authorization[0] !== "Bearer") {
+          // console.log("req");
           return res.status(401).send();
         } else {
           req.jwt = jwt.verify(authorization[1], secret);
           return next();
         }
       } catch (err) {
+        console.log(authorization[1]);
+        // console.log(err);
         return res.status(403).send("Authentication failed");
       }
     } else {
-      console.log(res);
+      // console.log(req.headers.authorization);
       return res.status(401).send("No authorization header found.");
     }
   },

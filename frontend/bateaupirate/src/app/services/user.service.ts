@@ -5,7 +5,14 @@ import {
   SocialUser,
   FacebookLoginProvider,
 } from 'angularx-social-login';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { SingleUserModel, UserModelServer } from './../models/user.model';
@@ -38,8 +45,10 @@ export class UserService {
     });
     console.log(this.error);
   }
+
   //  Login User with Email and Password
   loginUser(email: string, mdp: string) {
+    // console.log('sada');
     return this.httpClient
       .post(`${this.API_KEY}auth/login`, { email, mdp })
       .subscribe(
@@ -63,11 +72,13 @@ export class UserService {
         },
         (err) => {
           // console.log(err.error.message);
+          console.log(err);
           this.error = err.error.message;
           return this.error;
         }
       );
   }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(error);
   }
@@ -102,7 +113,6 @@ export class UserService {
 
   logout() {
     this.auth = false;
-    console.log('Logout');
     this.authState$.next(this.auth);
     this.authService.signOut();
     window.localStorage.removeItem('user');

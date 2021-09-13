@@ -124,6 +124,19 @@
         </div>
         <!-- form-row end.// -->
         <div class="form-group">
+          <label for="inputPhoto">Photo url</label>
+          <input
+            type="text"
+            id="inputPhoto"
+            class="form-control"
+            placeholder="kaarisornoir.jpg"
+            [(ngModel)]="photoUrl"
+            name="photoUrl"
+            required
+            autofocus
+          />
+        </div>
+        <div class="form-group">
           <label for="inputEmail">Email address</label>
           <input
             type="email"

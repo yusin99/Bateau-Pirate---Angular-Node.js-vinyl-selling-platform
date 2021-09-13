@@ -16,7 +16,8 @@ export class RegisterComponent implements OnInit {
   nom!: string;
   prenom!: string;
   pseudo!: string;
-  photoUrl!: string;
+  photoUrl: string =
+    'https://www.seekpng.com/png/full/356-3562377_personal-user.png';
   error!: string;
   success!: string;
   constructor(

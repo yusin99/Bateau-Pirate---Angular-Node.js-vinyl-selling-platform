@@ -85,7 +85,7 @@ router.put(
       return helper.database
         .table("clients")
         .filter({
-          $or: [{ email: value }, { pseudo: value.split("@")[0] }],
+          $or: [{ email: value }],
         })
         .getAll()
         .then((user) => {

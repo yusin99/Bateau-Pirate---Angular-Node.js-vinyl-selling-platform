@@ -14,7 +14,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { HomeComponent } from './components/home/home.component';
 import { SingleProductComponent } from './components/single-product/single-product.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductModelServer } from './models/product.model';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
@@ -39,6 +39,9 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AddVinylComponent } from './components/add-vinyl/add-vinyl.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+// import { AuthInterceptorService } from './services/user.service';
+// import { AuthInterceptor } from './services/user.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +72,7 @@ import { UpdateUserComponent } from './components/update-user/update-user.compon
     FormsModule,
     SocialLoginModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule, 
+    Ng2SearchPipeModule,
   ],
   providers: [
     {
@@ -89,6 +92,11 @@ import { UpdateUserComponent } from './components/update-user/update-user.compon
           },
         ],
       } as SocialAuthServiceConfig,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],
