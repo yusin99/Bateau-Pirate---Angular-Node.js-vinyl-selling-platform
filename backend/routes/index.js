@@ -7,7 +7,7 @@ const helper = require("../config/helpers");
 
 /* GET home page. */
 
-router.get("/", function (req, res, next) {
+router.get("/", helper.validJWTNeeded, function (req, res, next) {
   let page =
     req.query.page !== undefined && req.query.page !== 0 ? req.query.page : 1; // set current page number
   const limit =
@@ -51,7 +51,7 @@ router.get("/", function (req, res, next) {
     .catch((err) => console.log(err));
 });
 // Delete single vinyl
-router.delete("/delete/:idVinyl", async (req, res) => {
+router.delete("/delete/:idVinyl", helper.validJWTNeeded, async (req, res) => {
   try {
     const vinylId = req.params.idVinyl;
     console.log(vinylId);
@@ -74,7 +74,7 @@ router.delete("/delete/:idVinyl", async (req, res) => {
   }
 });
 
-router.get("/category", function (req, res, next) {
+router.get("/category", helper.validJWTNeeded, function (req, res, next) {
   database
     .table("categories_musique as c")
     .getAll()
