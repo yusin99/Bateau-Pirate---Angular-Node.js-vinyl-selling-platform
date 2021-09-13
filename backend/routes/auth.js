@@ -15,7 +15,7 @@ router.post(
       helper.secret,
       {
         algorithm: "HS256",
-        expiresIn: "120s",
+        expiresIn: "4h",
       }
     );
     // console.log(token);

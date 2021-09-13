@@ -93,7 +93,7 @@ router.get("/category", helper.validJWTNeeded, function (req, res, next) {
     .catch((err) => console.log(err));
 });
 
-router.get("/groupes", function (req, res, next) {
+router.get("/groupes", helper.validJWTNeeded, function (req, res, next) {
   database
     .table("groupes as g")
     .getAll()
@@ -138,7 +138,7 @@ router.get("/search/:search", function (req, res, next) {
     .catch((err) => console.log(err));
 });
 
-router.get("/:vinylId", function (req, res, next) {
+router.get("/:vinylId", helper.validJWTNeeded, function (req, res, next) {
   let vinylId = req.params.vinylId;
 
   database
@@ -164,7 +164,7 @@ router.get("/:vinylId", function (req, res, next) {
     .catch((err) => console.log(err));
 });
 // Get All songs
-router.get("/piste/:vinylId", function (req, res, next) {
+router.get("/piste/:vinylId", helper.validJWTNeeded, function (req, res, next) {
   let vinylId = req.params.vinylId;
 
   database
@@ -193,7 +193,7 @@ router.get("/piste/:vinylId", function (req, res, next) {
     .catch((err) => console.log(err));
 });
 // All products from a particular category
-router.get("/category/:catName", function (req, res) {
+router.get("/category/:catName", helper.validJWTNeeded, function (req, res) {
   let page =
     req.query.page !== undefined && req.query.page !== 0 ? req.query.page : 1; // set current page number
   const limit =
