@@ -8,19 +8,15 @@
             <div class="card mb-3">
               <div class="card-body">
                 <h5 class="card-title">Categories</h5>
-                <label
-                class="custom-control custom-radio"
-              >
-                <input
-                  type="radio"
-                  name="myfilter_radio"
-                  class="custom-control-input"
-                  (click)="filterItemsByCategory(categories)"
-                />
-                <div class="custom-control-label">
-                  All
-                </div>
-              </label>
+                <label class="custom-control custom-radio">
+                  <input
+                    type="radio"
+                    name="myfilter_radio"
+                    class="custom-control-input"
+                    (click)="filterItemsByCategory(categories)"
+                  />
+                  <div class="custom-control-label">All</div>
+                </label>
                 <label
                   class="custom-control custom-radio"
                   *ngFor="let categories of categories.categories; index as i"
@@ -36,13 +32,9 @@
                   </div>
                 </label>
               </div>
-
-                
-          
             </div>
-            
           </article>
-          
+
           <!-- filter-group .// -->
         </div>
         <!-- card.// -->
@@ -50,37 +42,22 @@
       <!-- col.// -->
       <main class="col-md-9">
         <header class="border-bottom mb-4 pb-3">
-          
           <div class="form-inline">
-            <span class="mr-md-auto">{{ filteredItems.length > 0 ? filteredItems.length : products.length }} Items found </span>
-            
+            <span class="mr-md-auto"
+              >{{
+                filteredItems.length > 0
+                  ? filteredItems.length
+                  : products.length
+              }}
+              Items found
+            </span>
+
             <select class="mr-2 form-control">
               <option>Latest items</option>
               <option>Trending</option>
               <option>Most Popular</option>
               <option>Cheapest</option>
             </select>
-            
-            <!-- <div class="btn-group">
-              <a
-                href="#"
-                class="btn btn-outline-secondary active"
-                data-toggle="tooltip"
-                title=""
-                data-original-title="List view"
-              >
-                <i class="fa fa-bars"></i
-              ></a>
-              <a
-                href="#"
-                class="btn btn-outline-secondary"
-                data-toggle="tooltip"
-                title=""
-                data-original-title="Grid view"
-              >
-                <i class="fa fa-th"></i
-              ></a>
-            </div> -->
           </div>
           <div class="input-group mt-3">
             <input
@@ -90,7 +67,6 @@
               placeholder="Search"
               required=""
               [(ngModel)]="filterTerm"
-              
             />
             <div class="input-group-append">
               <button type="submit" class="btn btn-primary">
@@ -100,235 +76,225 @@
           </div>
         </header>
         <!-- sect-heading -->
-<div *ngIf="filteredItems.length === 0">
-  <div class="mb-5 mt-5">
-    <p>{{filteredItems ? 'No items found with that category' : ''}}</p>
-  
-    <h3>Suggested:</h3>
-  </div>
-  <article
-        
-  class="card card-product-list"
-  *ngFor="
-    let product of products | filter:filterTerm
-      | paginate
-        : {
-            itemsPerPage: 2,
-            currentPage: page,
-            totalItems: totalLength
-          };
-    index as i
-  "
->
-
-  <div class="row no-gutters">
-    <aside class="col-md-3">
-      <a class="img-wrap">
-        <span class="badge badge-danger"> NEW </span>
-        <img
-          src="assets/img/{{ product['photo'] }}"
-          (click)="selectProduct(product['idVinyl'])"
-        />
-      </a>
-    </aside>
-    <!-- col.// -->
-    <div class="col-md-6">
-      <div class="info-main">
-        <a class="h5 title"> {{ product["nomVinyl"] }} </a>
-        <div class="rating-wrap mb-3">
-          <!-- <ul class="rating-stars">
-            <li style="width: 80%" class="stars-active">
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </li>
-          </ul> -->
-          <div class="label-rating">
-            <p
-              class="{{
-                product['quantite_dispo']
-                  ? 'text-success'
-                  : 'text-danger'
-              }}"
-            >
-              In Stock: {{ product["quantite_dispo"] }}
+        <div *ngIf="filteredItems.length === 0">
+          <div class="mb-5 mt-5">
+            <p>
+              {{ filteredItems ? "No items found with that category" : "" }}
             </p>
-          </div>
-        </div>
-        <!-- rating-wrap.// -->
 
-        <p>
-          <!-- {{ product["description"] }} -->
-          {{
-            product["description"].length > 20
-              ? (product["description"] | slice: 0:100) + ".."
-              : product["description"]
-          }}
-        </p>
-      </div>
-      <!-- info-main.// -->
-    </div>
-    <!-- col.// -->
-    <aside class="col-sm-3">
-      <div class="info-aside">
-        <div class="price-wrap">
-          <span class="price h5">
-            {{ prices[i] | currency: "EUR" }}
-          </span>
-          <!-- <del class="price-old"> $198</del> -->
-        </div>
-        <!-- info-price-detail // -->
-        <p class="text-success">Free reservation</p>
-        <br />
-        <p>
-          <a
-            class="btn btn-primary btn-block"
-            (click)="selectProduct(product['idVinyl'])"
-          >
-            Details
-          </a>
-          <button
-            class="btn btn-light btn-block"
-            [disabled]="product['quantite_dispo'] < 1"
-            (click)="addToCart(product['idVinyl'])"
-          >
-            <i class="fa fa-shopping-cart"></i>
-            <span class="text">Add to Cart</span>
-          </button>
-        </p>
-      </div>
-      <!-- info-aside.// -->
-    </aside>
-    <!-- col.// -->
-  </div>
-  <!-- row.// -->
-</article>
-</div>
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<div *ngIf="filteredItems.length >= 1">
-  <article
-        
-  class="card card-product-list"
-  *ngFor="
-    let product of filteredItems | filter:filterTerm
-      | paginate
-        : {
-            itemsPerPage: 2,
-            currentPage: page,
-            totalItems: totalLengthP 
-          };
-    index as i
-  "
->
-  <div class="row no-gutters">
-    <aside class="col-md-3">
-      <a class="img-wrap">
-        <span class="badge badge-danger"> NEW </span>
-        <img
-          src="assets/img/{{ product['photo'] }}"
-          (click)="selectProduct(product['idVinyl'])"
-        />
-      </a>
-    </aside>
-    <!-- col.// -->
-    <div class="col-md-6">
-      <div class="info-main">
-        <a class="h5 title"> {{ product["nomVinyl"] }} </a>
-        <div class="rating-wrap mb-3">
-          <!-- <ul class="rating-stars">
-            <li style="width: 80%" class="stars-active">
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </li>
-          </ul> -->
-          <div class="label-rating">
-            <p
-              class="{{
-                product['quantite_dispo']
-                  ? 'text-success'
-                  : 'text-danger'
-              }}"
-            >
-              In Stock: {{ product["quantite_dispo"] }}
-            </p>
+            <h3>Suggested:</h3>
           </div>
-        </div>
-        <!-- rating-wrap.// -->
+          <article
+            class="card card-product-list"
+            *ngFor="
+              let product of products
+                | filter: filterTerm
+                | paginate
+                  : {
+                      id: 'page',
+                      itemsPerPage: 2,
+                      currentPage: page,
+                      totalItems: this.products.length
+                    };
+              index as i
+            "
+          >
+            <div class="row no-gutters">
+              <aside class="col-md-3">
+                <a class="img-wrap">
+                  <span class="badge badge-danger"> NEW </span>
+                  <img
+                    src="assets/img/{{ product['photo'] }}"
+                    (click)="selectProduct(product['idVinyl'])"
+                  />
+                </a>
+              </aside>
+              <!-- col.// -->
+              <div class="col-md-6">
+                <div class="info-main">
+                  <a class="h5 title"> {{ product["nomVinyl"] }} </a>
+                  <div class="rating-wrap mb-3">
+                    <div class="label-rating">
+                      <p
+                        class="{{
+                          product['quantite_dispo']
+                            ? 'text-success'
+                            : 'text-danger'
+                        }}"
+                      >
+                        In Stock: {{ product["quantite_dispo"] }}
+                      </p>
+                    </div>
+                  </div>
+                  <!-- rating-wrap.// -->
 
-        <p>
-          <!-- {{ product["description"] }} -->
-          {{
-            product["description"].length > 20
-              ? (product["description"] | slice: 0:100) + ".."
-              : product["description"]
-          }}
-        </p>
-      </div>
-      <!-- info-main.// -->
-    </div>
-    <!-- col.// -->
-    <aside class="col-sm-3">
-      <div class="info-aside">
-        <div class="price-wrap">
-          <span class="price h5">
-            {{ prices[i] | currency: "EUR" }}
-          </span>
-          <!-- <del class="price-old"> $198</del> -->
+                  <p>
+                    {{
+                      product["description"].length > 20
+                        ? (product["description"] | slice: 0:100) + ".."
+                        : product["description"]
+                    }}
+                  </p>
+                </div>
+                <!-- info-main.// -->
+              </div>
+              <!-- col.// -->
+              <aside class="col-sm-3">
+                <div class="info-aside">
+                  <div class="price-wrap">
+                    <span class="price h5">
+                      {{ product.prixHT | currency: "EUR" }}
+                    </span>
+                    <!-- <del class="price-old"> $198</del> -->
+                  </div>
+                  <!-- info-price-detail // -->
+                  <p class="text-success">Free reservation</p>
+                  <br />
+                  <p>
+                    <a
+                      class="btn btn-primary btn-block"
+                      (click)="selectProduct(product['idVinyl'])"
+                    >
+                      Details
+                    </a>
+                    <button
+                      class="btn btn-light btn-block"
+                      [disabled]="product['quantite_dispo'] < 1"
+                      (click)="addToCart(product['idVinyl'])"
+                    >
+                      <i class="fa fa-shopping-cart"></i>
+                      <span class="text">Add to Cart</span>
+                    </button>
+                  </p>
+                </div>
+                <!-- info-aside.// -->
+              </aside>
+              <!-- col.// -->
+            </div>
+            <!-- row.// -->
+          </article>
+          <pagination-controls
+            id="page"
+            *ngIf="
+              (filteredItems.length === 0 && filterTerm === undefined) ||
+              filterTerm === ''
+            "
+            (pageChange)="page = $event"
+            previousLabel="Previous"
+            nextLabel="Next Page"
+            style="bottom: 0"
+          ></pagination-controls>
         </div>
-        <!-- info-price-detail // -->
-        <p class="text-success">Free reservation</p>
-        <br />
-        <p>
-          <a
-            class="btn btn-primary btn-block"
-            (click)="selectProduct(product['idVinyl'])"
+
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <div *ngIf="filteredItems.length > 0">
+          <article
+            class="card card-product-list"
+            *ngFor="
+              let product of filteredItems
+                | filter: filterTerm
+                | paginate
+                  : {
+                      id: 'pageF',
+                      itemsPerPage: 2,
+                      currentPage: pageF,
+                      totalItems: filteredItems.length
+                    };
+              index as i
+            "
           >
-            Details
-          </a>
-          <button
-            class="btn btn-light btn-block"
-            [disabled]="product['quantite_dispo'] < 1"
-            (click)="addToCart(product['idVinyl'])"
-          >
-            <i class="fa fa-shopping-cart"></i>
-            <span class="text">Add to Cart</span>
-          </button>
-        </p>
-      </div>
-      <!-- info-aside.// -->
-    </aside>
-    <!-- col.// -->
-  </div>
-  <!-- row.// -->
-</article>
-</div> 
-        <pagination-controls
-          (pageChange)="page = $event"
-          previousLabel="Previous"
-          nextLabel="Next Page"
-          style="bottom: 0"
-        ></pagination-controls>
+            <div class="row no-gutters">
+              <aside class="col-md-3">
+                <a class="img-wrap">
+                  <span class="badge badge-danger"> NEW </span>
+                  <img
+                    src="assets/img/{{ product['photo'] }}"
+                    (click)="selectProduct(product['idVinyl'])"
+                  />
+                </a>
+              </aside>
+              <!-- col.// -->
+              <div class="col-md-6">
+                <div class="info-main">
+                  <a class="h5 title"> {{ product["nomVinyl"] }} </a>
+                  <div class="rating-wrap mb-3">
+                    <div class="label-rating">
+                      <p
+                        class="{{
+                          product['quantite_dispo']
+                            ? 'text-success'
+                            : 'text-danger'
+                        }}"
+                      >
+                        In Stock: {{ product["quantite_dispo"] }}
+                      </p>
+                    </div>
+                  </div>
+                  <!-- rating-wrap.// -->
+
+                  <p>
+                    {{
+                      product["description"].length > 20
+                        ? (product["description"] | slice: 0:100) + ".."
+                        : product["description"]
+                    }}
+                  </p>
+                </div>
+                <!-- info-main.// -->
+              </div>
+              <!-- col.// -->
+              <aside class="col-sm-3">
+                <div class="info-aside">
+                  <div class="price-wrap">
+                    <span class="price h5">
+                      {{ product.prixHT | currency: "EUR" }}
+                    </span>
+                  </div>
+                  <!-- info-price-detail // -->
+                  <p class="text-success">Free reservation</p>
+                  <br />
+                  <p>
+                    <a
+                      class="btn btn-primary btn-block"
+                      (click)="selectProduct(product['idVinyl'])"
+                    >
+                      Details
+                    </a>
+                    <button
+                      class="btn btn-light btn-block"
+                      [disabled]="product['quantite_dispo'] < 1"
+                      (click)="addToCart(product['idVinyl'])"
+                    >
+                      <i class="fa fa-shopping-cart"></i>
+                      <span class="text">Add to Cart</span>
+                    </button>
+                  </p>
+                </div>
+                <!-- info-aside.// -->
+              </aside>
+              <!-- col.// -->
+            </div>
+            <!-- row.// -->
+          </article>
+          <pagination-controls
+            id="pageF"
+            *ngIf="filterTerm === undefined || filterTerm === ''"
+            (pageChange)="pageF = $event"
+            previousLabel="Previous"
+            nextLabel="Next Page"
+            style="bottom: 0"
+          ></pagination-controls>
+        </div>
       </main>
       <!-- col.// -->
     </div>

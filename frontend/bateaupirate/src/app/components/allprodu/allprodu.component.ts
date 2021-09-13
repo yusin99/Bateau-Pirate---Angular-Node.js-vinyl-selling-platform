@@ -10,7 +10,6 @@ import { ProductModelServer } from './../../models/product.model';
   styleUrls: ['./allprodu.component.scss'],
 })
 export class AllproduComponent implements OnInit {
-
   products: ProductModelServer[] = [];
   prices: any[] = [];
   vinyl: any[] = [];
@@ -18,6 +17,7 @@ export class AllproduComponent implements OnInit {
   totalLength: number | undefined;
   totalLengthP: number | undefined;
   page = 1;
+  pageF = 1;
   categories: any = [];
   filterTerm!: string;
   filteredItems: any[] = [...this.products];
@@ -38,10 +38,10 @@ export class AllproduComponent implements OnInit {
       this.products = prods.products;
       this.totalLength = prods.products.length;
       // this.totalLengthP = this.products.length
-      for (let i = 0; i < prods.products.length; i++) {
-        this.prices.push(prods.products[i].prixHT);
-        this.vinyl.push(prods.products[i].nomVinyl);
-      }
+      // for (let i = 0; i < prods.products.length; i++) {
+      //   this.prices.push(prods.products[i].prixHT);
+      //   // this.vinyl.push(prods.products[i].nomVinyl);
+      // }
     });
   }
 
@@ -52,11 +52,11 @@ export class AllproduComponent implements OnInit {
 
   filterItemsByCategory(category: any) {
     this.filteredItems = this.products.filter((item: any) => {
-      // console.log(this.filteredItems.length)
+      console.log(this.filteredItems.length);
       this.totalLengthP = this.filteredItems.length;
       let cas = [item.idCategorie];
       return cas.includes(category.idCategorie);
-    })
+    });
   }
 
   addToCart(idVinyl: number) {
