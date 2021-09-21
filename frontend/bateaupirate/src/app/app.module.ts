@@ -40,6 +40,7 @@ import { AddVinylComponent } from './components/add-vinyl/add-vinyl.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 // import { AuthInterceptorService } from './services/user.service';
 // import { AuthInterceptor } from './services/user.service';
 @NgModule({
@@ -73,6 +74,9 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     SocialLoginModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
+
+    RecaptchaModule, //this is the recaptcha main module
+    RecaptchaFormsModule, //this is the module for form incase form validation
   ],
   providers: [
     {

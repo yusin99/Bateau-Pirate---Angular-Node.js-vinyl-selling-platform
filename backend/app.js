@@ -25,12 +25,14 @@ app.use(express.json());
 const productRouter = require("./routes/index");
 const userRouter = require("./routes/users");
 const ordersRouter = require("./routes/orders");
+const captchaRouter = require("./routes/captcha");
 const authRouter = require("./routes/auth");
 // Use routes
 
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", ordersRouter);
+app.use("/api/captcha", captchaRouter);
 app.use("/api/auth", authRouter);
 // app.use("/api/users", userRouter);
 app.use(express.urlencoded({ extended: true }));
