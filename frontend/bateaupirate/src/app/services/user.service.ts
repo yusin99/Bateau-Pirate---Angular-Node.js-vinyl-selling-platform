@@ -24,7 +24,7 @@ import { ProductModelServer } from '../models/product.model';
 })
 export class UserService {
   auth = false;
-  role = 555;
+  role!: number;
   error: any;
   private readonly API_KEY = 'http://localhost:3000/api/';
   user: any = {};
@@ -37,10 +37,10 @@ export class UserService {
     private Router: Router
   ) {
     authService.authState.subscribe((user: SocialUser) => {
+      console.log(user);
       if (user != null) {
         this.auth = true;
         this.authState$.next(this.auth);
-        this.userData$.next(user);
       }
     });
     console.log(this.error);
@@ -54,13 +54,15 @@ export class UserService {
       .subscribe(
         (data: any) => {
           console.log(data);
+          this.userData$.next(data);
+          if (data.role === 777) {
+            this.role = 777;
+          } else {
+            this.role === 555;
+          }
           window.localStorage.setItem('user', JSON.stringify(data));
           window.localStorage.setItem('token', JSON.stringify(data.token));
-          // if (data.role === 777) {
-          //   this.role = 777;
-          // } else {
-          //   this.role === 555;
-          // }
+
           if (window.localStorage.getItem('user')) {
             this.auth = true;
           } else {

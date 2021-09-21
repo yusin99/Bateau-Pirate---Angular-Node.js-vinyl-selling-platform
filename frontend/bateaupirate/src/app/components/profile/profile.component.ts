@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
       .subscribe(
         (data: ResponseModel | SocialUser) => {
           this.myUser = data;
-          // window.localStorage.setItem('user', JSON.stringify(this.myUser));
+          console.log(this.myUser);
         },
         (err) => {
           this.errors = err;
@@ -53,14 +53,11 @@ export class ProfileComponent implements OnInit {
       window.localStorage.setItem('user', JSON.stringify(this.myUser));
     }
     this.myUser = JSON.parse(window.localStorage.getItem('user') || '');
-    // }
-    // console.log(this.myUser);
     this.orderService
       .getOrderByClientId(this.myUser.idClient)
       .then((orders) => {
         this.totalLength = orders.length;
         this.orders = orders;
-        console.log(this.orders);
       });
   }
   getUserPhoto() {

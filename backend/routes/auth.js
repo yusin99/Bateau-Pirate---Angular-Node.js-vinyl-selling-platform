@@ -4,6 +4,7 @@ const router = express.Router();
 const helper = require("../config/helpers");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+var session = require("express-session");
 
 // LOGIN ROUTE
 router.post(
@@ -15,11 +16,11 @@ router.post(
       helper.secret,
       {
         algorithm: "HS256",
-        expiresIn: "4h",
+        expiresIn: "1h",
       }
     );
     // console.log(token);
-    // res.cookie("SESSIONID", token, { httpOnly: true, secure: true });
+
     res.json({
       token: token,
       auth: true,
@@ -31,6 +32,12 @@ router.post(
       idClient: req.idClient,
       role: req.role,
       type: req.type,
+    });
+    session({
+      secret: req.role,
+      resave: false,
+      saveUninitialized: true,
+      cookie: { secure: true, httpOnly: true },
     });
   }
 );

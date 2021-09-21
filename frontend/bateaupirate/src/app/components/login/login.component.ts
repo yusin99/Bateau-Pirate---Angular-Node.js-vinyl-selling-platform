@@ -35,10 +35,11 @@ export class LoginComponent implements OnInit {
         });
       },
       (err) => {
-        console.log(err);
         return (this.error_message = err);
       }
     );
+    // this.error_message = this.getError;
+    // console.log(this.error_message);
   }
 
   isEmpty(obj: any) {

@@ -13,7 +13,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class HomeComponent implements OnInit {
   products: ProductModelServer[] = [];
-  filterTerm!:any;
+  filterTerm!: any;
   prices: any[] = [];
   vinyl: any[] = [];
   totalLength: number | undefined;
@@ -38,10 +38,11 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
   selectProduct(id: Number) {
     this.router.navigate(['/product/', id]).then();
-    console.log(id);
   }
+
   addToCart(idVinyl: number) {
     // console.log(idVinyl);
     this.cartServiece.AddProductToCart(idVinyl);

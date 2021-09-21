@@ -9,105 +9,9 @@
 
   <!-- WHEN THE CART HAS ITEMS -->
   <ng-container *ngIf="cartData.data[0].numInCart !== 0">
-    <!-- <div class="row"> -->
-    <!-- <div class="col-6 col-sm-6 col-md-6 col-lg-12"> -->
-    <!-- <table class="table">
-        <thead class="table-dark">
-          <tr class="text-center">
-            <th scope="col">Image</th>
-            <th scope="col">Title</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Subtotal</th>
-            <th scope="col">Disponible</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let c of cartData.data; let i = index">
-            <td class="d-flex align-items-center justify-content-around">
-              <img
-                src="assets/img/{{ c.product.photo }}"
-                alt="{{ c.product.nomVinyl }}"
-                height="60px"
-                class="order-1"
-              />
-              <span class="text-danger"
-                ><i
-                  class="fa fa-trash m-4"
-                  (click)="cartService.DeleteProductFromCart(i)"
-                  style="cursor: pointer; height: 50px"
-                ></i
-              ></span>
-            </td>
-            <td>
-              <p>{{ c.product.nomVinyl }}</p>
-            </td>
-            <td>
-              <p>{{ c.product.prixHT | currency: "EUR" }}</p>
-            </td>
-            <td>
-              <form action="">
-                <div
-                  *ngIf="c.numInCart === 1"
-                  class="value-button"
-                  id="decrease"
-                  (click)="cartService.DeleteProductFromCart(i)"
-                >
-                  <i class="fa fa-trash"></i>
-                </div>
-
-                <div
-                  *ngIf="c.numInCart > 1"
-                  class="value-button"
-                  id="decrease"
-                  (click)="changeQuantity(i, false)"
-                >
-                  <i class="fa fa-minus"></i>
-                </div>
-
-                <input
-                  type="number"
-                  id="number"
-                  [value]="c.numInCart"
-                  readonly
-                  max="{{ c.product.quantite_dispo }}"
-                />
-
-                <div
-                  class="value-button"
-                  id="increase"
-                  (click)="changeQuantity(i, true)"
-                >
-                  <i class="fa fa-plus"></i>
-                </div>
-                <p
-                  class="text-danger"
-                  *ngIf="c.numInCart === 1"
-                  style="font-size: 10px"
-                >
-                  Attention. If you reduce one more you will delete the item
-                  from cart
-                </p>
-              </form>
-            </td>
-            <td>
-              <p>{{ cartService.CalculateSubTotal(i) | currency: "EUR" }}</p>
-            </td>
-            <td>Disponible: {{ c.product.quantite_dispo }}</td>
-          </tr>
-          <tr class="border-0">
-            <td style="border: none"></td>
-            <td></td>
-            <td></td>
-            <td>TOTAL</td>
-            <td>{{ cartTotal | currency: "EUR" }}</td>
-          </tr>
-        </tbody>
-      </table> -->
-
     <div class="row">
-      <div class="col-md-8 cart">
+      <div class="col-md-2"></div>
+      <div class="col-md-6 cart">
         <div class="title">
           <div class="row">
             <div class="col">
@@ -158,46 +62,12 @@
             </div>
           </div>
         </div>
-        <!-- <div class="row">
-          <div class="row main align-items-center">
-            <div class="col-2">
-              <img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg" />
-            </div>
-            <div class="col">
-              <div class="row text-muted">Shirt</div>
-              <div class="row">Cotton T-shirt</div>
-            </div>
-            <div class="col">
-              <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-            </div>
-            <div class="col">
-              &euro; 44.00 <span class="close">&#10005;</span>
-            </div>
-          </div>
-        </div> -->
-        <!-- <div class="row border-top border-bottom">
-          <div class="row main align-items-center">
-            <div class="col-2">
-              <img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg" />
-            </div>
-            <div class="col">
-              <div class="row text-muted">Shirt</div>
-              <div class="row">Cotton T-shirt</div>
-            </div>
-            <div class="col">
-              <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-            </div>
-            <div class="col">
-              &euro; 44.00 <span class="close">&#10005;</span>
-            </div>
-          </div>
-        </div> -->
         <div class="back-to-shop">
           <a routerLink="/">&larr;</a
           ><span class="text-muted">Back to shop</span>
         </div>
       </div>
-      <div class="col-md-4 summary">
+      <div class="col-md-2 summary">
         <div>
           <h5><b>Summary</b></h5>
         </div>
@@ -236,11 +106,15 @@
       <div class="div col-md-12 d-flex mb-5">
         <div class="div col-md-12">
           <div class="row">
-            <div class="col-md-12">
-              <a routerLink="/" class="btn btn-success btn-sm order-0 btnGreen"
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <a
+                routerLink="/"
+                class="btn btn-success btn-sm order-0 btnGreen p-3 h2"
                 >Continue Shopping</a
               >
             </div>
+            <div class="col-md-3"></div>
             <!-- <div class="col-md-2">
               <a routerLink="/checkout" class="btn btn-danger btn-sm order-1"
                 >Checkout</a

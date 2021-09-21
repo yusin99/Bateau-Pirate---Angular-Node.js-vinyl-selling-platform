@@ -46,24 +46,26 @@ export class RegisterComponent implements OnInit {
     );
   }
   register(form: NgForm) {
-    const email = this.email;
-    const mdp1 = this.mdp1;
-    const mdp2 = this.mdp2;
-    const nom = this.nom;
-    const prenom = this.prenom;
-    const pseudo = this.pseudo;
-    const photoUrl = this.photoUrl;
-    // console.log(email, mdp, pseudo, nom, prenom);
-    // this.userService.error
-    //   ? (this.error = this.userService.error)
-    //   : (this.error = 'Invalid Inputs');
-    // this.error = this.userService.error;
+    // const email = this.email;
+    // const mdp1 = this.mdp1;
+    // const mdp2 = this.mdp2;
+    // const nom = this.nom;
+    // const prenom = this.prenom;
+    // const pseudo = this.pseudo;
+    // const photoUrl = this.photoUrl;
     if (form.invalid) {
       return;
     }
-    if (mdp1 === mdp2) {
+    if (this.mdp1 === this.mdp2) {
       this.userService
-        .registerUser(email, mdp1, pseudo, nom, prenom, photoUrl)
+        .registerUser(
+          this.email,
+          this.mdp1,
+          this.pseudo,
+          this.nom,
+          this.prenom,
+          this.photoUrl
+        )
         .subscribe(
           (data) => {
             console.log(data);

@@ -37,11 +37,6 @@ export class AllproduComponent implements OnInit {
     this.productService.getAllProducts(57864).subscribe((prods: any) => {
       this.products = prods.products;
       this.totalLength = prods.products.length;
-      // this.totalLengthP = this.products.length
-      // for (let i = 0; i < prods.products.length; i++) {
-      //   this.prices.push(prods.products[i].prixHT);
-      //   // this.vinyl.push(prods.products[i].nomVinyl);
-      // }
     });
   }
 

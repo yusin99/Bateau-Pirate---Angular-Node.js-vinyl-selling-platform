@@ -5,7 +5,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 import { CartModelPublic, CartModelServer } from '../models/cart.model';
-import { ProductModelServer } from '../models/product.model';
+import {
+  ProductModelServer,
+  SingleProductModelServer,
+} from '../models/product.model';
 import { OrderService } from './order.service';
 import { ProductService } from './product.service';
 
@@ -63,30 +66,22 @@ export class CartService {
         info !== undefined &&
         info.prodData[0].incart !== 0
       ) {
-        //  Local Storage is not empty and has some information
         this.cartDataClient = info;
-        // console.log(this.cartDataServer);
-        // console.log(this.cartDataClient);
         //  Loop through each entry and put it in the cartDataServer object
         this.cartDataClient.prodData.forEach((p) => {
           this.productService
             .getSingleProduct(p.id)
-            .subscribe((actualProductInfo: ProductModelServer) => {
+            .subscribe((actualProductInfo: SingleProductModelServer) => {
               if (this.cartDataServer.data[0].numInCart === 0) {
                 // this.cartDataServer.data[0].numInCart++;
                 this.cartDataServer.data[0].numInCart = p.incart;
-                this.cartDataServer.data[0].product = actualProductInfo;
+                this.cartDataServer.data[0].product = actualProductInfo; // Updates the product info
                 this.CalculateTotal();
-
                 this.cartDataClient.total = this.cartDataServer.total;
-                // console.log(this.cartDataClient.total);
-                // console.log(this.cartDataServer.total);
-                console.log(this.cartDataServer);
-                // console.log('First if maaan');
                 localStorage.setItem(
                   'cart',
                   JSON.stringify(this.cartDataClient)
-                );
+                ); // Updates the product info
               } else {
                 // CartDataServer already has some entry in it
                 this.cartDataServer.data.push({
@@ -106,7 +101,9 @@ export class CartService {
       }
     }
   }
-
+  setLocalStorage(name: string, data: any) {
+    window.localStorage.setItem(name, JSON.stringify(data));
+  }
   AddProductToCart(id: number, quantity?: number) {
     this.productService.getSingleProduct(id).subscribe((prod) => {
       console.log(prod);
@@ -122,10 +119,11 @@ export class CartService {
         this.cartDataClient.prodData[0].nomVinyl = prod.nomVinyl;
         this.cartDataClient.prodData[0].photo = prod.photo;
         this.cartDataClient.total = this.cartDataServer.total;
-        localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
+        this.setLocalStorage('cart', this.cartDataClient);
+        // localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
         this.cartData$.next({ ...this.cartDataServer });
         this.toast.success(
-          `${prod.idVinyl} added to the cart`,
+          `${prod.nomVinyl} added to the cart`,
           'Product Added',
           {
             timeOut: 1500,
@@ -139,17 +137,6 @@ export class CartService {
         const index = this.cartDataServer.data.findIndex(
           (p) => p.product.idVinyl === prod.idVinyl
         ); // -1 or a positive value
-        console.log(index);
-        // console.log(
-        //   this.cartDataServer.data.findIndex(
-        //     (p) => p.product.id === prod.idVinyl
-        //   )
-        // );
-
-        // const itrm1 = this.cartDataServer.data[0].product.findIndex(
-        //   (p: any) => p.product.id === prod.idVinyl
-        // );
-        // console.log(itrm1);
         //     a. if that item is already in the cart  =>  index is positive value
         if (index !== -1) {
           if (quantity !== undefined && quantity <= prod.quantite_dispo) {
@@ -163,14 +150,13 @@ export class CartService {
               ? this.cartDataServer.data[index].numInCart++
               : prod.quantite_dispo;
           }
-
           this.cartDataClient.prodData[index].incart =
             this.cartDataServer.data[index].numInCart;
           this.CalculateTotal();
           this.cartDataClient.total = this.cartDataServer.total;
           localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
           this.toast.info(
-            `${prod.idVinyl} quantity updated in the cart`,
+            `${prod.nomVinyl} quantity updated in the cart`,
             'Product Updated',
             {
               timeOut: 1500,
@@ -192,7 +178,7 @@ export class CartService {
             id: prod.idVinyl,
           });
           this.toast.success(
-            `${prod.idVinyl} added to the cart`,
+            `${prod.nomVinyl} added to the cart`,
             'Product Added',
             {
               timeOut: 1500,

@@ -6,15 +6,18 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
+import { SocialUser } from 'angularx-social-login';
 import { Observable } from 'rxjs';
-import { UserService } from '../services/user.service';
+import { map } from 'rxjs/operators';
+import { ResponseModel, UserService } from '../services/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminGuard implements CanActivate {
   constructor(private userService: UserService, private router: Router) {}
-
+  role!: number;
+  profile!: any;
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -23,13 +26,7 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (
-      // JSON.parse(window.localStorage.getItem('user') || '').pseudo ===
-      //   'admin' &&
-      JSON.parse(window.localStorage.getItem('user') || '').role === 777
-      // this.userService.role === 777
-    ) {
-      console.log(JSON.parse(window.localStorage.getItem('user') || '').role);
+    if (JSON.parse(window.localStorage.getItem('user') || '').role === 777) {
       return true;
     } else {
       console.log(this.userService.role);

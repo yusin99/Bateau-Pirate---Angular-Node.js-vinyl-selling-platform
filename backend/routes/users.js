@@ -120,7 +120,7 @@ router.put(
             pseudo: pseudo,
             mdp: mdp || null,
             email: email,
-            role: 555 || null,
+            // role: 555 || null,
             nom: nom || null,
             prenom: prenom || null,
             photoUrl: photoUrl || null,

@@ -22,9 +22,13 @@ export class ProductService {
       },
     });
   }
-  getSingleProduct(id: number): Observable<ProductModelServer> {
-    return this.http.get<ProductModelServer>(this.API_KEY + '/products/' + id);
+
+  getSingleProduct(id: number): Observable<SingleProductModelServer> {
+    return this.http.get<SingleProductModelServer>(
+      this.API_KEY + '/products/' + id
+    );
   }
+
   getAllSongs(id: number): Observable<SingleProductModelServer> {
     return this.http.get<SingleProductModelServer>(
       this.API_KEY + '/products/piste/' + id

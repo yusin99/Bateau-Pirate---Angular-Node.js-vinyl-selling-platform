@@ -21,18 +21,22 @@ module.exports = {
   validJWTNeeded: (req, res, next) => {
     if (req.headers.authorization) {
       try {
+        // const token = req.cookies.token;
+        // if (!token) {
+        //   return res.sendStatus(403);
+        // }
         // console.log(authorization);
         let authorization = req.headers.authorization.split(" ");
         if (authorization[0] !== "Bearer") {
           // console.log("req");
           return res.status(401).send();
         } else {
+          console.log(authorization[1]);
           req.jwt = jwt.verify(authorization[1], secret);
           return next();
         }
       } catch (err) {
-        console.log(authorization[1]);
-        // console.log(err);
+        console.log(err);
         return res.status(403).send("Authentication failed");
       }
     } else {

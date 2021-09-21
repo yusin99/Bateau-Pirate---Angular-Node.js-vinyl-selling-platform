@@ -7,11 +7,14 @@ import {
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ProductService } from './product.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthInterceptorService implements HttpInterceptor {
+  constructor(private userService: UserService) {}
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     console.log('Interception In Progress'); // Interception Stage
     let idToken;
@@ -25,9 +28,15 @@ export class AuthInterceptorService implements HttpInterceptor {
       headers: req.headers.set('Content-Type', 'application/json'),
     });
     req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
-    console.log(req);
+    // console.log(req);
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
+        console.log(error);
+        if (error.statusText === 'Forbidden') {
+          this.userService.error === 'Session Expired. Please log in again.';
+          this.userService.logout();
+          this.userService.auth = false;
+        }
         // Catching Error Stage
         if (error && error.status === 401) {
           console.log('ERROR 401 UNAUTHORIZED'); // in case of an error response the error message is displayed
