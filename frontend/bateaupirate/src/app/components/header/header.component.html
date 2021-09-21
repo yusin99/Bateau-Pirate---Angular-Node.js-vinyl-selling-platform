@@ -5,7 +5,10 @@
         <div class="d-flex col-lg-3 col-sm-4 col-md-4 col-5">
           <a routerLink="/" class="brand-wrap mb-0">
             <img class="logo" src="assets/images/logo.png" />
-            <img class="logo logo1" src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Music-PNG/Gramophone_Vinyl_LP_Record_PNG_Transparent_Clip_Art_Image.png?m=1462983196" />
+            <img
+              class="logo logo1"
+              src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Music-PNG/Gramophone_Vinyl_LP_Record_PNG_Transparent_Clip_Art_Image.png?m=1462983196"
+            />
           </a>
           <!-- brand-wrap.// -->
         </div>
@@ -104,25 +107,6 @@
 
   <nav class="navbar navbar-expand-md navbar-main border-bottom">
     <div class="container">
-      <!-- <form class="d-md-none my-2">
-        <div class="input-group">
-          <input
-            type="search"
-            name="search"
-            class="form-control"
-            placeholder="Search"
-            required=""
-             [(ngModel)]="filterTerm"
-            
-          />
-          <div class="input-group-append">
-            <button type="submit" class="btn btn-secondary">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form> -->
-
       <button
         class="navbar-toggler"
         type="button"
@@ -143,9 +127,10 @@
           </li>
           <li class="nav-item">
             <a
+              *ngIf="role === 777 ? true : false"
               class="nav-link"
               routerLink="{{ role === 777 ? '/admin' : '' }}"
-              >{{ role === 777 ? "Admin" : "" }}</a
+              >Admin</a
             >
           </li>
         </ul>

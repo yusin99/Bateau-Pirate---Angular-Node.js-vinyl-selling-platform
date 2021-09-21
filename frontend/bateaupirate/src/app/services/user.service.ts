@@ -29,7 +29,7 @@ export class UserService {
   private readonly API_KEY = 'http://localhost:3000/api/';
   user: any = {};
   authState$ = new BehaviorSubject<boolean>(this.auth);
-  userData$ = new BehaviorSubject<SocialUser>(this.user);
+  userData$ = new BehaviorSubject<any>(this.user);
 
   constructor(
     private authService: SocialAuthService,
@@ -68,8 +68,9 @@ export class UserService {
           } else {
             this.auth = false;
           }
-          this.auth = data.auth;
-          this.authState$.next(this.auth);
+          console.log(data);
+          // this.auth = data.auth;
+          this.authState$.next(true);
           this.userData$.next(data);
         },
         (err) => {

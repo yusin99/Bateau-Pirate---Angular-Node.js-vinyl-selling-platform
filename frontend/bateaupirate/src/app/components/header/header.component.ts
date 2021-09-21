@@ -27,11 +27,20 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.cartService.cartTotal$.subscribe((total) => (this.cartTotal = total));
     this.cartService.cartData$.subscribe((data) => (this.cartData = data));
+    this.userService.authState$.subscribe((state) => {
+      this.authState = state;
+      console.log(state);
+    });
+    this.userService.userData$.subscribe((data) => {
+      this.role = data.role;
+      console.log(this.role);
+    });
     if (window.localStorage.getItem('user')) {
       this.authState = true;
       this.role = JSON.parse(window.localStorage.getItem('user') || '').role;
     } else {
       this.authState = false;
+      this.role = 0;
     }
   }
   navigateAllProducts() {
@@ -47,6 +56,7 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     this.userService.logout();
+    this.role === 0;
     this.authState = false;
     window.localStorage.removeitem('user');
   }
