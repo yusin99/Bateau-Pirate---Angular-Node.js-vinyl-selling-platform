@@ -63,6 +63,11 @@ export class ProfileComponent implements OnInit {
   getUserPhoto() {
     return this.myUser.photoUrl;
   }
+  getRole() {
+    let role;
+    this.myUser.role === 555 ? (role = 'User') : (role = 'Admin');
+    return role;
+  }
   getUserEmail() {
     return this.myUser.email;
   }
@@ -71,14 +76,14 @@ export class ProfileComponent implements OnInit {
       // console.log(this.myUser);
       return [this.myUser.name];
     } else {
-      return [this.myUser.prenom + ' ' + this.myUser.nom];
+      return [this.myUser.nom + ' ' + this.myUser.prenom];
     }
   }
   getProvider() {
     if (this.myUser.provider) {
       return this.myUser.provider;
     } else {
-      return 'Bateau Pirate account';
+      return 'BP Account';
     }
   }
   navigateUpdate(idClient: number) {

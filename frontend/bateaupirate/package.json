@@ -23,6 +23,7 @@
     "bootstrap": "^4.4.1",
     "ng-recaptcha": "^8.0.1",
     "ng2-search-filter": "^0.5.1",
+    "ngx-avatar": "^4.1.0",
     "ngx-order-pipe": "^2.1.1",
     "ngx-pagination": "^5.1.1",
     "ngx-spinner": "^11.0.1",

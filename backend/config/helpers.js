@@ -96,7 +96,6 @@ module.exports = {
   isPasswordAndUserMatch: async (req, res, next) => {
     const myPlaintextPassword = req.body.mdp;
     const myEmail = req.body.email;
-
     const user = await db
       .table("clients")
       .filter({ $or: [{ email: myEmail }, { pseudo: myEmail }] }) // can login with username or password

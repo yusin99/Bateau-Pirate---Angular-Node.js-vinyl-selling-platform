@@ -5,6 +5,7 @@ import { ServerResponse } from 'src/app/models/product.model';
 import { ProductModelServer } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class HomeComponent implements OnInit {
   products: ProductModelServer[] = [];
   filterTerm!: any;
+  email!: any;
   prices: any[] = [];
   vinyl: any[] = [];
   totalLength: number | undefined;
@@ -22,6 +24,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private cartServiece: CartService,
+    private userService: UserService,
     private productService: ProductService,
     private router: Router
   ) {}
@@ -29,7 +32,9 @@ export class HomeComponent implements OnInit {
     // console.log(this.arr.prodData[0]);
     this.productService.getAllProducts(6000).subscribe((prods: any) => {
       // console.log(prods);
-
+      this.userService.userData$.subscribe((data) => {
+        this.email = data.email;
+      });
       this.products = prods.products;
       this.totalLength = prods.products.length;
       for (let i = 0; i < prods.products.length; i++) {
@@ -40,6 +45,7 @@ export class HomeComponent implements OnInit {
   }
 
   selectProduct(id: Number) {
+    this.email = null;
     this.router.navigate(['/product/', id]).then();
   }
 

@@ -16,7 +16,9 @@ export class HeaderComponent implements OnInit {
   cartData!: CartModelServer;
   cartTotal!: number;
   authState!: any;
+  email!: any;
   role!: number;
+  username!: string;
   constructor(
     public cartService: CartService,
     public productService: ProductService,
@@ -33,11 +35,18 @@ export class HeaderComponent implements OnInit {
     });
     this.userService.userData$.subscribe((data) => {
       this.role = data.role;
-      console.log(this.role);
+      this.email = data.email;
+      this.username = data.nom + ' ' + data.prenom;
+      console.log(this.email);
     });
     if (window.localStorage.getItem('user')) {
       this.authState = true;
+      this.email = JSON.parse(window.localStorage.getItem('user') || '').email;
       this.role = JSON.parse(window.localStorage.getItem('user') || '').role;
+      this.username =
+        JSON.parse(window.localStorage.getItem('user') || '').nom +
+        ' ' +
+        JSON.parse(window.localStorage.getItem('user') || '').prenom;
     } else {
       this.authState = false;
       this.role = 0;
@@ -58,6 +67,7 @@ export class HeaderComponent implements OnInit {
     this.userService.logout();
     this.role === 0;
     this.authState = false;
+    this.username = '';
     window.localStorage.removeitem('user');
   }
 }

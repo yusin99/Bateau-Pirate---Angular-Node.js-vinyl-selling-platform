@@ -12,26 +12,12 @@
           </a>
           <!-- brand-wrap.// -->
         </div>
-        <div class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block">
-          <!-- <form action="#" class="search">
-            <div class="input-group w-100">
-              <input
-                type="text"
-                class="form-control"
-                style="width: 35%"
-                placeholder="Search"
-              />
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">
-                  <i class="fa fa-search"></i>
-                </button>
-              </div>
-            </div>
-          </form> -->
-          <!-- search-wrap .end// -->
-        </div>
+        <div
+          class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block"
+        ></div>
+
         <!-- col.// -->
-        <div class="col-lg-5 col-xl-4 col-sm-8 col-md-4 col-7">
+        <div class="d-flex col-lg-5 col-xl-4 col-sm-8 col-md-4 col-7">
           <div class="d-flex justify-content-end">
             <a routerLink="/cart" class="widget-header mr-3">
               <div class="icon">
@@ -58,7 +44,11 @@
                 aria-expanded="false"
               >
                 <div class="icon icon-sm rounded-circle border">
-                  <i class="fa fa-user"></i>
+                  <i class="fa fa-user" *ngIf="!username"></i>
+                  <ngx-avatar
+                    *ngIf="username"
+                    name="{{ username }}"
+                  ></ngx-avatar>
                 </div>
                 <span class="sr-only">Profile actions</span>
               </a>

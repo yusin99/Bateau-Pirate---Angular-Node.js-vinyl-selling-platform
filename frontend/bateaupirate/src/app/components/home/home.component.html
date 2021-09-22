@@ -1,3 +1,8 @@
+<section class="section-intro padding-y-sm" *ngIf="email">
+  <div class="container">
+    <h1 class="h1">Bienvenue {{ email }}</h1>
+  </div>
+</section>
 <section class="section-intro padding-y-sm">
   <div class="container">
     <div class="intro-banner-wrap">
@@ -10,48 +15,80 @@
   <div class="container">
     <article class="card card-body">
       <div class="row">
-        <div class="col-md-4">
-          <figure class="item-feature">
-            <span class="text-primary"><i class="fa fa-2x fa-truck"></i></span>
-            <figcaption class="pt-3">
-              <h5 class="title">Fast delivery</h5>
-              <p>
-                Dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore
-              </p>
-            </figcaption>
-          </figure>
-          <!-- iconbox // -->
+        <div class="col-md-3">
+          <article class="card card-body">
+            <figure class="text-center">
+              <span class="rounded-circle icon-md bg-primary"
+                ><i class="fa fa-user white"></i
+              ></span>
+              <figcaption class="pt-4">
+                <h5 class="title">Creative Strategy &amp; solution</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                  do eiusmod
+                </p>
+              </figcaption>
+            </figure>
+            <!-- iconbox // -->
+          </article>
+          <!-- panel-lg.// -->
         </div>
         <!-- col // -->
-        <div class="col-md-4">
-          <figure class="item-feature">
-            <span class="text-primary"
-              ><i class="fa fa-2x fa-landmark"></i
-            ></span>
-            <figcaption class="pt-3">
-              <h5 class="title">Creative Strategy</h5>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod
-              </p>
-            </figcaption>
-          </figure>
-          <!-- iconbox // -->
+        <div class="col-md-3">
+          <article class="card card-body">
+            <figure class="text-center">
+              <span class="rounded-circle icon-md bg-primary"
+                ><i class="fa fa-truck white"></i
+              ></span>
+              <figcaption class="pt-4">
+                <h5 class="title">Creative Strategy &amp; solution</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                  do eiusmod
+                </p>
+              </figcaption>
+            </figure>
+            <!-- iconbox // -->
+          </article>
+          <!-- panel-lg.// -->
         </div>
         <!-- col // -->
-        <div class="col-md-4">
-          <figure class="item-feature">
-            <span class="text-primary"><i class="fa fa-2x fa-lock"></i></span>
-            <figcaption class="pt-3">
-              <h5 class="title">High secured</h5>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod
-              </p>
-            </figcaption>
-          </figure>
-          <!-- iconbox // -->
+        <div class="col-md-3">
+          <article class="card card-body">
+            <figure class="text-center">
+              <span class="rounded-circle icon-md bg-primary"
+                ><i class="fa fa-star white"></i
+              ></span>
+              <figcaption class="pt-4">
+                <h5 class="title">Creative Strategy &amp; solution</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                  do eiusmod
+                </p>
+              </figcaption>
+            </figure>
+            <!-- iconbox // -->
+          </article>
+          <!-- panel-lg.// -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <article class="card card-body">
+            <figure class="text-center">
+              <span class="rounded-circle icon-md bg-primary"
+                ><i class="far fa-clock white"></i
+              ></span>
+              <figcaption class="pt-4">
+                <h5 class="title">Creative Strategy &amp; solution</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                  do eiusmod
+                </p>
+              </figcaption>
+            </figure>
+            <!-- iconbox // -->
+          </article>
+          <!-- panel-lg.// -->
         </div>
         <!-- col // -->
       </div>
@@ -100,11 +137,17 @@
           "
         >
           <div class="card card-product-grid">
+            <!-- <div>
+              <a class="btn-overlay" href="/"
+                ><i class="fa fa-search-plus"></i> Quick view</a
+              >
+            </div> -->
             <img
               src="assets/img/{{ product['photo'] }}"
               (click)="selectProduct(product['idVinyl'])"
               alt="{{ product['nomVinyl'] }}"
             />
+
             <div
               class="
                 col-md-12 col-lg-12
@@ -182,27 +225,21 @@
 <!-- dsaaaaaaaaaaaaaaaaaaaa -->
 <!-- dsaaaaaaaaaaaaaaaaaaaa -->
 <!-- dsaaaaaaaaaaaaaaaaaaaa -->
-<div class="container">
+<div class="container mt-5 mb-5">
   <div class="row">
     <div class="col-md-8">
       <!-- ============================ COMPONENT BANNER 7 ================================= -->
-      <div
-        class="card-banner overlay-gradient"
-        style="
-          min-height: 230px;
-          background-image: url('bootstrap-ecommerce-html/images/posts/2.jpg');
-        "
-      >
+      <div class="card-banner overlay-gradient" style="min-height: 230px">
         <div class="card-img-overlay white">
           <h3 class="card-title">
-            Photography is my hobby <br />
-            right now
+            Come and visit our store <br />
+            to discover all our vinyls.
           </h3>
           <p class="card-text" style="max-width: 400px">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt.
+            Great collection of old/new generation. All the extraordinary taste
+            will be satisfied.
           </p>
-          <a href="" class="btn btn-warning">Learn more</a>
+          <a href="" class="btn btn-primary">Learn more</a>
         </div>
       </div>
       <!-- ============================ COMPONENT BANNER 7  END .// =========================== -->
@@ -210,18 +247,12 @@
     <!-- col.// -->
     <div class="col-md-4">
       <!-- ============================ COMPONENT BANNER 8  ================================= -->
-      <div
-        class="card-banner overlay-gradient"
-        style="
-          min-height: 230px;
-          background-image: url('bootstrap-ecommerce-html/images/posts/3.jpg');
-        "
-      >
+      <div class="card-banner overlay-gradient" style="min-height: 230px">
         <div class="card-img-overlay text-white">
           <h5 class="card-title">Best products</h5>
           <p class="card-text">
             No matter how far along you are in your sophistication as an amateur
-            astronomer, there is always one.
+            musician, there is always one.
           </p>
         </div>
       </div>

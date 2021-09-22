@@ -1,16 +1,20 @@
 <div class="container emp-profile">
   <div class="row">
-    <div class="col-md-4">
-      <div class="profile-img">
-        <img src="{{ getUserPhoto() }}" alt="" />
+    <div class="col-md-4 text-center">
+      <div class="img-fluid">
+        <ngx-avatar name="{{ getUserName() }}" size="250"></ngx-avatar>
+        <!-- <img src="{{ getUserPhoto() }}" alt="" /> -->
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 text-center">
       <div class="profile-head">
         <h5>{{ getUserName() }}</h5>
         <h6>Provider: {{ getProvider() }}</h6>
-        <p class="proile-rating">Role:</p>
-        <table class="table table-striped">
+        <p class="proile-rating">Role: {{ getRole() }}</p>
+        <table
+          class="table table-responsive table-bordered"
+          *ngIf="orders.length !== 0"
+        >
           <thead>
             <tr>
               <th>Date</th>
@@ -54,7 +58,16 @@
             </tr>
           </tbody>
         </table>
+        <div *ngIf="orders.length === 0">
+          <h3>You have no orders.</h3>
+          <br />
+          <h5>
+            Right after you pass an order, we will update the orders table for
+            you :)
+          </h5>
+        </div>
         <pagination-controls
+          *ngIf="orders.length !== 0"
           (pageChange)="page = $event"
           style="bottom: 0"
         ></pagination-controls>
@@ -88,13 +101,13 @@
         <!-- <a href="">Website Link</a><br /> -->
         <a href="">EMAIL : {{ getUserEmail() }}</a
         ><br />
-        <a href="">Bootply Profile</a>
+        <!-- <a href="">Bootply Profile</a>
         <p>SKILLS</p>
         <a href="">Web Designer</a><br />
         <a href="">Web Developer</a><br />
         <a href="">WordPress</a><br />
         <a href="">WooCommerce</a><br />
-        <a href="">PHP, .Net</a><br />
+        <a href="">PHP, .Net</a><br /> -->
       </div>
     </div>
   </div>

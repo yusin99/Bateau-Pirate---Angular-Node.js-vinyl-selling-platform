@@ -41,6 +41,7 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { AvatarModule } from 'ngx-avatar';
 // import { AuthInterceptorService } from './services/user.service';
 // import { AuthInterceptor } from './services/user.service';
 @NgModule({
@@ -74,9 +75,9 @@ import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
     SocialLoginModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
-
     RecaptchaModule, //this is the recaptcha main module
     RecaptchaFormsModule, //this is the module for form incase form validation
+    AvatarModule,
   ],
   providers: [
     {
