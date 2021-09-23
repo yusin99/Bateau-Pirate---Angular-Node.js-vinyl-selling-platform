@@ -21,7 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AllproduComponent } from './components/allprodu/allprodu.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 // import {
 //   GoogleLoginProvider,
@@ -43,6 +43,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { AvatarModule } from 'ngx-avatar';
 import { ContactComponent } from './components/contact/contact.component';
+import { NgxStripeModule } from 'ngx-stripe';
 
 // import { AuthInterceptorService } from './services/user.service';
 // import { AuthInterceptor } from './services/user.service';
@@ -81,6 +82,8 @@ import { ContactComponent } from './components/contact/contact.component';
     RecaptchaModule, //this is the recaptcha main module
     RecaptchaFormsModule, //this is the module for form incase form validation
     AvatarModule,
+    NgxStripeModule.forRoot('pk_test_aZQCfwAo2aQtqxwOH8IXoXMi'),
+    ReactiveFormsModule,
   ],
   providers: [
     {

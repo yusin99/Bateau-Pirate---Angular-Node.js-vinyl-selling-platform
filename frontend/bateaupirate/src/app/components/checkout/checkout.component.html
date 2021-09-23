@@ -64,7 +64,7 @@
 <!--  -->
 <div class="container w-75">
   <div class="row">
-    <aside class="col-lg-9">
+    <aside class="col-lg-7">
       <div class="card">
         <table class="table table-borderless table-shopping-cart">
           <thead class="text-muted">
@@ -142,7 +142,7 @@
       <!-- card.// -->
     </aside>
     <!-- col.// -->
-    <aside class="col-lg-3">
+    <aside class="col-lg-5">
       <div class="card mb-3">
         <div class="card-body">
           <form>
@@ -184,15 +184,34 @@
           </dl>
           <hr />
           <p class="text-center mb-3">
-            <img
-              src="bootstrap-ecommerce-html/images/misc/payments.png"
-              height="26"
-            />
+            <img src="assets/images/stripe.png" height="56" />
           </p>
-          <button (click)="onCheckout()" class="btn btn-primary btn-block">
-            Make Purchase
-          </button>
-          <button routerLink="/" class="btn btn-light btn-block">
+          <form novalidate [formGroup]="stripeTest">
+            <input
+              type="text"
+              [(ngModel)]="name2"
+              formControlName="name"
+              class="form-control mb-3"
+            />
+            <br />
+            <ngx-stripe-card
+              [options]="cardOptions"
+              [elementsOptions]="elementsOptions"
+            ></ngx-stripe-card>
+            <p class="h6 text-danger">{{ error }}</p>
+            <!-- <button type="submit" class="btn btn-primary btn-send mt-2">
+              CREATE TOKEN
+            </button> -->
+
+            <button
+              (click)="onCheckout()"
+              type="submit"
+              class="btn btn-primary btn-block mt-3 mb-2"
+            >
+              Make Purchase {{ cartTotal | currency: "EUR" }}
+            </button>
+          </form>
+          <button routerLink="/" class="btn btn-light btn-block mb-2">
             Continue Shopping
           </button>
         </div>
