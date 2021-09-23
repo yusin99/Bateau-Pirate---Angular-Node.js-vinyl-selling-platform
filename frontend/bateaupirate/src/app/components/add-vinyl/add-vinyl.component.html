@@ -82,12 +82,13 @@
         <div class="form-group">
           <label for="photo">Photo Name</label>
           <input
-            type="text"
+            type="file"
             id="photo"
             class="form-control"
             placeholder="kaarisornoir.jpg"
             [(ngModel)]="photo"
             name="photo"
+            (change)="onFileSelected($event)"
             required
             autofocus
           />

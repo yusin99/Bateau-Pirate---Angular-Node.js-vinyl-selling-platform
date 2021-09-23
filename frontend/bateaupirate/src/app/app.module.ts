@@ -42,6 +42,8 @@ import { UpdateUserComponent } from './components/update-user/update-user.compon
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { AvatarModule } from 'ngx-avatar';
+import { ContactComponent } from './components/contact/contact.component';
+
 // import { AuthInterceptorService } from './services/user.service';
 // import { AuthInterceptor } from './services/user.service';
 @NgModule({
@@ -62,6 +64,7 @@ import { AvatarModule } from 'ngx-avatar';
     AddVinylComponent,
     AddUserComponent,
     UpdateUserComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,6 +25,7 @@ export class AddVinylComponent implements OnInit {
   error!: string;
   success!: string;
   categories!: any;
+  currentInput: any;
   constructor(
     private router: Router,
     private productService: ProductService,
@@ -38,6 +39,12 @@ export class AddVinylComponent implements OnInit {
     this.productService.getAllGroupes().subscribe((groupes) => {
       this.groupes = groupes;
     });
+  }
+  onFileSelected(event: any) {
+    if (event.target.files.length > 0) {
+      this.photo = event.target.files[0].name;
+      console.log(event.target.files[0].name);
+    }
   }
   registerVinyl(form: NgForm) {
     const nomVinyl = this.nomVinyl;

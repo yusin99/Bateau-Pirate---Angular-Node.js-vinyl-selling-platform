@@ -1,6 +1,6 @@
 <div class="container emp-profile">
   <div class="row">
-    <div class="col-md-4 text-center">
+    <div class="col-md-4 text-center d-flex justify-content-center mb-5">
       <div class="img-fluid">
         <ngx-avatar name="{{ getUserName() }}" size="250"></ngx-avatar>
         <!-- <img src="{{ getUserPhoto() }}" alt="" /> -->
@@ -11,8 +11,10 @@
         <h5>{{ getUserName() }}</h5>
         <h6>Provider: {{ getProvider() }}</h6>
         <p class="proile-rating">Role: {{ getRole() }}</p>
+        <p class="mb-5">EMAIL : {{ getUserEmail() }}</p>
+        <br />
         <table
-          class="table table-responsive table-bordered"
+          class="table table-responsive table-bordered mt-5"
           *ngIf="orders.length !== 0"
         >
           <thead>
@@ -88,27 +90,6 @@
         value="Modify"
         (click)="navigateUpdate(id)"
       />
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-3">
-      <div class="profile-work">
-        <!-- <p>{{ o.date_commande }}</p>
-          <p>{{ o.nomVinyl }}</p>
-          <img src="assets/img/{{ o.photo }}" alt="" /> -->
-
-        <!-- <a href="">Website Link</a><br /> -->
-        <a href="">EMAIL : {{ getUserEmail() }}</a
-        ><br />
-        <!-- <a href="">Bootply Profile</a>
-        <p>SKILLS</p>
-        <a href="">Web Designer</a><br />
-        <a href="">Web Developer</a><br />
-        <a href="">WordPress</a><br />
-        <a href="">WooCommerce</a><br />
-        <a href="">PHP, .Net</a><br /> -->
-      </div>
     </div>
   </div>
 </div>

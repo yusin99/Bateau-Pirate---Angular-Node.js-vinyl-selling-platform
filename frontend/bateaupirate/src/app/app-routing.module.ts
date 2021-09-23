@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AllproduComponent } from './components/allprodu/allprodu.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
@@ -15,7 +15,7 @@ import { AdminGuard } from './guard/admin.guard';
 import { AddVinylComponent } from './components/add-vinyl/add-vinyl.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
-
+import { ContactComponent } from './components/contact/contact.component';
 const routes: Routes = [
   {
     path: '',
@@ -75,16 +75,24 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
   },
-
   {
     path: 'profile',
     component: ProfileComponent,
     canActivate: [ProfileGuard],
   },
+  {
+    path: 'contact',
+    component: ContactComponent,
+    canActivate: [ProfileGuard],
+  },
 ];
+const routerOptions: ExtraOptions = {
+  useHash: false,
+  anchorScrolling: 'enabled',
+};
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, routerOptions)],
 
   exports: [RouterModule],
 })

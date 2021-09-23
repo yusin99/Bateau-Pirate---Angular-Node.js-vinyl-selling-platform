@@ -63,6 +63,7 @@ export class ProfileComponent implements OnInit {
   getUserPhoto() {
     return this.myUser.photoUrl;
   }
+
   getRole() {
     let role;
     this.myUser.role === 555 ? (role = 'User') : (role = 'Admin');
