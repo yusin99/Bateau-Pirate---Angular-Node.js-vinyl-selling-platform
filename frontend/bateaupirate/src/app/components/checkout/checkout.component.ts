@@ -21,6 +21,7 @@ export class CheckoutComponent implements OnInit {
   cartData!: CartModelServer;
   isTrue: boolean = false;
   error!: any;
+  success!: any;
   name2: string = '';
   @ViewChild(StripeCardComponent) card!: StripeCardComponent;
   cardOptions: StripeCardElementOptions = {
@@ -68,6 +69,8 @@ export class CheckoutComponent implements OnInit {
       .createToken(this.card.element, { name })
       .subscribe((result) => {
         if (result.token) {
+          this.error = '';
+          this.success = 'Everything seems correct...';
           this.spinner.show().then((p) => {
             this.cartService.CheckoutFromCart(
               JSON.parse(window.localStorage.getItem('user') || '').idClient ||
@@ -76,11 +79,10 @@ export class CheckoutComponent implements OnInit {
           });
           console.log(result.token.id);
         } else if (result.error) {
+          this.success = '';
           this.error = result.error.message;
           console.log(result.error.message);
         }
       });
   }
-
-  createToken(): void {}
 }
