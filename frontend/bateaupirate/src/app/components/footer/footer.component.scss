@@ -1,0 +1,13 @@
+@keyframes play {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.logo1 {
+  animation: play 15s 0s infinite;
+  transform: rotate(0deg);
+  animation-timing-function: linear;
+}
