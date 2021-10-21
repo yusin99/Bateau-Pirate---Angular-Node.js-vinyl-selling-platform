@@ -11,12 +11,13 @@ import {
 } from '../models/product.model';
 import { OrderService } from './order.service';
 import { ProductService } from './product.service';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private readonly API_KEY = 'http://localhost:3000/api/';
+  private readonly API_KEY = environment.api_key;
 
   private cartDataClient: CartModelPublic = {
     total: 0,

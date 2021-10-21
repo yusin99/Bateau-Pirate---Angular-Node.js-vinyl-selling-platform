@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 })
 export class OrderService {
   products: ProductResponseModel[] = [];
-  API_KEY = 'http://localhost:3000/api/';
+  API_KEY = environment.api_key;
 
   constructor(private http: HttpClient) {}
 

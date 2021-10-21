@@ -8,13 +8,14 @@ import { CategoriesModel } from '../models/categories.model';
 import { NumberFormatStyle } from '@angular/common';
 import { catchError } from 'rxjs/operators';
 import { GroupesModel } from './../models/groupes.model';
+import { environment } from './../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
   constructor(private http: HttpClient, private router: Router) {}
-  API_KEY = 'http://localhost:3000/api';
+  API_KEY = environment.api_key;
   getAllProducts(numberOfResults: NumberFormatStyle) {
     return this.http.get(this.API_KEY + '/products/', {
       params: {

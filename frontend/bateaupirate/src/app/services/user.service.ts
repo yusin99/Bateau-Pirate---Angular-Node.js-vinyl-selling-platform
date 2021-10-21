@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 import { SingleUserModel, UserModelServer } from './../models/user.model';
 import { catchError } from 'rxjs/operators';
 import { ProductModelServer } from '../models/product.model';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class UserService {
   auth = false;
   role!: number;
   error: any;
-  private readonly API_KEY = 'http://localhost:3000/api/';
+  private readonly API_KEY = environment.api_key + '/';
   user: any = {};
   authState$ = new BehaviorSubject<boolean>(this.auth);
   userData$ = new BehaviorSubject<any>(this.user);
