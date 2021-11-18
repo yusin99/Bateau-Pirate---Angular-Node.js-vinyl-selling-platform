@@ -13,7 +13,7 @@ import { CaptchaService } from 'src/app/services/captcha.service';
 export class LoginComponent implements OnInit {
   email!: string;
   mdp!: string;
-  error_message: any = this.getError();
+  error_message: any;
   captcha_token: any;
   constructor(
     private authService: SocialAuthService,
@@ -55,46 +55,17 @@ export class LoginComponent implements OnInit {
   signInWithFacebook(): void {
     this.userService.facebookLogin();
   }
-  getError() {
-    return this.error_message;
-  }
-  //function to resolve the reCaptcha and retrieve a token
-  async resolved(captchaResponse: string) {
-    console.log(`Resolved response token: ${captchaResponse}`);
-    this.captcha_token = captchaResponse;
-    await this.sendTokenToBackend(captchaResponse); //declaring the token send function with a token parameter
-  }
-
-  //function to send the token to the node server
-  sendTokenToBackend(tok: any) {
-    //calling the service and passing the token to the service
-    this.captcha.sendToken(tok).subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (err) => {
-        console.log(err);
-      },
-      () => {}
-    );
-  }
-
   async login(form: NgForm) {
-    await this.captcha_token;
-    if (this.captcha_token) {
-      const email = this.email;
-      const mdp = this.mdp;
-      if (form.invalid) {
-        return;
-      }
-      form.reset();
-      this.userService.loginUser(email, mdp);
-      if (!this.userService.auth) {
-        this.error_message = 'Username or password are incorrect';
-      }
-      this.userService.authState$.next(true);
-    } else {
-      this.error_message = 'Validez captcha';
+    const email = this.email;
+    const mdp = this.mdp;
+    if (form.invalid) {
+      return;
     }
+    form.reset();
+    this.userService.loginUser(email, mdp);
+    if (!this.userService.auth) {
+      this.error_message = 'Username or password are incorrect';
+    }
+    this.userService.authState$.next(true);
   }
 }

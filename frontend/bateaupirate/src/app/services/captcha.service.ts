@@ -10,7 +10,7 @@ export class CaptchaService {
   constructor(private http: HttpClient) {}
 
   sendToken(token: any) {
-    return this.http.post<any>(`${this.API_KEY}captcha/token_validate`, {
+    return this.http.post<any>(`${this.API_KEY}/captcha/token_validate`, {
       recaptcha: token,
     });
   }

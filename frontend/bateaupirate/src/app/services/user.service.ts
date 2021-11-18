@@ -27,7 +27,7 @@ export class UserService {
   auth = false;
   role!: number;
   error: any;
-  private readonly API_KEY = environment.api_key + '/';
+  private readonly API_KEY = environment.api_key;
   user: any = {};
   authState$ = new BehaviorSubject<boolean>(this.auth);
   userData$ = new BehaviorSubject<any>(this.user);
@@ -51,7 +51,7 @@ export class UserService {
   loginUser(email: string, mdp: string) {
     // console.log('sada');
     return this.httpClient
-      .post(`${this.API_KEY}auth/login`, { email, mdp })
+      .post(`${this.API_KEY}/auth/login`, { email, mdp })
       .subscribe(
         (data: any) => {
           console.log(data);
@@ -95,7 +95,7 @@ export class UserService {
     photoUrl: string
   ): Observable<any> {
     return this.httpClient
-      .post<any>(`${this.API_KEY}auth/register`, {
+      .post<any>(`${this.API_KEY}/auth/register`, {
         email,
         mdp,
         pseudo,
@@ -125,26 +125,26 @@ export class UserService {
   }
   // API_KEY = 'http://localhost:3000/api';
   getAllUsers() {
-    return this.httpClient.get(this.API_KEY + 'users');
+    return this.httpClient.get(this.API_KEY + '/users');
   }
   getSingleUser(idClient: number): Observable<SingleUserModel> {
     return this.httpClient.get<SingleUserModel>(
-      this.API_KEY + 'users/' + idClient
+      this.API_KEY + '/users/' + idClient
     );
   }
   deleteSingleUser(idClient: number): Observable<UserModelServer> {
     return this.httpClient.delete<UserModelServer>(
-      this.API_KEY + 'users/' + idClient
+      this.API_KEY + '/users/' + idClient
     );
   }
   deleteSingleVinyl(idVinyl: number): Observable<ProductModelServer> {
     return this.httpClient.delete<ProductModelServer>(
-      this.API_KEY + 'products/delete/' + idVinyl
+      this.API_KEY + '/products/delete/' + idVinyl
     );
   }
   updateSingleUser(idClient: number, body: any): Observable<any> {
     return this.httpClient
-      .put<any>(this.API_KEY + 'users/updateUser/' + idClient, body)
+      .put<any>(this.API_KEY + '/users/updateUser/' + idClient, body)
       .pipe(catchError(this.errorHandler));
   }
 }

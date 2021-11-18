@@ -262,12 +262,12 @@ export class CartService {
   CheckoutFromCart(userId: number) {
     console.log(this.cartDataClient.prodData);
     this.http
-      .post(`${this.API_KEY}orders/payment`, null)
+      .post(`${this.API_KEY}/orders/payment`, null)
       .subscribe((res: any) => {
         if (res.success) {
           this.resetServerData();
           this.http
-            .post(`${this.API_KEY}orders/new`, {
+            .post(`${this.API_KEY}/orders/new`, {
               userId,
               products: this.cartDataClient.prodData,
             })

@@ -14,12 +14,12 @@ export class OrderService {
 
   getSingleOrder(orderId: number) {
     return this.http
-      .get<ProductResponseModel[]>(`${this.API_KEY}orders/${orderId}`)
+      .get<ProductResponseModel[]>(`${this.API_KEY}/orders/${orderId}`)
       .toPromise();
   }
   getOrderByClientId(clientId: number) {
     return this.http
-      .get<ProductResponseModel[]>(`${this.API_KEY}orders/client/${clientId}`)
+      .get<ProductResponseModel[]>(`${this.API_KEY}/orders/client/${clientId}`)
       .toPromise();
   }
 }

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_key: 'https://curved-tungsten-handsaw.glitch.me/api',
+  api_key: 'https://bateau-pirate83.herokuapp.com/api',
 };
 
 /*
